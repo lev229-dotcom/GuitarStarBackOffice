@@ -1,8 +1,19 @@
 ﻿@page "/Emp"
+@using GuitarStarBackOffice.Shared
 
 <h3>Employee</h3>
 
-@foreach (var item in employees)
+
+<RadzenDataGrid Data="@employees" TItem="Employee">
+    <Columns>
+        <RadzenDataGridColumn TItem="Employee" Property="Email" Title="Email" />
+        <RadzenDataGridColumn TItem="Employee" Property="Password" Title="Password" />
+        <RadzenDataGridColumn TItem="Employee" Property="Surname" Title="Surname" />
+    </Columns>
+</RadzenDataGrid>
+
+@*@foreach (var item in employees)
 {
     <p>@item.Email</p>
-}
+    <RadzenButton Text="@item.Email"></RadzenButton>
+}*@
