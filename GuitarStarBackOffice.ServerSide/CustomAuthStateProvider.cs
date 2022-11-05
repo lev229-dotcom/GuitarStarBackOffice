@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Security.Claims;
 
-namespace GuitarStarBackOffice.Client;
+namespace GuitarStarBackOffice.ServerSide;
 
 public class CustomAuthStateProvider : AuthenticationStateProvider
 {
@@ -23,6 +23,7 @@ public class CustomAuthStateProvider : AuthenticationStateProvider
         identity.AddClaim(new Claim(ClaimTypes.Role, "RoleAdmin"));
         return new AuthenticationState(new ClaimsPrincipal(identity));
     }
+
 
     public async Task StartSession(string fullName, string userName, UserRole role)
     {

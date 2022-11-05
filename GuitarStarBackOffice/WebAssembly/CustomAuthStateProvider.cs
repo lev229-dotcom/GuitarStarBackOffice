@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Security.Claims;
 
-namespace GuitarStarBackOffice.Client;
+namespace WebAssembly;
 
 public class CustomAuthStateProvider : AuthenticationStateProvider
 {

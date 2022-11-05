@@ -2,7 +2,7 @@
 //using GuitarStarBackOffice.Server.Services.EmployeeService;
 using Microsoft.AspNetCore.Components;
 
-namespace GuitarStarBackOffice.Client.Pages;
+namespace WebAssembly.Pages;
 
 public partial class Employee
 {
