@@ -6,6 +6,22 @@
 
 <RadzenDataGrid Data="@employees" TItem="Employee">
     <Columns>
+        <RadzenDataGridColumn TItem="Employee" Title="Действия">
+            <Template>
+                @{
+                    var emp = (Employee)context;
+                    <MudMenu Label="Действия" Dense="true" AnchorOrigin="@Origin.BottomCenter"
+                    TransformOrigin="@Origin.TopCenter" StartIcon="@Icons.Filled.Hive"
+                    EndIcon="@Icons.Filled.KeyboardArrowDown">
+                        <MudMenuItem >
+                            <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
+                                 Icon="@Icons.Material.Filled.Edit" />
+                                 Изменить
+                        </MudMenuItem>
+                    </MudMenu>
+                }
+            </Template>
+        </RadzenDataGridColumn>
         <RadzenDataGridColumn TItem="Employee" Property="Email" Title="Email" />
         <RadzenDataGridColumn TItem="Employee" Property="Password" Title="Password" />
         <RadzenDataGridColumn TItem="Employee" Property="Surname" Title="Surname" />
