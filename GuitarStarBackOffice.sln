@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuitarStarBackOffice.Client
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuitarStarBackOffice.Shared", "GuitarStarBackOffice\Shared\GuitarStarBackOffice.Shared.csproj", "{87DC5566-34A4-41E9-8F8C-BA46D68B50C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuitarStarBackOffice.ServerSide", "GuitarStarBackOffice.ServerSide\GuitarStarBackOffice.ServerSide.csproj", "{EE6AD291-47AF-458D-ABA1-0188F46832BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuitarStarBackOffice.ServerSide", "GuitarStarBackOffice.ServerSide\GuitarStarBackOffice.ServerSide.csproj", "{EE6AD291-47AF-458D-ABA1-0188F46832BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,87 @@
+﻿@page "/Emp"
+@using GuitarStarBackOffice.Shared
+@using MudBlazor.Extensions
+
+
+
+<RadzenContent>
+    <ChildContent>
+        <RadzenHeading Size="H1" Text="Сотрудники"/>
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Добавить" Click="AddEmployee">
+        </RadzenButton>
+
+        <RadzenDataGrid  ColumnWidth="300px"
+            AllowFiltering="true" AllowColumnResize="true" 
+            AllowAlternatingRows="false" FilterMode="FilterMode.Advanced"
+            AllowSorting="true" PageSize="5" AllowPaging="true"
+            AllowColumnReorder="true" 
+            PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+            @ref="grid" Data="@employees" TItem="Employee">
+            <Columns>
+                <RadzenDataGridColumn TItem="Employee" Title="Действия">
+                    <Template>
+                        @{
+                            var emp = (Employee)context;
+                            <MudMenu Label="Действия" Dense="true" AnchorOrigin="@Origin.BottomCenter"
+                                 TransformOrigin="@Origin.TopCenter" StartIcon="@Icons.Filled.Hive"
+                                 EndIcon="@Icons.Filled.KeyboardArrowDown">
+
+                                <MudMenuItem OnClick="@(() => OpenEditor(emp))">
+                                    <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
+                                         Icon="@Icons.Material.Filled.Edit" />
+                                    Изменить
+                                </MudMenuItem>
+
+                                <MudMenuItem OnClick="@(() => DeleteEmployee(emp))">
+                                    <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
+                                         Icon="@Icons.Material.Filled.Delete" />
+                                    Удалить
+                                </MudMenuItem>
+
+                            </MudMenu>
+                        }
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Employee" Property="Email" Frozen="true" Title="Email" />
+                <RadzenDataGridColumn TItem="Employee" Property="Name" Frozen="true" Title="Name" />
+                <RadzenDataGridColumn TItem="Employee" Property="Surname"  Title="Surname" />
+                <RadzenDataGridColumn TItem="Employee" Property="Patronymic"  Title="Patronymic" />
+                <RadzenDataGridColumn TItem="Employee" Property="PasportSeries" Title="PasportSeries" />
+                <RadzenDataGridColumn TItem="Employee" Property="PasportNumber" Title="PasportNumber" />
+                <RadzenDataGridColumn TItem="Employee" Property="DateOfBirth" Title="DateOfBirth" >
+                    <Template>
+                        @{
+                            var employee = (Employee)context;
+                            @String.Format("{0:d}", employee.DateOfBirth)
+                        }
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Employee" Property="DateOfEmployment" Title="DateOfEmployment" >
+                    <Template>
+                        @{
+                            var employee = (Employee)context;
+                            @String.Format("{0:d}", employee.DateOfEmployment)
+                        }
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Employee" Property="EmployeeRole" Title="EmployeeRole">
+                    <Template>
+                        @{
+                            var employee = (Employee)context;
+                            @employee.EmployeeRole.ToDescriptionString();
+                        }
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+
+    </ChildContent>
+</RadzenContent>
+
+@*<EmployeeEditor @ref="employeeEditor"></EmployeeEditor>*@
+
+@*@foreach (var item in employees)
+{
+    <p>@item.Email</p>
+    <RadzenButton Text="@item.Email"></RadzenButton>
+}*@

@@ -43,14 +43,14 @@ public class Employee
 	/// </summary>
 	[Display(Name = "Серия паспорта")]
 	[Required]
-	public int PasportSeries { get; set; }
+	public string PasportSeries { get; set; }
 
 	/// <summary>
 	/// Номер паспорта
 	/// </summary>
 	[Display(Name = "Номер паспорта")]
 	[Required]
-	public int PasportNumber { get; set; }
+	public string PasportNumber { get; set; }
 
 	/// <summary>
 	/// Дата рождения

@@ -3,6 +3,11 @@
 <PageTitle>GuitarStarBackOffice.ServerSide</PageTitle>
 
 <div class="page">
+    <link rel="stylesheet" href="_content/Radzen.Blazor/css/material-base.css">
+
+    <RadzenDialog />
+    <RadzenNotification />
+
     <MudThemeProvider />
     <MudDialogProvider CloseButton="true" DisableBackdropClick="true" />
     <MudSnackbarProvider />
@@ -16,7 +21,10 @@
         </div>
 
         <article class="content px-4">
-            @Body
+            <RadzenContentContainer Name="main">
+                @Body
+            </RadzenContentContainer>
         </article>
     </main>
+
 </div>
