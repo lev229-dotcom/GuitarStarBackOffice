@@ -116,7 +116,7 @@ namespace GuitarStarBackOffice.ServerSide.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("OrderElements");
                 });
 
             modelBuilder.Entity("GuitarStarBackOffice.Shared.OrderElement", b =>
@@ -279,7 +279,7 @@ namespace GuitarStarBackOffice.ServerSide.Migrations
             modelBuilder.Entity("GuitarStarBackOffice.Shared.Order", b =>
                 {
                     b.HasOne("GuitarStarBackOffice.Shared.Employee", "Employee")
-                        .WithMany("Orders")
+                        .WithMany("OrderElements")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -370,7 +370,7 @@ namespace GuitarStarBackOffice.ServerSide.Migrations
 
             modelBuilder.Entity("GuitarStarBackOffice.Shared.Employee", b =>
                 {
-                    b.Navigation("Orders");
+                    b.Navigation("OrderElements");
 
                     b.Navigation("PostEmployees");
                 });

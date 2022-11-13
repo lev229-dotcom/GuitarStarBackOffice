@@ -1,0 +1,34 @@
+﻿@using GuitarStarBackOffice.Shared
+@layout MainLayout
+@inject Radzen.DialogService dialogService
+
+<RadzenContent Container="main">
+
+    <ChildContent>
+        <div class="row">
+            <div class="col-md-12">
+                <RadzenTemplateForm TItem="Order" Data="@newOrder" Submit="@HandleAdd">
+                    <ChildContent>
+
+                        <div style="margin-bottom: 1rem" class="flex-column">
+                            <RadzenLabel Text="Сотрудник" style="width: 100%" />
+                            <RadzenDropDown Data="@employees" @bind-Value="@(newOrder.EmployeeId)"
+                                            SelectedItem="1"
+                                            ValueProperty="IdEmployee" TextProperty="Surname" />
+                        </div>
+
+                        <div style="margin-bottom: 1rem" class="flex-column">
+                            <RadzenLabel Text="Дата создания" style="width: 100%" />
+                            <RadzenDatePicker @bind-Value="@newOrder.OrderDate" />
+                        </div>
+
+                        
+                        <div class="row footer">
+                            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сохранить" />
+                        </div>
+                    </ChildContent>
+                </RadzenTemplateForm>
+            </div>
+        </div>
+    </ChildContent>
+</RadzenContent>

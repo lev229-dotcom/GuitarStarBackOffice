@@ -1,0 +1,50 @@
+﻿@page "/Product"
+@using GuitarStarBackOffice.Shared
+@using MudBlazor.Extensions
+
+<RadzenContent>
+    <ChildContent>
+        <RadzenHeading Size="H1" Text="Товары" />
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Добавить" Click="AddProduct">
+        </RadzenButton>
+        <RadzenDataGrid ColumnWidth="150px"
+                        AllowFiltering="true" AllowColumnResize="true"
+                        AllowAlternatingRows="false" FilterMode="FilterMode.Advanced"
+                        AllowSorting="true" PageSize="5" AllowPaging="true"
+                        AllowColumnReorder="true"
+                        PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                        @ref="grid" Data="@products" TItem="Product">
+            <Columns>
+                <RadzenDataGridColumn TItem="Product" Title="Действия" Frozen="true">
+                    <Template>
+                        @{
+                            var product = (Product)context;
+                            <MudMenu Label="Действия" Dense="true" AnchorOrigin="@Origin.BottomCenter"
+                                 TransformOrigin="@Origin.TopCenter" StartIcon="@Icons.Filled.Hive"
+                                 EndIcon="@Icons.Filled.KeyboardArrowDown">
+
+                                <MudMenuItem OnClick="@(() => OpenEditor(product))">
+                                    <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
+                                         Icon="@Icons.Material.Filled.Edit" />
+                                    Изменить
+                                </MudMenuItem>
+
+                                <MudMenuItem OnClick="@(() => DeleteProduct(product))">
+                                    <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
+                                         Icon="@Icons.Material.Filled.Delete" />
+                                    Удалить
+                                </MudMenuItem>
+
+                            </MudMenu>
+                        }
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Product" Property="ProductName" Title="Название" />
+                <RadzenDataGridColumn TItem="Product" Property="ProductPrice" Title="Стоимость" />
+                <RadzenDataGridColumn TItem="Product" Property="Category.CategoryName" Title="Категория" />
+                <RadzenDataGridColumn TItem="Product" Property="WareHouse.Address" Title="Склад" />
+            </Columns>
+
+        </RadzenDataGrid>
+    </ChildContent>
+</RadzenContent>

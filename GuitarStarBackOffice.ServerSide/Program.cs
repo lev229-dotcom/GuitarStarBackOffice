@@ -31,6 +31,9 @@ builder.Services.AddScoped<EmployeeService>();
 builder.Services.AddScoped<SupplierService>();
 builder.Services.AddScoped<WareHouseService>();
 builder.Services.AddScoped<CategoryService>();
+builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<OrderService>();
+
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped<CustomAuthStateProvider>();
 builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<CustomAuthStateProvider>());

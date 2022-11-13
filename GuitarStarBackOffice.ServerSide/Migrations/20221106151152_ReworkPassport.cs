@@ -84,7 +84,7 @@ namespace GuitarStarBackOffice.ServerSide.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orders",
+                name: "OrderElements",
                 columns: table => new
                 {
                     IdOrder = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -199,7 +199,7 @@ namespace GuitarStarBackOffice.ServerSide.Migrations
                     table.ForeignKey(
                         name: "FK_OrderElements_Orders_OrderId",
                         column: x => x.OrderId,
-                        principalTable: "Orders",
+                        principalTable: "OrderElements",
                         principalColumn: "IdOrder",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -222,7 +222,7 @@ namespace GuitarStarBackOffice.ServerSide.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_EmployeeId",
-                table: "Orders",
+                table: "OrderElements",
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
@@ -268,7 +268,7 @@ namespace GuitarStarBackOffice.ServerSide.Migrations
                 name: "Shipments");
 
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "OrderElements");
 
             migrationBuilder.DropTable(
                 name: "Products");
