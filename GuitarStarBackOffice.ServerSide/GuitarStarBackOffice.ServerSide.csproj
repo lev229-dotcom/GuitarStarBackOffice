@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
@@ -21,6 +21,7 @@
     </PackageReference>
     <PackageReference Include="MudBlazor" Version="6.0.17" />
     <PackageReference Include="Radzen.Blazor" Version="4.2.2" />
+    <PackageReference Include="Radzen.Blazor.GridExportOptions" Version="3.3.0" />
   </ItemGroup>
 
   <ItemGroup>

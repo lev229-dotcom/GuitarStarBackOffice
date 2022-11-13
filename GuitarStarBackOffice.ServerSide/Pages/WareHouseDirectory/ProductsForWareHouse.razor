@@ -1,0 +1,24 @@
+﻿@using GuitarStarBackOffice.Shared
+@layout MainLayout
+@inject Radzen.DialogService dialogService
+
+<RadzenContent>
+    <ChildContent>
+        <RadzenHeading Size="H1" Text="Товары" />
+        <RadzenDataGrid ColumnWidth="150px"
+                        AllowFiltering="true" AllowColumnResize="true"
+                        AllowAlternatingRows="false" FilterMode="FilterMode.Advanced"
+                        AllowSorting="true" PageSize="5" AllowPaging="true"
+                        AllowColumnReorder="true"
+                        PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                        @ref="grid" Data="@Products" TItem="Product">
+            <Columns>
+                <RadzenDataGridColumn TItem="Product" Property="ProductName" Title="Название" />
+                <RadzenDataGridColumn TItem="Product" Property="ProductPrice" Title="Стоимость" />
+                <RadzenDataGridColumn TItem="Product" Property="Category.CategoryName" Title="Категория" />
+                <RadzenDataGridColumn TItem="Product" Property="WareHouse.Address" Title="Склад" />
+            </Columns>
+
+        </RadzenDataGrid>
+    </ChildContent>
+</RadzenContent>

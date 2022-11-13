@@ -1,7 +1,9 @@
 using Blazored.LocalStorage;
 using GuitarStarBackOffice.ServerSide;
 using GuitarStarBackOffice.ServerSide.Data;
+using GuitarStarBackOffice.ServerSide.Services;
 using GuitarStarBackOffice.ServerSide.Services.EmployeeService;
+using GuitarStarBackOffice.ServerSide.Services.SupplierService;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
@@ -19,11 +21,16 @@ builder.Services.AddScoped<DialogService>();
 builder.Services.AddScoped<NotificationService>();
 builder.Services.AddScoped<TooltipService>();
 builder.Services.AddScoped<ContextMenuService>();
+builder.Services.AddScoped<NorthwindService>();
+
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddDbContext<DataContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<EmployeeService>();
+builder.Services.AddScoped<SupplierService>();
+builder.Services.AddScoped<WareHouseService>();
+builder.Services.AddScoped<CategoryService>();
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped<CustomAuthStateProvider>();
 builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<CustomAuthStateProvider>());

@@ -15,7 +15,7 @@ public class Shipment
     /// <summary>
     /// Дата поставка
     /// </summary>
-    [Display(Name = "Дата поставка")]
+    [Display(Name = "Дата поставки")]
     [Required]
     public DateTime ShipmentDate { get; set; }
 

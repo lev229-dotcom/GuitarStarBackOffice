@@ -1,4 +1,5 @@
-﻿using GuitarStarBackOffice.ServerSide.Services.EmployeeService;
+﻿using GuitarStarBackOffice.ServerSide.Services;
+using GuitarStarBackOffice.ServerSide.Services.EmployeeService;
 using GuitarStarBackOffice.Shared;
 using Microsoft.AspNetCore.Components;
 using Radzen;
@@ -14,6 +15,8 @@ public partial class EmployeePage
     [Inject] private EmployeeService EmployeeService { get; set; }
     
     [Inject] private DialogService DialogService { get; set; }
+
+    [Inject] private NorthwindService service { get; set; }
 
     private EmployeeEditor employeeEditor;
     protected override async void OnInitialized()
@@ -62,5 +65,15 @@ public partial class EmployeePage
             await grid.Reload();
 
         }
+    }
+
+    public void Export(string type)
+    {
+        service.Export("OrderDetails", type, new Query()
+        {
+            OrderBy = grid.Query.OrderBy,
+            Filter = grid.Query.Filter,
+            Select = string.Join(",", grid.ColumnsCollection.Where(c => c.GetVisible()).Select(c => c.Property))
+        });
     }
 }

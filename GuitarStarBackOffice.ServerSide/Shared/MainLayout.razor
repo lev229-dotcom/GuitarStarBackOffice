@@ -2,15 +2,77 @@
 
 <PageTitle>GuitarStarBackOffice.ServerSide</PageTitle>
 
-<div class="page">
+<RadzenDialog />
+<RadzenNotification />
+
+
+<MudThemeProvider />
+<MudDialogProvider CloseButton="true" DisableBackdropClick="true" />
+<MudSnackbarProvider />
+
+<RadzenLayout>
+    <ChildContent>
+        <RadzenHeader>
+            <ChildContent>
+                <div class="row justify-content-start align-items-center">
+                    <div class="col-6 d-flex align-items-center">
+                        <RadzenSidebarToggle Click="@ToggleNavMenu">
+                        </RadzenSidebarToggle>
+                        <RadzenLabel Text="Информационная система Guitar Star">
+                        </RadzenLabel>
+                    </div>
+                    <div class="col-6 text-right">
+                    </div>
+                </div>
+            </ChildContent>
+        </RadzenHeader>
+      
+        <RadzenBody @ref="body0">
+            <ChildContent>
+                <RadzenContentContainer Name="main">
+                    @Body
+                </RadzenContentContainer>
+            </ChildContent>
+        </RadzenBody>
+
+        <RadzenSidebar @ref="SideBar0">
+            <ChildContent>
+                <RadzenPanelMenu>
+                    <RadzenPanelMenuItem Text="Сотрудники" Path="Emp"/>
+                    <RadzenPanelMenuItem Text="Поставщики" Path="Supplier" />
+                    <RadzenPanelMenuItem Text="Склады" Path="WareHouse" />
+                    <RadzenPanelMenuItem Text="Категория" Path="Category" />
+                </RadzenPanelMenu>
+            </ChildContent>
+        </RadzenSidebar>
+    </ChildContent>
+</RadzenLayout>
+
+@code {
+    private bool collapseNavMenu = true;
+    
+    protected RadzenBody? body0;
+    protected RadzenSidebar? SideBar0;
+
+    protected async System.Threading.Tasks.Task ToggleNavMenu(dynamic args)
+    {
+        await InvokeAsync(() =>
+        {
+            SideBar0.Toggle();
+        });
+        await InvokeAsync(() =>
+        {
+            body0.Toggle();
+        });
+    }
+
+ 
+
+}
+@*<div class="page">
     <link rel="stylesheet" href="_content/Radzen.Blazor/css/material-base.css">
 
-    <RadzenDialog />
-    <RadzenNotification />
-
-    <MudThemeProvider />
-    <MudDialogProvider CloseButton="true" DisableBackdropClick="true" />
-    <MudSnackbarProvider />
+   
     <div class="sidebar">
         <NavMenu />
     </div>
@@ -27,4 +89,4 @@
         </article>
     </main>
 
-</div>
+</div>*@

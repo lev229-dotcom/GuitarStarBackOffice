@@ -6,19 +6,18 @@
 
 <RadzenContent>
     <ChildContent>
-        <RadzenHeading Size="H1" Text="Сотрудники"/>
+        <RadzenHeading Size="H1" Text="Сотрудники" />
         <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Добавить" Click="AddEmployee">
         </RadzenButton>
-
-        <RadzenDataGrid  ColumnWidth="300px"
-            AllowFiltering="true" AllowColumnResize="true" 
-            AllowAlternatingRows="false" FilterMode="FilterMode.Advanced"
-            AllowSorting="true" PageSize="5" AllowPaging="true"
-            AllowColumnReorder="true" 
-            PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-            @ref="grid" Data="@employees" TItem="Employee">
+        <RadzenDataGrid ColumnWidth="150px"
+                        AllowFiltering="true" AllowColumnResize="true"
+                        AllowAlternatingRows="false" FilterMode="FilterMode.Advanced"
+                        AllowSorting="true" PageSize="5" AllowPaging="true"
+                        AllowColumnReorder="true"
+                        PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                        @ref="grid" Data="@employees" TItem="Employee">
             <Columns>
-                <RadzenDataGridColumn TItem="Employee" Title="Действия">
+                <RadzenDataGridColumn TItem="Employee" Title="Действия" Frozen="true">
                     <Template>
                         @{
                             var emp = (Employee)context;
@@ -44,11 +43,11 @@
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="Employee" Property="Email" Frozen="true" Title="Email" />
                 <RadzenDataGridColumn TItem="Employee" Property="Name" Frozen="true" Title="Name" />
-                <RadzenDataGridColumn TItem="Employee" Property="Surname"  Title="Surname" />
-                <RadzenDataGridColumn TItem="Employee" Property="Patronymic"  Title="Patronymic" />
+                <RadzenDataGridColumn TItem="Employee" Property="Surname" Title="Surname" />
+                <RadzenDataGridColumn TItem="Employee" Property="Patronymic" Title="Patronymic" />
                 <RadzenDataGridColumn TItem="Employee" Property="PasportSeries" Title="PasportSeries" />
                 <RadzenDataGridColumn TItem="Employee" Property="PasportNumber" Title="PasportNumber" />
-                <RadzenDataGridColumn TItem="Employee" Property="DateOfBirth" Title="DateOfBirth" >
+                <RadzenDataGridColumn TItem="Employee" Property="DateOfBirth" Title="DateOfBirth">
                     <Template>
                         @{
                             var employee = (Employee)context;
@@ -56,7 +55,7 @@
                         }
                     </Template>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Employee" Property="DateOfEmployment" Title="DateOfEmployment" >
+                <RadzenDataGridColumn TItem="Employee" Property="DateOfEmployment" Title="DateOfEmployment">
                     <Template>
                         @{
                             var employee = (Employee)context;
@@ -68,7 +67,8 @@
                     <Template>
                         @{
                             var employee = (Employee)context;
-                            @employee.EmployeeRole.ToDescriptionString();
+                            @employee.EmployeeRole.ToDescriptionString()
+                            ;
                         }
                     </Template>
                 </RadzenDataGridColumn>
@@ -78,10 +78,3 @@
     </ChildContent>
 </RadzenContent>
 
-@*<EmployeeEditor @ref="employeeEditor"></EmployeeEditor>*@
-
-@*@foreach (var item in employees)
-{
-    <p>@item.Email</p>
-    <RadzenButton Text="@item.Email"></RadzenButton>
-}*@

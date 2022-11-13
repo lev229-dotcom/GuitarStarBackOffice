@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor.Extensions;
 using Radzen;
-using Radzen.Blazor;
-using System.ComponentModel;
 
 namespace GuitarStarBackOffice.ServerSide.Pages.EmployeeDirectory;
 

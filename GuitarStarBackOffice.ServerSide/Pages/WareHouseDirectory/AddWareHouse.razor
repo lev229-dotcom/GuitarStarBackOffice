@@ -1,0 +1,27 @@
+﻿@using GuitarStarBackOffice.Shared
+@layout MainLayout
+@inject Radzen.DialogService dialogService
+
+<RadzenContent Container="main">
+
+    <ChildContent>
+        <div class="row">
+            <div class="col-md-12">
+                <RadzenTemplateForm TItem="WareHouse" Data="@newWareHouse" Submit="@HandleAdd">
+                    <ChildContent>
+                        <div style="margin-bottom: 1rem" class="flex-column">
+                            <RadzenLabel Text="Адрес" style="width: 100%" />
+                            <RadzenTextBox MaxLength="50" style="display: block; width: 100%" @bind-Value="@newWareHouse.Address" />
+                        </div>
+
+                        <div class="row footer">
+                            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сохранить">
+
+                            </RadzenButton>
+                        </div>
+                    </ChildContent>
+                </RadzenTemplateForm>
+            </div>
+        </div>
+    </ChildContent>
+</RadzenContent>

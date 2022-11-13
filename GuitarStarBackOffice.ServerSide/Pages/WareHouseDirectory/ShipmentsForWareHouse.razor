@@ -1,0 +1,40 @@
+﻿@using GuitarStarBackOffice.Shared
+@layout MainLayout
+@inject Radzen.DialogService dialogService
+
+<RadzenContent>
+    <ChildContent>
+        <RadzenHeading Size="H1" Text="Поставки" />
+        <RadzenDataGrid ColumnWidth="150px"
+                        AllowFiltering="true" AllowColumnResize="true"
+                        AllowAlternatingRows="false" FilterMode="FilterMode.Advanced"
+                        AllowSorting="true" PageSize="5" AllowPaging="true"
+                        AllowColumnReorder="true"
+                        PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                        @ref="grid" Data="@Shipments" TItem="Shipment">
+            <Columns>
+                <RadzenDataGridColumn TItem="Shipment" Title="Действия" Frozen="true" Filterable="false" Sortable="false">
+                    <Template>
+                        @{
+                            var shipmnet = (Shipment)context;
+                            <MudMenu Label="Действия" Dense="true" AnchorOrigin="@Origin.BottomCenter"
+                                 TransformOrigin="@Origin.TopCenter" StartIcon="@Icons.Filled.Hive"
+                                 EndIcon="@Icons.Filled.KeyboardArrowDown">
+
+                                <MudMenuItem OnClick="@(() => DeleteShipment(shipmnet))">
+                                    <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
+                                         Icon="@Icons.Material.Filled.Delete" />
+                                    Удалить
+                                </MudMenuItem>
+
+                            </MudMenu>
+                        }
+                    </Template>
+                </RadzenDataGridColumn>
+
+                <RadzenDataGridColumn TItem="Shipment" Property="ShipmentDate" Title="Дата поставки" />
+                <RadzenDataGridColumn TItem="Shipment" Property="Supplier.SupplierName" Title="Название поставщика" />
+            </Columns>
+        </RadzenDataGrid>
+    </ChildContent>
+</RadzenContent>
