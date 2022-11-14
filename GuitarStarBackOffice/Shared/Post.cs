@@ -30,6 +30,6 @@ public class Post
 	/// ДолжностьСотрудник
 	/// </summary>
 	[Display(Name = "ДолжностьСотрудник")]
-	public ICollection<PostEmployee> PostEmployees { get; set; } = new HashSet<PostEmployee>();
+	public ICollection<Employee> Employees { get; set; } = new HashSet<Employee>();
 
 }

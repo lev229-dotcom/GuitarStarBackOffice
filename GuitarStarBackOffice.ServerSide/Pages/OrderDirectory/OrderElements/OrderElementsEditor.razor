@@ -1,5 +1,28 @@
-﻿<h3>OrderElementsEditor</h3>
+﻿@using GuitarStarBackOffice.Shared
+@layout MainLayout
+@inject Radzen.DialogService dialogService
 
-@code {
+<RadzenContent Container="main">
 
-}
+    <ChildContent>
+        <div class="row">
+            <div class="col-md-12">
+                <RadzenTemplateForm TItem="OrderElement" Data="@editedOrderElement" Submit="@HandleEdit">
+                    <ChildContent>
+
+                        <div style="margin-bottom: 1rem" class="flex-column">
+                            <RadzenLabel Text="Количество элементов" style="width: 100%" />
+                            <MudNumericField Min="1" @bind-Value="@editedOrderElement.ElementsCount" />
+                        </div>
+
+                       
+
+                        <div class="row footer">
+                            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сохранить" />
+                        </div>
+                    </ChildContent>
+                </RadzenTemplateForm>
+            </div>
+        </div>
+    </ChildContent>
+</RadzenContent>

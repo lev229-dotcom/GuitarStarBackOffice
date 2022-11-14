@@ -7,7 +7,8 @@ public class DataContext : DbContext
 {
     public DataContext(DbContextOptions<DataContext> options) : base(options)
     {
-        //Database.EnsureCreated();
+        Database.EnsureDeleted();
+        Database.EnsureCreated();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -16,7 +17,7 @@ public class DataContext : DbContext
         modelBuilder.Entity<Post>().HasKey(i => i.IdPost);
 
         modelBuilder.Entity<Post>()
-            .HasMany(i => i.PostEmployees)
+            .HasMany(i => i.Employees)
             .WithOne(i => i.Post)
             .HasForeignKey(i => i.PostId)
             .IsRequired()
@@ -27,9 +28,9 @@ public class DataContext : DbContext
 
         modelBuilder.Entity<Employee>().HasKey(i => i.IdEmployee);
         modelBuilder.Entity<Employee>()
-            .HasMany(i => i.PostEmployees)
-            .WithOne(i => i.Employee)
-            .HasForeignKey(i => i.EmployeeId)
+            .HasOne(i => i.Post)
+            .WithMany(i => i.Employees)
+            .HasForeignKey(i => i.PostId)
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
@@ -44,21 +45,48 @@ public class DataContext : DbContext
 
         #region PostEmployee
 
-        modelBuilder.Entity<PostEmployee>().HasKey(i => i.IdPostEmployee);
+        //modelBuilder.Entity<PostEmployee>().HasKey(i => i.IdPostEmployee);
 
-        modelBuilder.Entity<PostEmployee>()
-            .HasOne(i => i.Post)
-            .WithMany(i => i.PostEmployees)
-            .HasForeignKey(i => i.PostId)
+        //modelBuilder.Entity<PostEmployee>()
+        //    .HasOne(i => i.Post)
+        //    .WithMany(i => i.PostEmployees)
+        //    .HasForeignKey(i => i.PostId)
+        //    .IsRequired()
+        //    .OnDelete(DeleteBehavior.Cascade);
+
+        //modelBuilder.Entity<PostEmployee>()
+        //    .HasOne(i => i.Employee)
+        //    .WithMany(i => i.PostEmployees)
+        //    .HasForeignKey(i => i.EmployeeId)
+        //    .IsRequired()
+        //    .OnDelete(DeleteBehavior.Cascade);
+
+        #endregion
+
+        #region Product
+
+        modelBuilder.Entity<Product>().HasKey(i => i.IdProduct);
+        modelBuilder.Entity<Product>()
+            .HasMany(i => i.OrderElemnts)
+            .WithOne(i => i.Product)
+            .HasForeignKey(i => i.ProductId)
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
-        modelBuilder.Entity<PostEmployee>()
-            .HasOne(i => i.Employee)
-            .WithMany(i => i.PostEmployees)
-            .HasForeignKey(i => i.EmployeeId)
-            .IsRequired()
-            .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<Product>()
+               .HasOne(i => i.Category)
+               .WithMany(i => i.Products)
+               .HasForeignKey(i => i.CategoryId)
+               .IsRequired()
+               .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Product>()
+             .HasOne(i => i.WareHouse)
+             .WithMany(i => i.Products)
+             .HasForeignKey(i => i.WareHouseId)
+             .IsRequired()
+             .OnDelete(DeleteBehavior.Cascade);
+
 
         #endregion
 
@@ -126,32 +154,7 @@ public class DataContext : DbContext
 
         #endregion
 
-        #region Product
-
-        modelBuilder.Entity<Product>().HasKey(i => i.IdProduct);
-        modelBuilder.Entity<Product>()
-            .HasMany(i => i.OrderElemnts)
-            .WithOne(i => i.Product)
-            .HasForeignKey(i => i.ProductId)
-            .IsRequired()
-            .OnDelete(DeleteBehavior.Cascade);
-
-        modelBuilder.Entity<Product>()
-               .HasOne(i => i.Category)
-               .WithMany(i => i.Products)
-               .HasForeignKey(i => i.CategoryId)
-               .IsRequired()
-               .OnDelete(DeleteBehavior.Restrict);
-
-        modelBuilder.Entity<Product>()
-             .HasOne(i => i.WareHouse)
-             .WithMany(i => i.Products)
-             .HasForeignKey(i => i.WareHouseId)
-             .IsRequired()
-             .OnDelete(DeleteBehavior.Restrict);
-
-
-        #endregion
+       
 
         #region Order
 
@@ -161,14 +164,14 @@ public class DataContext : DbContext
             .WithMany(i => i.Orders)
             .HasForeignKey(i => i.EmployeeId)
             .IsRequired()
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Order>()
                .HasMany(i => i.OrderElements)
                 .WithOne(i => i.Order)
                 .HasForeignKey(i => i.OrderId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
         #endregion
 
         #region OrderElement
@@ -179,13 +182,13 @@ public class DataContext : DbContext
                     .HasOne(i => i.Order)
                     .WithMany(i => i.OrderElements)
                     .HasForeignKey(i => i.OrderId)
-                    .OnDelete(DeleteBehavior.Restrict);
+                    .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<OrderElement>()
                 .HasOne(i => i.Product)
                 .WithMany(i => i.OrderElemnts)
                 .HasForeignKey(i => i.ProductId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
         #endregion
     }
@@ -195,7 +198,7 @@ public class DataContext : DbContext
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderElement> OrderElements { get; set; }
     public DbSet<Post> Posts { get; set; }
-    public DbSet<PostEmployee> PostEmployees { get; set; }
+    //public DbSet<PostEmployee> PostEmployees { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<Shipment> Shipments { get; set; }
     public DbSet<Supplier> Supplier { get; set; }

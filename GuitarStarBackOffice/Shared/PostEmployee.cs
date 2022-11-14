@@ -1,40 +1,40 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿//using System.ComponentModel.DataAnnotations;
 
-namespace GuitarStarBackOffice.Shared;
+//namespace GuitarStarBackOffice.Shared;
 
-/// <summary>
-/// Должность_Сотрудник
-/// </summary>
-public class PostEmployee
-{
-    /// <summary>
-	/// Уникальный идентификатор
-	/// </summary>
-	public Guid IdPostEmployee { get; set; }
+///// <summary>
+///// Должность_Сотрудник
+///// </summary>
+//public class PostEmployee
+//{
+//    /// <summary>
+//	/// Уникальный идентификатор
+//	/// </summary>
+//	public Guid IdPostEmployee { get; set; }
 
-    #region Внешний ключ должности
+//    #region Внешний ключ должности
 
-    /// <summary>
-    /// Внешний ключ должности 
-    /// </summary>
-    public Post Post { get; set; }
+//    /// <summary>
+//    /// Внешний ключ должности 
+//    /// </summary>
+//    public Post Post { get; set; }
     
-    [Display(Name = "Внешний ключ должности")]
-    [Required]
-    public Guid PostId { get; set; }
+//    [Display(Name = "Внешний ключ должности")]
+//    [Required]
+//    public Guid PostId { get; set; }
 
-    #endregion
+//    #endregion
 
-    #region Внешний ключ сотрудника
+//    #region Внешний ключ сотрудника
 
-    /// <summary>
-    /// Внешний ключ сотрудника 
-    /// </summary>
-    public Employee Employee { get; set; }
+//    /// <summary>
+//    /// Внешний ключ сотрудника 
+//    /// </summary>
+//    public Employee Employee { get; set; }
 
-    [Display(Name = "Внешний ключ сотрудника")]
-    [Required]
-    public Guid EmployeeId { get; set; }    
+//    [Display(Name = "Внешний ключ сотрудника")]
+//    [Required]
+//    public Guid EmployeeId { get; set; }    
 
-    #endregion
-}
+//    #endregion
+//}

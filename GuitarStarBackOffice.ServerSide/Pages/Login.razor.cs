@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using GuitarStarBackOffice.Shared;
+using Microsoft.AspNetCore.Components;
 
 namespace GuitarStarBackOffice.ServerSide.Pages;
 
 public partial class Login
 {
+    Employee currentEmployee = new Employee();
+
     private async Task LogIn()
     {
         //var input = new AuthenticateManagerInputModel

@@ -1,6 +1,24 @@
 ﻿@page "/Login"
+@page "/"
 
-<h3>Login</h3>
+<Title>Вход</Title>
+<AuthorizeView>
+    <Authorized>
+        <RedirectTo TargetUrl="/Order"/>
+    </Authorized>
+    <NotAuthorized>
+        <MudText Align="Align.Center" Typo="Typo.h5" Class="mb-10">Вход в аккаунт</MudText>
+         <div style="margin-bottom: 1rem" class="flex-column">
+            <RadzenLabel Text="Email" style="width: 100%" />
+            <RadzenTextBox MaxLength="50" style="display: block; width: 100%" @bind-Value="@currentEmployee.Email" />
+        </div> 
+        
+        <div style="margin-bottom: 1rem" class="flex-column">
+            <RadzenLabel Text="Пароль" style="width: 100%" />
+            <RadzenPassword M style="display: block; width: 100%" @bind-Value="@currentEmployee.Password" />
+        </div>
+       <RadzenButton Click="LogIn" Text="Войти"/>
 
-<button @onclick="LogIn">Войти</button>
+    </NotAuthorized>
+</AuthorizeView>
 

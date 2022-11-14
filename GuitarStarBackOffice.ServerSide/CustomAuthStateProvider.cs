@@ -18,6 +18,12 @@ public class CustomAuthStateProvider : AuthenticationStateProvider
         if (!IsSessionLoaded)
             await LoadSession();
 
+        if (!IsSessionStarted)
+        {
+            var anonymous = new ClaimsIdentity();
+            return new AuthenticationState(new ClaimsPrincipal(anonymous));
+        }
+
         var identity = new ClaimsIdentity("Authorize");
         identity.AddClaim(new Claim(ClaimTypes.Name, "FullName"));
         identity.AddClaim(new Claim(ClaimTypes.Role, "RoleAdmin"));

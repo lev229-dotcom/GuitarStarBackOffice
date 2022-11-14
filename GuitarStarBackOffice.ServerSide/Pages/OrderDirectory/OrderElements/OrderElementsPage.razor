@@ -28,6 +28,12 @@
                                     Изменить
                                 </MudMenuItem>
 
+                                 <MudMenuItem OnClick="@(() => DeleteOrderElements(orderElement))">
+                                    <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
+                                         Icon="@Icons.Material.Filled.Delete" />
+                                    Удалить
+                                </MudMenuItem>
+
 
                             </MudMenu>
                         }

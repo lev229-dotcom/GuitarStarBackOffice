@@ -66,17 +66,22 @@ public class Employee
 	[Required]
 	public DateTime DateOfEmployment { get; set; }
 
-	/// <summary>
-	/// Сотрудник должность
-	/// </summary>
-	[Display(Name = "Сотрудник должность")]
-	public ICollection<PostEmployee> PostEmployees { get; set; } = new HashSet<PostEmployee>();
+    /// <summary>
+    /// Id Категории 
+    /// </summary>
+    [Display(Name = "Id Должности")]
+    [Required]
+    public Post Post { get; set; }
+
+    [Display(Name = "Id Должности")]
+    [Required]
+    public Guid PostId { get; set; }
 
 
-	/// <summary>
-	/// Заказы
-	/// </summary>
-	[Display(Name = "Заказы")]
+    /// <summary>
+    /// Заказы
+    /// </summary>
+    [Display(Name = "Заказы")]
 	public ICollection<Order> Orders { get; set; } = new HashSet<Order>();
 
 	public Role EmployeeRole { get; set; }

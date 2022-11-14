@@ -1,5 +1,6 @@
 ﻿@inherits LayoutComponentBase
-
+@inject CustomAuthStateProvider UserSession
+@inject NavigationManager NavigationManager
 <PageTitle>GuitarStarBackOffice.ServerSide</PageTitle>
 
 <RadzenDialog />
@@ -10,23 +11,48 @@
 <MudDialogProvider CloseButton="true" DisableBackdropClick="true" />
 <MudSnackbarProvider />
 
-<RadzenLayout>
-    <ChildContent>
-        <RadzenHeader>
+<AuthorizeView>
+    <Authorized>
+        <RadzenLayout>
             <ChildContent>
-                <div class="row justify-content-start align-items-center">
-                    <div class="col-6 d-flex align-items-center">
-                        <RadzenSidebarToggle Click="@ToggleNavMenu">
-                        </RadzenSidebarToggle>
-                        <RadzenLabel Text="Информационная система Guitar Star">
-                        </RadzenLabel>
-                    </div>
-                    <div class="col-6 text-right">
-                    </div>
-                </div>
+                <RadzenHeader>
+                    <ChildContent>
+                        <div class="row justify-content-start align-items-center">
+                            <div class="col-6 d-flex align-items-center">
+                                <RadzenSidebarToggle Click="@ToggleNavMenu">  </RadzenSidebarToggle>
+                                <RadzenLabel Text="Информационная система Guitar Star"></RadzenLabel>
+                                <MudButton Color="Color.Warning" OnClick="@Logout"> Выход из аккаунта</MudButton>
+                            </div>
+                            <div class="col-6 text-right">
+                            </div>
+                        </div>
+                    </ChildContent>
+                </RadzenHeader>
+
+                <RadzenBody @ref="body0">
+                    <ChildContent>
+                        <RadzenContentContainer Name="main">
+                            @Body
+                        </RadzenContentContainer>
+                    </ChildContent>
+                </RadzenBody>
+
+                <RadzenSidebar @ref="SideBar0">
+                    <ChildContent>
+                        <RadzenPanelMenu>
+                            <RadzenPanelMenuItem Text="Сотрудники" Path="Emp" />
+                            <RadzenPanelMenuItem Text="Поставщики" Path="Supplier" />
+                            <RadzenPanelMenuItem Text="Склады" Path="WareHouse" />
+                            <RadzenPanelMenuItem Text="Категория" Path="Category" />
+                            <RadzenPanelMenuItem Text="Товары" Path="Product" />
+                            <RadzenPanelMenuItem Text="Заказ" Path="Order" />
+                        </RadzenPanelMenu>
+                    </ChildContent>
+                </RadzenSidebar>
             </ChildContent>
-        </RadzenHeader>
-      
+        </RadzenLayout>
+    </Authorized>
+    <NotAuthorized>
         <RadzenBody @ref="body0">
             <ChildContent>
                 <RadzenContentContainer Name="main">
@@ -34,21 +60,9 @@
                 </RadzenContentContainer>
             </ChildContent>
         </RadzenBody>
+    </NotAuthorized>
+</AuthorizeView>
 
-        <RadzenSidebar @ref="SideBar0">
-            <ChildContent>
-                <RadzenPanelMenu>
-                    <RadzenPanelMenuItem Text="Сотрудники" Path="Emp"/>
-                    <RadzenPanelMenuItem Text="Поставщики" Path="Supplier" />
-                    <RadzenPanelMenuItem Text="Склады" Path="WareHouse" />
-                    <RadzenPanelMenuItem Text="Категория" Path="Category" />
-                    <RadzenPanelMenuItem Text="Товары" Path="Product" />
-                    <RadzenPanelMenuItem Text="Заказ" Path="Order" />
-                </RadzenPanelMenu>
-            </ChildContent>
-        </RadzenSidebar>
-    </ChildContent>
-</RadzenLayout>
 
 @code {
     private bool collapseNavMenu = true;
@@ -67,28 +81,11 @@
             body0.Toggle();
         });
     }
-
+    
+    private async Task Logout(){
+        await UserSession.FinishSession();
+        NavigationManager.NavigateTo("/Login");
+    }
  
 
 }
-@*<div class="page">
-    <link rel="stylesheet" href="_content/Radzen.Blazor/css/material-base.css">
-
-   
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
-            <RadzenContentContainer Name="main">
-                @Body
-            </RadzenContentContainer>
-        </article>
-    </main>
-
-</div>*@
