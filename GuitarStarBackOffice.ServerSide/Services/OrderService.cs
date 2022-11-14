@@ -67,9 +67,10 @@ public class OrderService
         return lastOrder;
     }
 
-    public async Task<double> GetOrderTotalAmount(Guid id)
+    public async Task<double> GetOrderTotalAmount(Guid orderId)
     {
-        var OrderElements = dataContext.OrderElements.Where(i => i.OrderId == id).ToList();
+        TotalOrderAmount = 0;
+        var OrderElements = dataContext.OrderElements.Where(i => i.OrderId == orderId).ToList();
 
         foreach (var item in OrderElements)
         {
@@ -77,7 +78,7 @@ public class OrderService
 
             item.Product = product;
 
-            TotalOrderAmount += item.Product.ProductPrice;
+            TotalOrderAmount += item.Product.ProductPrice * item.ElementsCount;
 
         }
 

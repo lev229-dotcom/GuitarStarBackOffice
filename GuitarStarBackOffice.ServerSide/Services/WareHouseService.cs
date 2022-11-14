@@ -47,9 +47,22 @@ public class WareHouseService
         return suppliers;
     }
 
+    public async Task<Shipment> GetShipmentByTwoId(Guid shipmentId, Guid wareHouseId)
+    {
+        var shipment = await dataContext.Shipments.Where(i => i.IdShipment == shipmentId && i.WareHouseId == wareHouseId).FirstOrDefaultAsync();
+
+        return await Task.FromResult(shipment);
+    }
+
     public async Task AddShipmentToCurrentWareHouse(Shipment shipment)
     {
         dataContext.Shipments.Add(shipment);
+        await dataContext.SaveChangesAsync();
+    }
+
+    public async Task UpdateShipment(Shipment shipment)
+    {
+        dataContext.Shipments.Attach(shipment);
         await dataContext.SaveChangesAsync();
     }
 

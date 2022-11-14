@@ -13,10 +13,16 @@ public partial class OrderElementsEditor
     [Parameter] public Guid editedOrderElementId { get; set; }
 
     OrderElement editedOrderElement = new();
+    Order currentOrder = new();
+
 
     protected override async Task OnInitializedAsync()
     {
+        currentOrder = await OrderService.GetOrderById(editedOrderElementId);
+
         editedOrderElement = await OrderService.GetOrderElementById(editedOrderElementId);
+    
+    
     }
 
     private async Task HandleEdit()
@@ -24,6 +30,11 @@ public partial class OrderElementsEditor
 
 
         await OrderService.UpdateElement(editedOrderElement);
+
+        currentOrder.TotalOrderAmount = await OrderService.GetOrderTotalAmount(editedOrderElementId);
+
+        await OrderService.UpdateOrder(currentOrder);
+
         await Close(null);
     }
 

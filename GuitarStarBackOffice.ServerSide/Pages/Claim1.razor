@@ -3,18 +3,14 @@
 @using Microsoft.AspNetCore.Components.Authorization
 @inject CustomAuthStateProvider CustomAuthStateProvider
 
-    @CustomAuthStateProvider.FullName
-    <h3>ClaimsPrincipal Data</h3>
-    @if (CustomAuthStateProvider.Role == UserRole.Admin)
-    {
-        <p>админ </p>
-    }
-
-    else if (CustomAuthStateProvider.Role == UserRole.Manager)
-    {
-        <p>менеджер </p>
-    }
-
+<AuthorizeView Roles="Админитсратор">
+       <Authorized>
+           <a>Это видит админ</a>
+       </Authorized>
+       <NotAuthorized>
+           <a>Это видят все остальные</a>
+       </NotAuthorized>
+   </AuthorizeView>
 
 @*<button @onclick="GetClaimsPrincipalData">Get ClaimsPrincipal Data</button>
 *@

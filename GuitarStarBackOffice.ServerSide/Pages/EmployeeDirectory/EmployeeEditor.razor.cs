@@ -1,4 +1,5 @@
-﻿using GuitarStarBackOffice.ServerSide.Services.EmployeeService;
+﻿using GuitarStarBackOffice.ServerSide.Services;
+using GuitarStarBackOffice.ServerSide.Services.EmployeeService;
 using GuitarStarBackOffice.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -14,6 +15,8 @@ public partial class EmployeeEditor
     
     [Inject]
     protected DialogService DialogService { get; set; }
+    [Inject] private PostService PostService { get; set; }
+
 
     [Inject] private EmployeeService EmployeeService { get; set; }
 
@@ -26,6 +29,7 @@ public partial class EmployeeEditor
     public bool IsOpened { get; set; } = false;
 
     public List<EmployeeRoleDdlModel> UserRoles = new();
+    public IEnumerable<Post> posts;
 
 
     public EmployeeEditor()
@@ -41,6 +45,7 @@ public partial class EmployeeEditor
 
     protected override async Task OnInitializedAsync()
     {
+        posts = await PostService.GetPosts();
         editedEmployee = await EmployeeService.GetEmployeeById(editedEmployeeId);
         EmpName = editedEmployee.Name; 
     }

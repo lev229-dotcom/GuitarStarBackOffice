@@ -33,6 +33,8 @@ builder.Services.AddScoped<WareHouseService>();
 builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<OrderService>();
+builder.Services.AddScoped<PostService>();
+builder.Services.AddScoped<DiagramService>();
 
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped<CustomAuthStateProvider>();

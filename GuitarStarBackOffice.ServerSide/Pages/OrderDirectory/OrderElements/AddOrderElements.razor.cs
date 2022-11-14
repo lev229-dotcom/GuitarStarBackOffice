@@ -20,6 +20,7 @@ public partial class AddOrderElements
     public Guid currentOrderId { get; set; }
 
     OrderElement newOrderElement = new();
+    Order currentOrder = new();
 
     IEnumerable<Product> products;
 
@@ -27,6 +28,7 @@ public partial class AddOrderElements
     {
         base.OnInitialized();
 
+        currentOrder = await OrderService.GetOrderById(currentOrderId);
         products = await ProductService.GetProducts();
     }
 
@@ -37,6 +39,10 @@ public partial class AddOrderElements
 
             newOrderElement.OrderId = currentOrderId;   
             await OrderService.AddElement(newOrderElement);
+
+            currentOrder.TotalOrderAmount = await OrderService.GetOrderTotalAmount(currentOrderId);
+
+            await OrderService.UpdateOrder(currentOrder);
 
             await Close(null);
         }

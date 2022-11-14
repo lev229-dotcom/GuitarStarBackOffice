@@ -7,16 +7,16 @@
     <ChildContent>
         <div class="row">
             <div class="col-md-12">
-                <RadzenTemplateForm TItem="Shipment" Data="@newShipment" Submit="@HandleAdd">
+                <RadzenTemplateForm TItem="Shipment" Data="@editedShipment" Submit="@HandleEdit">
                     <ChildContent>
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Дата поставки" style="width: 100%" />
-                            <RadzenDatePicker  @bind-Value="@newShipment.ShipmentDate"  />
+                            <RadzenDatePicker @bind-Value="@editedShipment.ShipmentDate" Inline="true" />
                         </div>
 
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Поставщик" style="width: 100%" />
-                            <RadzenDropDown Data="@suppliers" @bind-Value="@(newShipment.SupplierId)"
+                            <RadzenDropDown Data="@suppliers" @bind-Value="@(editedShipment.SupplierId)"
                                             SelectedItem="1"
                                             ValueProperty="IdSupplier" TextProperty="SupplierName" />
                         </div>

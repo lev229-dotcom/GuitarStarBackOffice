@@ -3,7 +3,6 @@
 @inject Radzen.DialogService dialogService
 
 <RadzenContent Container="main">
-
     <ChildContent>
         <div class="row">
             <div class="col-md-12">
@@ -21,7 +20,7 @@
 
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Номер телефона" style="width: 100%" />
-                            <RadzenMask Mask="*(***) ***-**-**" CharacterPattern="[0-9]" Placeholder="+7(000) 000-00-00"
+                            <RadzenMask Mask="+*(***) ***-**-**" CharacterPattern="[0-9]" Placeholder="+7(000) 000-00-00"
                                         style="display: block; width: 100%" @bind-Value="@newSupplier.PhoneNumber" />
                         </div>
 

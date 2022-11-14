@@ -1,4 +1,5 @@
-﻿using GuitarStarBackOffice.ServerSide.Services.EmployeeService;
+﻿using GuitarStarBackOffice.ServerSide.Services;
+using GuitarStarBackOffice.ServerSide.Services.EmployeeService;
 using GuitarStarBackOffice.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -16,12 +17,23 @@ public partial class AddEmployee
     protected DialogService DialogService { get; set; }
 
     [Inject] private EmployeeService EmployeeService { get; set; }
+    [Inject] private PostService PostService { get; set; }
 
     [Inject] protected NotificationService NotificationService { get; set; }
 
     Employee newEmployee = new Employee();
 
     public List<EmployeeRoleDdlModel> UserRoles = new ();
+
+    public IEnumerable<Post> posts ;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        posts = await PostService.GetPosts();
+
+    }
+
 
     public AddEmployee()
     {
@@ -33,11 +45,7 @@ public partial class AddEmployee
                 RoleName = roleEnumValue.ToDescriptionString(),
             });
     }
-    protected override async Task OnInitializedAsync()
-    {
-
-    }
-
+   
     private async Task HandleAdd()
     {
         try

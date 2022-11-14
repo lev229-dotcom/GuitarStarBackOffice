@@ -28,6 +28,15 @@ public partial class ShipmentsForWareHouse
         Shipments = await WareHouseService.GetShipmentsByWareHouseId(currentWareHouseId);
     }
 
+    private async void OpenEditor(Shipment editedShipment)
+    {
+        await DialogService.OpenAsync<EditShipmentForWareHouse>("Редактировать поставку", new Dictionary<string, object>()
+               { { "editedShipmentId", editedShipment.IdShipment },
+            { "currentWareHouseId", currentWareHouseId } },
+               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+        await grid.Reload();
+    }
+
     private async Task DeleteShipment(Shipment deletedShipment)
     {
         ConfirmOptions options = new ConfirmOptions();

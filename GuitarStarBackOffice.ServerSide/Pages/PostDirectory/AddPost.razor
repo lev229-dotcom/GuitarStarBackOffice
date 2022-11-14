@@ -1,0 +1,35 @@
+﻿@using GuitarStarBackOffice.Shared
+@layout MainLayout
+@inject Radzen.DialogService dialogService
+
+<RadzenContent Container="main">
+
+    <ChildContent>
+        <div class="row">
+            <div class="col-md-12">
+                <RadzenTemplateForm TItem="Post" Data="@newPost" Submit="@HandleAdd">
+                    <ChildContent>
+                        <div style="margin-bottom: 1rem" class="flex-column">
+                            <MudTextField Label="Название" @bind-Value="@newPost.PostName" Immediate="true"
+                                          Class="mt-5" InputType="InputType.Text" Variant="MudBlazor.Variant.Outlined" Required="true"
+                                          RequiredError="Поле обязательно к заполнению" />
+                        </div>
+
+                        <div style="margin-bottom: 1rem" class="flex-column">
+                            <MudNumericField Label="Оклад" @bind-Value="@newPost.Salary" Immediate="true"
+                                             Class="mt-5" Min="1" Variant="MudBlazor.Variant.Outlined" Required="true"
+                                             RequiredError="Поле обязательно к заполнению" />
+                        </div>
+
+
+
+                        <div class="row footer">
+                            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сохранить" />
+                        </div>
+                    </ChildContent>
+                </RadzenTemplateForm>
+            </div>
+        </div>
+    </ChildContent>
+</RadzenContent>
+

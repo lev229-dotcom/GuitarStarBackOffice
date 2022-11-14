@@ -1,0 +1,22 @@
+﻿@page "/Stats"
+
+<RadzenText TextStyle="TextStyle.H3" TagName="TagName.H1" Class="my-4">
+    Статистика продаж по датам
+</RadzenText>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 my-5">
+            <RadzenChart>
+                <RadzenColumnSeries Data="@orderForFirstDate" CategoryProperty="OrderDate" Title="OrderDate" LineType="LineType.Dashed" ValueProperty="TotalOrderAmount">
+                </RadzenColumnSeries>
+                <RadzenColumnSeries Data="@orderForSecondDate" CategoryProperty="OrderDate" Title="OrderDate" ValueProperty="TotalOrderAmount">
+                </RadzenColumnSeries>
+                <RadzenColumnOptions Radius="5" />
+                <RadzenValueAxis Formatter="@FormatAsRub">
+                    <RadzenGridLines Visible="true" />
+                </RadzenValueAxis>
+            </RadzenChart>
+        </div>
+    </div>
+</div>

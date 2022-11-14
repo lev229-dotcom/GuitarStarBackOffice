@@ -8,15 +8,17 @@
     </Authorized>
     <NotAuthorized>
         <MudText Align="Align.Center" Typo="Typo.h5" Class="mb-10">Вход в аккаунт</MudText>
-         <div style="margin-bottom: 1rem" class="flex-column">
-            <RadzenLabel Text="Email" style="width: 100%" />
-            <RadzenTextBox MaxLength="50" style="display: block; width: 100%" @bind-Value="@currentEmployee.Email" />
-        </div> 
-        
-        <div style="margin-bottom: 1rem" class="flex-column">
-            <RadzenLabel Text="Пароль" style="width: 100%" />
-            <RadzenPassword M style="display: block; width: 100%" @bind-Value="@currentEmployee.Password" />
-        </div>
+       
+        <MudTextField Label="Почта" @bind-Value="@Email" Immediate="true"
+                      Class="mt-5" InputType="InputType.Email" Variant="MudBlazor.Variant.Outlined" Required="true"
+                      RequiredError="Поле обязательно к заполнению" />
+
+        <MudTextField Label="Пароль" @bind-Value="@Password" Immediate="true"
+                      Class="mt-5" InputType="InputType.Password" Variant="MudBlazor.Variant.Outlined" Required="true"
+                      RequiredError="Поле обязательно к заполнению" />
+
+       
+
        <RadzenButton Click="LogIn" Text="Войти"/>
 
     </NotAuthorized>

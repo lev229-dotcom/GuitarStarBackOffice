@@ -63,13 +63,8 @@
                         }
                     </Template>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Employee" Property="EmployeeRole" Title="EmployeeRole">
-                    <Template>
-                        @{
-                            var employee = (Employee)context;
-                            @employee.EmployeeRole.ToDescriptionString();
-                        }
-                    </Template>
+                <RadzenDataGridColumn TItem="Employee" Property="Post.PostName" Title="Должность">
+                    
                 </RadzenDataGridColumn>
             </Columns>
         </RadzenDataGrid>

@@ -58,9 +58,9 @@
 
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Роль пользователя" style="width: 100%" />
-                            <RadzenDropDown Data="@UserRoles" @bind-Value="@(newEmployee.EmployeeRole)"
+                            <RadzenDropDown Data="@posts" @bind-Value="@(newEmployee.PostId)"
                                             SelectedItem="1"
-                                            ValueProperty="UserRoleValue" TextProperty="RoleName" />
+                                            ValueProperty="IdPost" TextProperty="PostName" />
                         </div>
 
                         <div class="row footer">

@@ -1,34 +1,35 @@
-﻿@using GuitarStarBackOffice.Shared
-@layout MainLayout
-@inject Radzen.DialogService dialogService
+﻿@page "/Post"
+@using GuitarStarBackOffice.Shared
+@using MudBlazor.Extensions
 
 <RadzenContent>
     <ChildContent>
-        <RadzenHeading Size="H1" Text="Поставки" />
+        <RadzenHeading Size="H1" Text="Должности" />
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Добавить" Click="AddPost">
+        </RadzenButton>
         <RadzenDataGrid ColumnWidth="150px"
                         AllowFiltering="true" AllowColumnResize="true"
                         AllowAlternatingRows="false" FilterMode="FilterMode.Advanced"
                         AllowSorting="true" PageSize="5" AllowPaging="true"
                         AllowColumnReorder="true"
                         PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-                        @ref="grid" Data="@Shipments" TItem="Shipment">
+                        @ref="grid" Data="@posts" TItem="Post">
             <Columns>
-                <RadzenDataGridColumn TItem="Shipment" Title="Действия" Frozen="true" Filterable="false" Sortable="false">
+                <RadzenDataGridColumn TItem="Post" Title="Действия" Frozen="true">
                     <Template>
                         @{
-                            var shipmnet = (Shipment)context;
+                            var post = (Post)context;
                             <MudMenu Label="Действия" Dense="true" AnchorOrigin="@Origin.BottomCenter"
                                  TransformOrigin="@Origin.TopCenter" StartIcon="@Icons.Filled.Hive"
                                  EndIcon="@Icons.Filled.KeyboardArrowDown">
 
-                                <MudMenuItem OnClick="@(() => OpenEditor(shipmnet))">
+                                <MudMenuItem OnClick="@(() => OpenEditor(post))">
                                     <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
                                          Icon="@Icons.Material.Filled.Edit" />
                                     Изменить
                                 </MudMenuItem>
 
-
-                                <MudMenuItem OnClick="@(() => DeleteShipment(shipmnet))">
+                                <MudMenuItem OnClick="@(() => DeletePost(post))">
                                     <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
                                          Icon="@Icons.Material.Filled.Delete" />
                                     Удалить
@@ -38,10 +39,10 @@
                         }
                     </Template>
                 </RadzenDataGridColumn>
-
-                <RadzenDataGridColumn TItem="Shipment" Property="ShipmentDate" Title="Дата поставки" />
-                <RadzenDataGridColumn TItem="Shipment" Property="Supplier.SupplierName" Title="Название поставщика" />
+                <RadzenDataGridColumn TItem="Post" Property="PostName" Title="Название" />
+                <RadzenDataGridColumn TItem="Post" Property="Salary" Title="Оклад" />
             </Columns>
+
         </RadzenDataGrid>
     </ChildContent>
 </RadzenContent>

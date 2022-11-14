@@ -1,4 +1,5 @@
-﻿using GuitarStarBackOffice.ServerSide.Pages.OrderDirectory.OrderElements;
+﻿using ClosedXML.Excel;
+using GuitarStarBackOffice.ServerSide.Pages.OrderDirectory.OrderElements;
 using GuitarStarBackOffice.ServerSide.Pages.ProductRepository;
 using GuitarStarBackOffice.ServerSide.Services;
 using GuitarStarBackOffice.Shared;
@@ -58,6 +59,21 @@ public partial class OrderPage
                { { "editedOrderId", editedOrder.IdOrder } },
                new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
         await grid.Reload();
+    }
+
+    private async void Export()
+    {
+        var wb = new XLWorkbook();
+        wb.Properties.Author = "the Author";
+        wb.Properties.Title = "the Title";
+        wb.Properties.Subject = "the Subject";
+        var ws = wb.Worksheets.Add("Weather Forecast");
+        ws.Cell(1, 1).Value = "Temp. (C)";
+        ws.Cell(1, 2).Value = "Temp. (F)";
+        ws.Cell(1, 3).Value = "Summary";
+
+        MemoryStream XLSStream = new();
+        wb.SaveAs(XLSStream);
     }
 
     private async Task DeleteOrder(Order deletedOrder)

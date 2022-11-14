@@ -25,13 +25,13 @@ public class CustomAuthStateProvider : AuthenticationStateProvider
         }
 
         var identity = new ClaimsIdentity("Authorize");
-        identity.AddClaim(new Claim(ClaimTypes.Name, "FullName"));
-        identity.AddClaim(new Claim(ClaimTypes.Role, "RoleAdmin"));
+        identity.AddClaim(new Claim(ClaimTypes.Name, FullName));
+        identity.AddClaim(new Claim(ClaimTypes.Role, Role));
         return new AuthenticationState(new ClaimsPrincipal(identity));
     }
 
 
-    public async Task StartSession(string fullName, string userName, UserRole role)
+    public async Task StartSession(string fullName, string userName, string role)
     {
         await localStorage.SetItemAsync(FullNameKey, fullName);
         await localStorage.SetItemAsync(RoleKey, role);
@@ -48,7 +48,7 @@ public class CustomAuthStateProvider : AuthenticationStateProvider
     private async Task LoadSession()
     {
         FullName = await localStorage.GetItemAsync<string>(FullNameKey);
-        Role = await localStorage.GetItemAsync<UserRole>(RoleKey);
+        Role = await localStorage.GetItemAsync<string>(RoleKey);
         Token = await localStorage.GetItemAsync<string>(TokenKey);
         Username = await localStorage.GetItemAsync<string>(UsernameKey);
         IsSessionStarted = await localStorage.GetItemAsync<bool>(SessionStartedKey);
@@ -100,7 +100,7 @@ public class CustomAuthStateProvider : AuthenticationStateProvider
     /// <summary>
     ///     Роль пользователя
     /// </summary>
-    public UserRole Role { get; private set; }
+    public string Role { get; private set; }
 
     /// <summary>
     ///     Токен
