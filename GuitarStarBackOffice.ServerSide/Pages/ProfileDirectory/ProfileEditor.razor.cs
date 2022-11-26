@@ -54,9 +54,15 @@ public partial class ProfileEditor
     //}
     private async Task HandleEdit()
     {
-        if(!string.IsNullOrWhiteSpace(Password))
+        if (!string.IsNullOrWhiteSpace(Password))
+        {
             employee.Password = Password;
+            await EmployeeService.UpdateEmployee(employee, true);
+
+
+        }
         await EmployeeService.UpdateEmployee(employee);
+
         await UserSession.StartSession(UserSession.FullName, UserSession.Username, UserSession.Role);
         await Close(null);
         ShowNotification(new NotificationMessage { Style = ConstantsValues.NotifyMessageStyle, Severity = NotificationSeverity.Success, Summary = "Операция завершена успешно", Duration = 4000 });

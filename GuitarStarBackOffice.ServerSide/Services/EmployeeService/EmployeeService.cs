@@ -19,7 +19,7 @@ public class EmployeeService
 
     public async Task<IEnumerable<Employee>> GetEmployees()
     {
-        var employees =  dataContext.Employees.Include(p => p.Post).ToList();
+        var employees = dataContext.Employees.Include(p => p.Post).ToList();
 
         return employees;
     }
@@ -41,19 +41,21 @@ public class EmployeeService
         return await Task.FromResult(employee);
     }
 
-    public async Task UpdateEmployee (Employee employee)
+    public async Task UpdateEmployee(Employee employee, bool IsNewPassword = false)
     {
-        if(!string.IsNullOrWhiteSpace(employee.Password))
-                employee.Password = HashHelper.GetHashString(employee.Password);
+        if (IsNewPassword)
+            employee.Password = HashHelper.GetHashString(employee.Password);
+        else
+            employee.Password = employee.Password;
         dataContext.Employees.Attach(employee);
         await dataContext.SaveChangesAsync();
-    }  
-    public async Task AddEmployee (Employee employee)
+    }
+    public async Task AddEmployee(Employee employee)
     {
         employee.Password = HashHelper.GetHashString(employee.Password);
 
         dataContext.Employees.Add(employee);
-            await dataContext.SaveChangesAsync();
+        await dataContext.SaveChangesAsync();
     }
 
     public async Task DeleteEmployee(Employee employee)
