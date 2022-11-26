@@ -1,7 +1,9 @@
-﻿using GuitarStarBackOffice.ServerSide.Services;
+﻿using GuitarStarBackOffice.ServerSide.Constants;
+using GuitarStarBackOffice.ServerSide.Services;
 using GuitarStarBackOffice.ServerSide.Services.EmployeeService;
 using GuitarStarBackOffice.Shared;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor.Extensions;
 using Radzen;
@@ -27,13 +29,21 @@ public partial class AddEmployee
 
     public IEnumerable<Post> posts ;
 
+    EditContext editContext;
+
+    private bool IsActive = false;
 
     protected override async Task OnInitializedAsync()
     {
         posts = await PostService.GetPosts();
-
+        editContext = new EditContext(newEmployee);
+        editContext.OnFieldChanged += FieldChanged;
     }
 
+    private void FieldChanged(object sender, FieldChangedEventArgs args)
+    {
+        IsActive = !editContext.Validate();
+    }
 
     public AddEmployee()
     {
@@ -48,16 +58,25 @@ public partial class AddEmployee
    
     private async Task HandleAdd()
     {
-        try
+        if (editContext.Validate())
         {
-            newEmployee.AccountCreateDate = DateTime.Now;
-            await EmployeeService.AddEmployee(newEmployee);
-            await Close(null);
+            try
+            {
+                newEmployee.AccountCreateDate = DateTime.Now;
+                await EmployeeService.AddEmployee(newEmployee);
+                await Close(null);
+                ShowNotification(new NotificationMessage { Style = ConstantsValues.NotifyMessageStyle, Severity = NotificationSeverity.Success, Summary = "Операция завершена успешно", Duration = 4000 });
+            }
+            catch (Exception ex)
+            {
+                ShowNotification(new NotificationMessage { Style = ConstantsValues.NotifyMessageStyle, Severity = NotificationSeverity.Error, Summary = "Произошла ошибка", Detail = "Данные не валидны", Duration = 4000 });
+            }
         }
-        catch(Exception ex)
+        else
         {
-            ShowNotification(new NotificationMessage { Style = "position: absolute; ", Severity = NotificationSeverity.Error, Summary = "Произошла ошибка", Detail = $"{ex.Message}", Duration = 4000 });
+            ShowNotification(new NotificationMessage { Style = ConstantsValues.NotifyMessageStyle, Severity = NotificationSeverity.Error, Summary = "Произошла ошибка", Detail = $"{Environment.NewLine}Данные не валидны", Duration = 4000 });
         }
+
     }
 
     protected async Task Close(MouseEventArgs? args)

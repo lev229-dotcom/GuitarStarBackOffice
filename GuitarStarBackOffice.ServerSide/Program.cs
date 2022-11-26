@@ -1,8 +1,11 @@
+using BlazorDownloadFile;
 using Blazored.LocalStorage;
 using GuitarStarBackOffice.ServerSide;
 using GuitarStarBackOffice.ServerSide.Data;
 using GuitarStarBackOffice.ServerSide.Services;
+using GuitarStarBackOffice.ServerSide.Services.BackUpService;
 using GuitarStarBackOffice.ServerSide.Services.EmployeeService;
+using GuitarStarBackOffice.ServerSide.Services.ExportService;
 using GuitarStarBackOffice.ServerSide.Services.SupplierService;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -16,6 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddBlazorDownloadFile();
 
 builder.Services.AddScoped<DialogService>();
 builder.Services.AddScoped<NotificationService>();
@@ -35,6 +39,10 @@ builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<OrderService>();
 builder.Services.AddScoped<PostService>();
 builder.Services.AddScoped<DiagramService>();
+builder.Services.AddScoped<UseTemplateXLSX>();
+builder.Services.AddScoped<Excel>();
+builder.Services.AddScoped<ExportService>();
+builder.Services.AddScoped<BackupService>();
 
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped<CustomAuthStateProvider>();

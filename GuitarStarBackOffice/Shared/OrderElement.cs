@@ -16,7 +16,7 @@ public class OrderElement
     /// Количестов элементов
     /// </summary>
     [Display(Name = "Количестов элементов")]
-    [Required]
+    [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
     public int ElementsCount { get; set; }
 
     #region Id заказа
@@ -25,7 +25,7 @@ public class OrderElement
     /// Id заказа 
     /// </summary>
     [Display(Name = "Id заказа")]
-    [Required]
+    [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
     public Order Order { get; set; }
 
     public Guid OrderId { get; set; }
@@ -38,7 +38,7 @@ public class OrderElement
     /// Id товара 
     /// </summary>
     [Display(Name = "Id товара")]
-    [Required]
+    [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
     public Product Product { get; set; }
 
     public Guid ProductId { get; set; }

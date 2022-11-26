@@ -16,28 +16,28 @@ public class Supplier
 	/// Название
 	/// </summary>
 	[Display(Name = "Название")]
-	[Required]
+	[Required(ErrorMessage ="Данное поле обязательно к заполнению")]
 	public string SupplierName { get; set; }
 
 	/// <summary>
 	/// Представитель
 	/// </summary>
 	[Display(Name = "Представитель")]
-	[Required]
+	[Required(ErrorMessage ="Данное поле обязательно к заполнению")]
 	public string Representive { get; set; }
 
 	/// <summary>
 	/// Телефон
 	/// </summary>
 	[Display(Name = "Телефон")]
-	[Required]
+	[Required(ErrorMessage ="Данное поле обязательно к заполнению")]
 	public string PhoneNumber { get; set; }
 
 	/// <summary>
 	/// Адрес
 	/// </summary>
 	[Display(Name = "Адрес")]
-	[Required]
+	[Required(ErrorMessage ="Данное поле обязательно к заполнению")]
 	public string SupplierAddress { get; set; }
 
 	/// <summary>

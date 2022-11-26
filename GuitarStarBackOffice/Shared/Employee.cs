@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using GuitarStarBackOffice.Shared.Attributes;
+using GuitarStarBackOffice.Shared.Validators;
+using System.ComponentModel.DataAnnotations;
 
 namespace GuitarStarBackOffice.Shared;
 
@@ -12,8 +14,10 @@ public class Employee
 	/// </summary>
 	public Guid IdEmployee { get; set; }
 
+	[EmailValidator(ErrorMessage = "Некорректная почта")]
     public string Email { get; set; }
 
+    [MinLength(6, ErrorMessage = "Минимальная длина 6 символов")]
     public string Password { get; set; }
     public DateTime AccountCreateDate { get; set; }
 
@@ -21,60 +25,67 @@ public class Employee
     /// Фамилия
     /// </summary>
     [Display(Name = "Фамилия")]
-	[Required]
-	public string Surname { get; set; }
+	[Required(ErrorMessage ="Данное поле обязательно к заполнению")]
+    [MinLength(4, ErrorMessage = "Минимальная длина 4 буквы")]
+    public string Surname { get; set; }
 
 	/// <summary>
 	/// Имя
 	/// </summary>
 	[Display(Name = "Имя")]
-	[Required]
-	public string Name { get; set; }
+	[Required(ErrorMessage ="Данное поле обязательно к заполнению")]
+    [MinLength(4, ErrorMessage = "Минимальная длина 4 буквы")]
+    public string Name { get; set; }
 
 	/// <summary>
 	/// Отчество
 	/// </summary>
 	[Display(Name = "Отчество")]
-
-	public string Patronymic { get; set; }
+    [Nullable(5, ErrorMessage = "Отчество не может быть менее 5 букв")]
+    public string Patronymic { get; set; }
 
 	/// <summary>
 	/// Серия паспорта
 	/// </summary>
 	[Display(Name = "Серия паспорта")]
-	[Required]
-	public string PasportSeries { get; set; }
+	[Required(ErrorMessage ="Данное поле обязательно к заполнению")]
+    [MinLength(4, ErrorMessage = "Серия паспорта состоит 4-ех цифр")]
+    [MaxLength(4)]
+    public string PasportSeries { get; set; }
 
 	/// <summary>
 	/// Номер паспорта
 	/// </summary>
 	[Display(Name = "Номер паспорта")]
-	[Required]
-	public string PasportNumber { get; set; }
+	[Required(ErrorMessage ="Данное поле обязательно к заполнению")]
+    [MinLength(6, ErrorMessage = "Номер паспорта состоит 6 цифр")]
+    [MaxLength(6)]
+    public string PasportNumber { get; set; }
 
 	/// <summary>
 	/// Дата рождения
 	/// </summary>
 	[Display(Name = "Дата рождения")]
-	[Required]
-	public DateTime DateOfBirth { get; set; }
+	[Required(ErrorMessage ="Данное поле обязательно к заполнению")]
+    [Date(100, -18, ErrorMessage = "Дата рождения должна быть между {1} и {2}")]
+    public DateTime DateOfBirth { get; set; }
 
 	/// <summary>
 	/// Дата приема на работу
 	/// </summary>
 	[Display(Name = "Дата приема на работу")]
-	[Required]
-	public DateTime DateOfEmployment { get; set; }
+	[Required(ErrorMessage ="Данное поле обязательно к заполнению")]
+    [Date(50, 0, ErrorMessage = "Дата приема на работу должна быть между {1} и {2}")]
+    public DateTime DateOfEmployment { get; set; }
 
     /// <summary>
     /// Id Категории 
     /// </summary>
     [Display(Name = "Id Должности")]
-    [Required]
     public Post Post { get; set; }
 
     [Display(Name = "Id Должности")]
-    [Required]
+    [Required(ErrorMessage ="Данное поле обязательно к заполнению IdPost")]
     public Guid PostId { get; set; }
 
 
@@ -92,7 +103,7 @@ public class Employee
 	///// Id Аккаунта 
 	///// </summary>
 	//[Display(Name = "Id Аккаунта")]
-	//[Required]
+	//[Required(ErrorMessage ="Данное поле обязательно к заполнению")]
 	//public Account Account { get; set; }
 
 	//#endregion

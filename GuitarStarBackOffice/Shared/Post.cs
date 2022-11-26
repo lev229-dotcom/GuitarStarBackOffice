@@ -16,14 +16,14 @@ public class Post
 	/// Название
 	/// </summary>
 	[Display(Name = "Название")]
-	[Required]
+	[Required(ErrorMessage ="Данное поле обязательно к заполнению")]
 	public string PostName { get; set; }
 
 	/// <summary>
 	/// Оклад
 	/// </summary>
 	[Display(Name = "Оклад")]
-	[Required]
+	[Required(ErrorMessage ="Данное поле обязательно к заполнению")]
 	public double Salary { get; set; }
 
 	/// <summary>

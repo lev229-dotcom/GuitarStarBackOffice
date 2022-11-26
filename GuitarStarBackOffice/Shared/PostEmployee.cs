@@ -20,7 +20,7 @@
 //    public Post Post { get; set; }
     
 //    [Display(Name = "Внешний ключ должности")]
-//    [Required]
+//    [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
 //    public Guid PostId { get; set; }
 
 //    #endregion
@@ -33,7 +33,7 @@
 //    public Employee Employee { get; set; }
 
 //    [Display(Name = "Внешний ключ сотрудника")]
-//    [Required]
+//    [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
 //    public Guid EmployeeId { get; set; }    
 
 //    #endregion

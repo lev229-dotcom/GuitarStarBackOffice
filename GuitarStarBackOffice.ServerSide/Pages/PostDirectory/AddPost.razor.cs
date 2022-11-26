@@ -17,6 +17,8 @@ public partial class AddPost
 
     Post newPost = new();
 
+
+    private bool IsActive => string.IsNullOrWhiteSpace(newPost.PostName);
     private async Task HandleAdd()
     {
         try

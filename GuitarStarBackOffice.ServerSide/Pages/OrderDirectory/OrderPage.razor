@@ -6,6 +6,7 @@
     <ChildContent>
         <RadzenHeading Size="H1" Text="Заказы" />
         <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Добавить" Click="AddOrder"/>
+        <RadzenButton style="margin-bottom: 10px" Text="Экспорт" Click="Export" />
         @*<RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Экспорт" Click="Export"/>*@
         <RadzenDataGrid ColumnWidth="250px"
                         AllowFiltering="true" AllowColumnResize="true"
@@ -46,7 +47,14 @@
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="Order" Property="OrderNumber" Title="Номер заказа" />
                 <RadzenDataGridColumn TItem="Order" Property="OrderDate" Title="Дата создания" />
-                <RadzenDataGridColumn TItem="Order" Property="TotalOrderAmount" Title="Общая стоимость" />
+                <RadzenDataGridColumn TItem="Order" Property="TotalOrderAmount" Title="Общая стоимость" >
+                    <Template>
+                        @{
+                            var order = (Order)context;
+                            <a>@Math.Round(order.TotalOrderAmount, 2)</a>
+                        }
+                    </Template>
+                </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="Order"  Title="Сотрудник" >
                     <Template>
                         @{

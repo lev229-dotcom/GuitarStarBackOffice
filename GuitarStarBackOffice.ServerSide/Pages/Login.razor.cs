@@ -22,10 +22,10 @@ public partial class Login
         if(result is not null)
         {
             // начинаем сессию
-            await UserSession.StartSession(result.Name, result.Email, result.Post.PostName);
+            await UserSession.StartSession(result.IdEmployee.ToString(), result.Email, result.Post.PostName);
             //await UserSession.FinishSession();
             // переходим в админку
-            NavigationManager.NavigateTo("/Claim");
+            NavigationManager.NavigateTo($"/Profile");
         }
         else
         {

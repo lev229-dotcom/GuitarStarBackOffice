@@ -7,28 +7,28 @@ namespace GuitarStarBackOffice.Shared;
 /// </summary>
 public class Order
 {
-	[Required]
+	[Required(ErrorMessage ="Данное поле обязательно к заполнению")]
 	public Guid IdOrder { get; set; }
 
     /// <summary>
     /// Номер заказа
     /// </summary>
     [Display(Name = "Номер заказа")]
-	[Required]
+	[Required(ErrorMessage ="Данное поле обязательно к заполнению")]
 	public int OrderNumber { get; set; }
 
 	/// <summary>
 	/// Дата создания
 	/// </summary>
 	[Display(Name = "Дата создания")]
-	[Required]
+	[Required(ErrorMessage ="Данное поле обязательно к заполнению")]
 	public DateTime OrderDate { get; set; }
 
 	/// <summary>
 	/// Общая стоимость заказа
 	/// </summary>
 	[Display(Name = "Общая стоимость заказа")]
-	[Required]
+	[Required(ErrorMessage ="Данное поле обязательно к заполнению")]
 	public double TotalOrderAmount { get; set; }
 
 	#region Id Сотрудника
@@ -40,14 +40,14 @@ public class Order
 	public Employee Employee { get; set; }
 
 	[Display(Name = "Id Сотрудника")]
-	[Required]
+	[Required(ErrorMessage ="Данное поле обязательно к заполнению")]
 	public Guid EmployeeId { get; set; }
 
     #endregion
-    [Required]
+    [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
 	public OrderStatus orderStatus { get; set; }
 
-	[Required]
+	[Required(ErrorMessage ="Данное поле обязательно к заполнению")]
 	public PayementStatus payementStatus { get; set; }
 
     /// <summary>

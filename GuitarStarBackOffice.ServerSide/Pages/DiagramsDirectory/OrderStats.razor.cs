@@ -9,8 +9,11 @@ public partial class OrderStats
 {
     [Inject] private DiagramService DiagramService { get; set; }
 
-    IEnumerable<Order> orderForFirstDate;
-    IEnumerable<Order> orderForSecondDate;
+    IEnumerable<DiagramServiceModel> orderForFirstDate;
+   // IEnumerable<Order> orderForSecondDate;
+
+    DateTime startDate { get; set; } = DateTime.Parse("7.11.2022");
+    DateTime endDate { get; set; } = DateTime.Parse("15.11.2022");
 
     protected override async void OnInitialized()
     {
@@ -21,8 +24,8 @@ public partial class OrderStats
 
     public async Task Get()
     {
-        orderForFirstDate = await DiagramService.GetOrdersByDate(DateTime.Parse("16.11.2022"));
-        orderForSecondDate = await DiagramService.GetOrdersByDate(DateTime.Parse("15.11.2022"));
+        orderForFirstDate = await DiagramService.GetOrdersByDate(startDate, endDate);
+       // orderForSecondDate = await DiagramService.GetOrdersByDate(endDate);
     }
 
     string FormatAsRub(object value)
@@ -30,4 +33,20 @@ public partial class OrderStats
         return ((double)value).ToString("C0", CultureInfo.CreateSpecificCulture("ru-RU"));
     }
 
+    private async Task CreateStat()
+    {
+        orderForFirstDate = await DiagramService.GetOrdersByDate(startDate, endDate);
+       // orderForSecondDate = await DiagramService.GetOrdersByDate(endDate);
+
+    }
+
+    string FormatAsMonth(object value)
+    {
+        if (value != null)
+        {
+            return Convert.ToDateTime(value).ToString("M");
+        }
+
+        return string.Empty;
+    }
 }

@@ -36,14 +36,15 @@ public class EmployeeService
 
     public async Task<Employee> GetEmployeeById(Guid id)
     {
-        Employee employee = await dataContext.Employees.Where(i => i.IdEmployee == id).FirstOrDefaultAsync();
+        Employee employee = await dataContext.Employees.Include(d => d.Post).Where(i => i.IdEmployee == id).FirstOrDefaultAsync();
 
         return await Task.FromResult(employee);
     }
 
     public async Task UpdateEmployee (Employee employee)
     {
-        employee.Password = HashHelper.GetHashString(employee.Password);
+        if(!string.IsNullOrWhiteSpace(employee.Password))
+                employee.Password = HashHelper.GetHashString(employee.Password);
         dataContext.Employees.Attach(employee);
         await dataContext.SaveChangesAsync();
     }  

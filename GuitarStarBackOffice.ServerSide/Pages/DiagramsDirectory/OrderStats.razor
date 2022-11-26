@@ -7,14 +7,26 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 my-5">
-            <RadzenChart>
-                <RadzenColumnSeries Data="@orderForFirstDate" CategoryProperty="OrderDate" Title="OrderDate" LineType="LineType.Dashed" ValueProperty="TotalOrderAmount">
-                </RadzenColumnSeries>
-                <RadzenColumnSeries Data="@orderForSecondDate" CategoryProperty="OrderDate" Title="OrderDate" ValueProperty="TotalOrderAmount">
-                </RadzenColumnSeries>
-                <RadzenColumnOptions Radius="5" />
+            <RadzenCard class="w-100 mb-4" Style="display: flex; align-items: center; gap: 0.5rem">
+            <div style="margin-bottom: 1rem" class="flex-column">
+                <RadzenLabel Text="Начальная дата" style="width: 100%" />
+                <RadzenDatePicker @bind-Value="@startDate" Max="@endDate.AddDays(-1)" />
+            </div>
+
+            <div style="margin-bottom: 1rem" class="flex-column">
+                <RadzenLabel Text="Конечная дата" style="width: 100%" />
+                <RadzenDatePicker @bind-Value="@endDate" Min="@startDate.AddDays(1)" />
+            </div>
+            <RadzenButton Click="@CreateStat" ButtonType="Radzen.ButtonType.Submit" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сформировать статистику" />
+            </RadzenCard>
+            <RadzenChart >
+                <RadzenLineSeries Smooth="true" Data="@orderForFirstDate" CategoryProperty="Date" Title="Сумма за день" LineType="LineType.Dashed" ValueProperty="AmountForDate">
+                    <RadzenMarkers MarkerType="MarkerType.Circle" />
+                </RadzenLineSeries>
+                <RadzenCategoryAxis Padding="20" Formatter="@FormatAsMonth" />
                 <RadzenValueAxis Formatter="@FormatAsRub">
                     <RadzenGridLines Visible="true" />
+                    <RadzenAxisTitle Text="Сумма в рублях"/>
                 </RadzenValueAxis>
             </RadzenChart>
         </div>

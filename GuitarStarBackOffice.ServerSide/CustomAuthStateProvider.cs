@@ -76,15 +76,17 @@ public class CustomAuthStateProvider : AuthenticationStateProvider
         NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
     }
 
-    private const string FullNameKey = "tegmento.admin.fullname";
-    private const string UsernameKey = "tegmento.admin.username";
-    private const string RoleKey = "tegmento.admin.userrole";
-    private const string TokenKey = "tegmento.admin.token";
-    private const string SessionStartedKey = "tegmento.admin.issessionstarted";
+    private const string FullNameKey = "admin.fullname";
+    private const string UsernameKey = "admin.username";
+    private const string RoleKey = "admin.userrole";
+    private const string TokenKey = "admin.token";
+    private const string SessionStartedKey = "admin.issessionstarted";
 
 
 
     #region Properties
+
+    public Guid UserId { get; set; }
 
     /// <summary>
     ///     Полное имя пользователя

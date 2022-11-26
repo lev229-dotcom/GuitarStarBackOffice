@@ -21,7 +21,7 @@ public class WareHouse
     /// Адрес
     /// </summary>
     [Display(Name = "Адрес")]
-    [Required]
+    [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
     public string Address { get; set; }
 
     /// <summary>

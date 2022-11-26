@@ -16,7 +16,7 @@ public class Category
     /// Название категории
     /// </summary>
     [Display(Name = "Название категории")]
-    [Required]
+    [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
     public string CategoryName { get; set; }
 
     /// <summary>

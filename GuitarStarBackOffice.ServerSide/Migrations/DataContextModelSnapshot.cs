@@ -109,7 +109,7 @@ namespace GuitarStarBackOffice.ServerSide.Migrations
                     b.Property<int>("orderStatus")
                         .HasColumnType("int");
 
-                    b.Property<int>("payementStatus")
+                    b.Property<int>("paymentStatus")
                         .HasColumnType("int");
 
                     b.HasKey("IdOrder");

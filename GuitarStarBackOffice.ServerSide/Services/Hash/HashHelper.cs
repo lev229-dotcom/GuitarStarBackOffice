@@ -18,8 +18,14 @@ public static class HashHelper
 
     public static string GetHashString(string inputString)
     {
-        using HashAlgorithm hashAlgorithm = SHA1.Create();
-        return BytesToString(hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(inputString)));
+        if(inputString is not null)
+        {
+            using HashAlgorithm hashAlgorithm = SHA1.Create();
+            return BytesToString(hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(inputString)));
+
+        }
+
+        return default;
     }
 
     public static string GetHashString(byte[] inputBytes)

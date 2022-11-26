@@ -7,52 +7,69 @@
     <ChildContent>
         <div class="row">
             <div class="col-md-12">
-                <RadzenTemplateForm TItem="Employee" Data="@newEmployee" Submit="@HandleAdd">
+                <RadzenTemplateForm TItem="Employee" Data="@newEmployee"  EditContext="editContext">
                     <ChildContent>
+                        <DataAnnotationsValidator />
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Имя" style="width: 100%" />
                             <RadzenTextBox MaxLength="50" style="display: block; width: 100%" @bind-Value="@newEmployee.Name" />
+                            <ValidationMessage For="@(() => newEmployee.Name)" />
                         </div>
 
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Фамилия" style="width: 100%" />
                             <RadzenTextBox MaxLength="50" style="display: block; width: 100%" @bind-Value="@newEmployee.Surname" />
+                            <ValidationMessage For="@(() => newEmployee.Surname)" />
                         </div>
 
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Отчество" style="width: 100%" />
                             <RadzenTextBox MaxLength="50" style="display: block; width: 100%" @bind-Value="@newEmployee.Patronymic" />
+                            <ValidationMessage For="@(() => newEmployee.Patronymic)" />
+
                         </div>
 
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Почта" style="width: 100%" />
                             <RadzenTextBox MaxLength="50" style="display: block; width: 100%" @bind-Value="@newEmployee.Email" />
+                            <ValidationMessage For="@(() => newEmployee.Email)" />
                         </div>
 
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Пароль" style="width: 100%" />
-                            <RadzenPassword style="display: block; width: 100%" @bind-Value="@newEmployee.Password" />
+                            <RadzenPassword style="display: block; width: 100%" @bind-Value="@newEmployee.Password" Name="Password" />
+                           @* <ValidationMessage For="@(() => newEmployee.Password)" />*@
+                            <RadzenRequiredValidator Component="Password" Text="Пароль - обязательное поле" />
+
                         </div>
 
 
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Серия паспорта" style="width: 100%" />
                             <RadzenMask Name="PasportSeries" Mask="****" CharacterPattern="[0-9]" Style="display: block; width: 100%" @bind-Value="@newEmployee.PasportSeries" />
+                            <ValidationMessage For="@(() => newEmployee.PasportSeries)" />
+
                         </div>
 
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Номер паспорта" style="width: 100%" />
                             <RadzenMask Name="PasportNumber" Mask="******" CharacterPattern="[0-9]" Style="display: block; width: 100%" @bind-Value="@newEmployee.PasportNumber" />
+                            <ValidationMessage For="@(() => newEmployee.PasportNumber)" />
+
                         </div>
 
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Дата рождения" style="width: 100%" />
-                            <RadzenDatePicker @bind-Value="@newEmployee.DateOfBirth" Inline="true" />
+                            <RadzenDatePicker @bind-Value="@newEmployee.DateOfBirth" />
+                            <ValidationMessage For="@(() => newEmployee.DateOfBirth)" />
+
                         </div>
 
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Дата начала работы" style="width: 100%" />
-                            <RadzenDatePicker @bind-Value="@newEmployee.DateOfEmployment" Inline="true" />
+                            <RadzenDatePicker @bind-Value="@newEmployee.DateOfEmployment"  />
+                            <ValidationMessage For="@(() => newEmployee.DateOfEmployment)" />
+
                         </div>
 
 
@@ -64,7 +81,7 @@
                         </div>
 
                         <div class="row footer">
-                            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сохранить">
+                            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" Disabled="@(IsActive)" Click="@HandleAdd" ButtonStyle="ButtonStyle.Primary" Text="Сохранить">
 
                             </RadzenButton>
                         </div>

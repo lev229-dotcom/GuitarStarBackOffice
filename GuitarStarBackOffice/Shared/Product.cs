@@ -21,14 +21,14 @@ public class Product
     /// Название товара
     /// </summary>
     [Display(Name = "Название товара")]
-    [Required]
+    [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
     public string ProductName { get; set; }
 
     /// <summary>
     /// Стоиость товара
     /// </summary>
     [Display(Name = "Стоиость товара")]
-    [Required]
+    [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
     public double ProductPrice { get; set; }
 
     #region Id Категории
@@ -37,11 +37,11 @@ public class Product
     /// Id Категории 
     /// </summary>
     [Display(Name = "Id Категории")]
-    [Required]
+    [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
     public Category Category { get; set; }
     
     [Display(Name = "Id Категории")]
-    [Required]
+    [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
     public Guid CategoryId { get; set; }
 
     #endregion
@@ -52,7 +52,7 @@ public class Product
     /// Id Склада 
     /// </summary>
     [Display(Name = "Id Склада")]
-    [Required]
+    [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
     public WareHouse WareHouse { get; set; }
 
     public Guid WareHouseId { get; set; }

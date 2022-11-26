@@ -24,7 +24,7 @@ public class Account
     /// Id Сотрудника 
     /// </summary>
     [Display(Name = "Id Сотрудника")]
-    [Required]
+    [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
     public Employee Employee { get; set; }
 
     #endregion

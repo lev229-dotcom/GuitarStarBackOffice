@@ -16,7 +16,7 @@ public class Shipment
     /// Дата поставка
     /// </summary>
     [Display(Name = "Дата поставки")]
-    [Required]
+    [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
     public DateTime ShipmentDate { get; set; }
 
     #region Id склада
@@ -25,7 +25,7 @@ public class Shipment
     /// Id склада 
     /// </summary>
     [Display(Name = "Id склада")]
-    [Required]
+    [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
     public WareHouse Warehouse { get; set; }
 
     public Guid WareHouseId { get; set; }
@@ -38,7 +38,7 @@ public class Shipment
     /// Id поставщика 
     /// </summary>
     [Display(Name = "Id поставщика")]
-    [Required]
+    [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
     public Supplier Supplier { get; set; }
 
     public Guid SupplierId { get; set; }

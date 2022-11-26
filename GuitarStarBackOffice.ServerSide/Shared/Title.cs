@@ -12,7 +12,7 @@ public class Title : ComponentBase
     /// <summary>
     /// Название системы
     /// </summary>
-    private const string SystemName = "Tegmento";
+    private const string SystemName = "Tempus";
 
     /// <summary>
     /// Gets or sets the content to be rendered as the document title.

@@ -1,0 +1,48 @@
+﻿@using GuitarStarBackOffice.Shared
+@layout MainLayout
+@page "/Profile"
+
+<h3>Ваш профиль, @currentEmployee?.Surname @currentEmployee?.Name @currentEmployee?.Patronymic</h3>
+
+<RadzenContent Container="main">
+
+    <ChildContent>
+        <div class="row">
+            <div class="col-md-12">
+                <RadzenCard >
+                    <ChildContent>
+                        <div style="margin-bottom: 1rem" class="flex-row">
+                            <RadzenLabel Text="Email:" Style="font-size: 18px"/>
+                            <RadzenLabel Text="@currentEmployee?.Email" Style="font-size: 18px" />
+                        </div>   
+                        <div style="margin-bottom: 1rem" class="flex-row">
+                            <RadzenLabel Text="Дата создания аккаунта:" Style="font-size: 18px" />
+                            <RadzenLabel Text="@Convert.ToDateTime(currentEmployee?.AccountCreateDate).ToString("D")" Style="font-size: 18px"/>
+                        </div>   
+                        <div style="margin-bottom: 1rem" class="flex-row">
+                            <RadzenLabel Text="Серия и номер паспорта" Style="font-size: 18px" />
+                            <RadzenLabel Style="font-size: 18px" Text="@($"{currentEmployee?.PasportSeries.ToString()}  {currentEmployee?.PasportNumber.ToString()}" )" />
+                        </div>   
+                        <div style="margin-bottom: 1rem" class="flex-row">
+                            <RadzenLabel Style="font-size: 18px" Text="Дата рождения:" />
+                            <RadzenLabel Style="font-size: 18px" Text="@Convert.ToDateTime(currentEmployee?.DateOfBirth).ToString("D")" />
+                        </div>
+                        <div style="margin-bottom: 1rem" class="flex-row">
+                            <RadzenLabel Style="font-size: 18px" Text="Дата приема на работу:" />
+                            <RadzenLabel Style="font-size: 18px" Text="@Convert.ToDateTime(currentEmployee?.DateOfEmployment).ToString("D")" />
+                        </div>
+                        <div style="margin-bottom: 1rem" class="flex-row">
+                            <RadzenLabel Style="font-size: 18px" Text="Должность: " />
+                            <RadzenLabel Style="font-size: 18px" Text="@currentEmployee?.Post.PostName" />
+                        </div>
+                        <div class="row footer">
+                            <RadzenButton Click="@OpenAccountEditor" ButtonType="Radzen.ButtonType.Submit" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Изменить данные аккаунта" />
+                        </div>
+                      
+                    </ChildContent>
+                </RadzenCard>
+            </div>
+        </div>
+    </ChildContent>
+</RadzenContent>
+

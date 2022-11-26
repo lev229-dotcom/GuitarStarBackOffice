@@ -1,26 +1,38 @@
 ﻿@page "/Login"
 @page "/"
+@layout LoginLayout
 
 <Title>Вход</Title>
 <AuthorizeView>
     <Authorized>
-        <RedirectTo TargetUrl="/Order"/>
+        <RedirectTo TargetUrl="/Profile" />
     </Authorized>
     <NotAuthorized>
-        <MudText Align="Align.Center" Typo="Typo.h5" Class="mb-10">Вход в аккаунт</MudText>
-       
-        <MudTextField Label="Почта" @bind-Value="@Email" Immediate="true"
-                      Class="mt-5" InputType="InputType.Email" Variant="MudBlazor.Variant.Outlined" Required="true"
-                      RequiredError="Поле обязательно к заполнению" />
+        <RadzenContent Container="main">
+            <ChildContent>
+                <div class="row">
+                    <div class="col-md-12">
 
-        <MudTextField Label="Пароль" @bind-Value="@Password" Immediate="true"
-                      Class="mt-5" InputType="InputType.Password" Variant="MudBlazor.Variant.Outlined" Required="true"
-                      RequiredError="Поле обязательно к заполнению" />
+                        <MudText Align="Align.Center" Typo="Typo.h5" Class="mb-10">Вход в аккаунт</MudText>
 
-       
+                        <MudTextField Label="Почта" @bind-Value="@Email" Immediate="true"
+                                      Class="mt-5" InputType="InputType.Email" Variant="MudBlazor.Variant.Outlined" Required="true"
+                                      RequiredError="Поле обязательно к заполнению" />
 
-       <RadzenButton Click="LogIn" Text="Войти"/>
+                        <MudTextField Label="Пароль" @bind-Value="@Password" Immediate="true"
+                                      Class="mt-5" InputType="InputType.Password" Variant="MudBlazor.Variant.Outlined" Required="true"
+                                      RequiredError="Поле обязательно к заполнению" />
 
+
+                        <div class="row footer">
+
+                            <RadzenButton Click="LogIn" Text="Войти" />
+                        </div>
+                    </div>
+                </div>
+
+            </ChildContent>
+        </RadzenContent>
     </NotAuthorized>
 </AuthorizeView>
 

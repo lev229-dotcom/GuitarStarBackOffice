@@ -2,8 +2,10 @@
 using GuitarStarBackOffice.ServerSide.Pages.OrderDirectory.OrderElements;
 using GuitarStarBackOffice.ServerSide.Pages.ProductRepository;
 using GuitarStarBackOffice.ServerSide.Services;
+using GuitarStarBackOffice.ServerSide.Services.ExportService;
 using GuitarStarBackOffice.Shared;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using Radzen;
 using Radzen.Blazor;
 
@@ -17,8 +19,10 @@ public partial class OrderPage
     IEnumerable<Order> orders;
 
     [Inject] private OrderService OrderService { get; set; }
+    [Inject] private ExportService ExportService { get; set; }
 
     [Inject] private DialogService DialogService { get; set; }
+    [Inject] private IJSRuntime JS { get; set; }
 
     protected override async void OnInitialized()
     {
@@ -61,19 +65,11 @@ public partial class OrderPage
         await grid.Reload();
     }
 
-    private async void Export()
+    private async Task Export()
     {
-        var wb = new XLWorkbook();
-        wb.Properties.Author = "the Author";
-        wb.Properties.Title = "the Title";
-        wb.Properties.Subject = "the Subject";
-        var ws = wb.Worksheets.Add("Weather Forecast");
-        ws.Cell(1, 1).Value = "Temp. (C)";
-        ws.Cell(1, 2).Value = "Temp. (F)";
-        ws.Cell(1, 3).Value = "Summary";
+      var downloadOptions = await ExportService.Execute();
 
-        MemoryStream XLSStream = new();
-        wb.SaveAs(XLSStream);
+        await JS.InvokeVoidAsync(downloadOptions.Identifier, downloadOptions.FileName, downloadOptions.Stream);
     }
 
     private async Task DeleteOrder(Order deletedOrder)
