@@ -1,4 +1,5 @@
-﻿using GuitarStarBackOffice.ServerSide.Services;
+﻿using GuitarStarBackOffice.ServerSide.Constants;
+using GuitarStarBackOffice.ServerSide.Services;
 using GuitarStarBackOffice.ServerSide.Services.EmployeeService;
 using GuitarStarBackOffice.Shared;
 using GuitarStarBackOffice.Shared.Validators;
@@ -16,6 +17,7 @@ public partial class ProfileEditor
     protected DialogService DialogService { get; set; }
     [Inject] private EmployeeService EmployeeService { get; set; }
     [Inject] private CustomAuthStateProvider UserSession { get; set; }
+    [Inject] protected NotificationService NotificationService { get; set; }
 
 
     [Parameter]
@@ -37,7 +39,7 @@ public partial class ProfileEditor
     {
         if (string.IsNullOrWhiteSpace(Password))
             return true;
-        return Password.Length > 6 && Password.Length < 26;
+        return Password.Length >= 6 && Password.Length < 26;
     }
 
     protected override async Task OnInitializedAsync()
@@ -57,11 +59,16 @@ public partial class ProfileEditor
         await EmployeeService.UpdateEmployee(employee);
         await UserSession.StartSession(UserSession.FullName, UserSession.Username, UserSession.Role);
         await Close(null);
+        ShowNotification(new NotificationMessage { Style = ConstantsValues.NotifyMessageStyle, Severity = NotificationSeverity.Success, Summary = "Операция завершена успешно", Duration = 4000 });
     }
 
     protected async Task Close(MouseEventArgs? args)
     {
         DialogService.Close(null);
     }
+    private void ShowNotification(NotificationMessage message)
+    {
+        NotificationService.Notify(message);
 
+    }
 }

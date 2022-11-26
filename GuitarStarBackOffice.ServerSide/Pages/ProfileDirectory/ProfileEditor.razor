@@ -26,7 +26,7 @@
 
                         <div class="row footer">
                             <RadzenButton ButtonType="Radzen.ButtonType.Submit"
-                                          Icon="save" ButtonStyle="ButtonStyle.Primary" Disabled="@(IsActive)" Text="Сохранить" Click="HandleEdit" />
+                                          Icon="save" ButtonStyle="ButtonStyle.Primary" Disabled="@(!IsActive)" Text="Сохранить" Click="HandleEdit" />
                         </div>
                     </ChildContent>
                 </RadzenTemplateForm>
