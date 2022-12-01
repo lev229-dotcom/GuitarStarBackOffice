@@ -24,6 +24,7 @@ public class Post
 	/// </summary>
 	[Display(Name = "Оклад")]
 	[Required(ErrorMessage ="Данное поле обязательно к заполнению")]
+	[Range(1, 9_999_999,ErrorMessage ="Значение зарплаты должно быть от 1 до 9.999.999")]
 	public double Salary { get; set; }
 
 	/// <summary>

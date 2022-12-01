@@ -31,7 +31,7 @@ public partial class ProductPage
     private async Task AddProduct()
     {
         await DialogService.OpenAsync<AddProduct>("Добавить наименование", null,
-               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
         products = await ProductService.GetProducts();
 
         await grid.Reload();
@@ -41,7 +41,7 @@ public partial class ProductPage
     {
         await DialogService.OpenAsync<ProductEditor>("Редактировать наименование", new Dictionary<string, object>()
                { { "editedProductId", editedProduct.IdProduct } },
-               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true , ShowClose = false });
         await grid.Reload();
     }
 

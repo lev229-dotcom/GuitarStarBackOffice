@@ -17,6 +17,7 @@ public class OrderElement
     /// </summary>
     [Display(Name = "Количестов элементов")]
     [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
+    [Range(1, 9_999_999, ErrorMessage = "Значение должно быть от 1 до 9.999.999")]
     public int ElementsCount { get; set; }
 
     #region Id заказа
@@ -38,10 +39,10 @@ public class OrderElement
     /// Id товара 
     /// </summary>
     [Display(Name = "Id товара")]
-    [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
     public Product Product { get; set; }
 
-    public Guid ProductId { get; set; }
+    [Required(ErrorMessage = "Данное поле обязательно к заполнению")]
+    public Guid? ProductId { get; set; }
 
     #endregion
 }

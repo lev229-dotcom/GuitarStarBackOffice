@@ -31,7 +31,7 @@ public class OrderService
 
     public async Task<OrderElement> GetOrderElementById(Guid currentOrderElement)
     {
-        OrderElement orderElement = await dataContext.OrderElements.Where(i => i.IdOrderElement == currentOrderElement).FirstOrDefaultAsync();
+        OrderElement orderElement = await dataContext.OrderElements.Include(o => o.Order).Where(i => i.IdOrderElement == currentOrderElement).FirstOrDefaultAsync();
 
         return await Task.FromResult(orderElement);
     }

@@ -36,7 +36,7 @@ public partial class OrderElementsPage
     {
         await DialogService.OpenAsync<AddOrderElements>("Добавить элемент в заказ", new Dictionary<string, object>()
                { { "currentOrderId", currentOrderId } },
-               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
         OrderElements = await OrderService.GetOrderElements(currentOrderId);
 
         await grid.Reload();
@@ -46,7 +46,7 @@ public partial class OrderElementsPage
     {
         await DialogService.OpenAsync<OrderElementsEditor>("Редактировать элемент заказа", new Dictionary<string, object>()
                { { "editedOrderElementId", editedOrderElement.IdOrderElement } },
-               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
         await grid.Reload();
     }
 

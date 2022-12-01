@@ -7,11 +7,13 @@
     <ChildContent>
         <div class="row">
             <div class="col-md-12">
-                <RadzenTemplateForm TItem="Shipment" Data="@editedShipment" Submit="@HandleEdit">
+                <RadzenTemplateForm TItem="Shipment" Data="@editedShipment" Submit="@HandleEdit" EditContext="editContext">
                     <ChildContent>
+                        <DataAnnotationsValidator />
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Дата поставки" style="width: 100%" />
-                            <RadzenDatePicker @bind-Value="@editedShipment.ShipmentDate" Inline="true" />
+                            <RadzenDatePicker @bind-Value="@editedShipment.ShipmentDate" />
+                            <ValidationMessage For="@(() => editedShipment.ShipmentDate)" />
                         </div>
 
                         <div style="margin-bottom: 1rem" class="flex-column">
@@ -19,10 +21,12 @@
                             <RadzenDropDown Data="@suppliers" @bind-Value="@(editedShipment.SupplierId)"
                                             SelectedItem="1"
                                             ValueProperty="IdSupplier" TextProperty="SupplierName" />
+                            <ValidationMessage For="@(() => editedShipment.SupplierId)" />
+
                         </div>
 
                         <div class="row footer">
-                            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сохранить">
+                            <RadzenButton Disabled="IsActive" ButtonType="Radzen.ButtonType.Submit" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сохранить">
 
                             </RadzenButton>
                         </div>

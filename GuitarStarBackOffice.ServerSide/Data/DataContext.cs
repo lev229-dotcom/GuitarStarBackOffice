@@ -42,6 +42,7 @@ public class DataContext : DbContext
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
+        modelBuilder.Entity<Employee>().Property(i => i.Patronymic).HasDefaultValue("");
         #endregion
 
         #region PostEmployee
@@ -453,4 +454,6 @@ public class DataContext : DbContext
     public DbSet<Shipment> Shipments { get; set; }
     public DbSet<Supplier> Supplier { get; set; }
     public DbSet<WareHouse> WareHouses { get; set; }
+    public DbSet<EmployeeHistory> EmployeeHistories { get; set; }
+    public DbSet<ProductHistory> ProductHistories { get; set; }
 }

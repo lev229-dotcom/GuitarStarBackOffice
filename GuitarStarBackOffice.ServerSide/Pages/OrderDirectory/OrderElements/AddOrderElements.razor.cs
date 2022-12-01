@@ -1,4 +1,5 @@
-﻿using GuitarStarBackOffice.ServerSide.Services;
+﻿using GuitarStarBackOffice.ServerSide.Constants;
+using GuitarStarBackOffice.ServerSide.Services;
 using GuitarStarBackOffice.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -24,6 +25,9 @@ public partial class AddOrderElements
 
     IEnumerable<Product> products;
 
+    private bool IsActive =>  newOrderElement.ProductId is not null && newOrderElement.ElementsCount >=1 && newOrderElement.ElementsCount <= 9_999_999;
+
+
     protected override async Task OnInitializedAsync()
     {
         base.OnInitialized();
@@ -45,10 +49,11 @@ public partial class AddOrderElements
             await OrderService.UpdateOrder(currentOrder);
 
             await Close(null);
+            ShowNotification(new NotificationMessage { Style = ConstantsValues.NotifyMessageStyle, Severity = NotificationSeverity.Success, Summary = "Операция завершена успешно", Duration = 4000 });
         }
         catch (Exception ex)
         {
-            ShowNotification(new NotificationMessage { Style = "position: absolute; ", Severity = NotificationSeverity.Error, Summary = "Произошла ошибка", Detail = $"{ex.Message}", Duration = 4000 });
+            ShowNotification(new NotificationMessage { Style = ConstantsValues.NotifyMessageStyle, Severity = NotificationSeverity.Error, Summary = "Произошла ошибка", Detail = $"{ex.Message}", Duration = 4000 });
         }
     }
 

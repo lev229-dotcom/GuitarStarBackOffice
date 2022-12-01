@@ -33,7 +33,7 @@ public partial class ShipmentsForWareHouse
         await DialogService.OpenAsync<EditShipmentForWareHouse>("Редактировать поставку", new Dictionary<string, object>()
                { { "editedShipmentId", editedShipment.IdShipment },
             { "currentWareHouseId", currentWareHouseId } },
-               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
         await grid.Reload();
     }
 

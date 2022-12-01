@@ -45,7 +45,7 @@ namespace GuitarStarBackOffice.ServerSide.Services.BackUpService
                 }
                 using (FileStream reader = new FileStream(_backupFolderFullPath, FileMode.Open))
                 {
-                    await blazorDownloadFile.DownloadFile("BackUpStore_" + DateTime.Now.ToShortDateString() + ".bak", reader, "application/ostet-stream");
+                    await blazorDownloadFile.DownloadFile("BackUpGuitarStar_" + DateTime.Now.ToShortDateString() + ".bak", reader, "application/ostet-stream");
                 }
             }
         }

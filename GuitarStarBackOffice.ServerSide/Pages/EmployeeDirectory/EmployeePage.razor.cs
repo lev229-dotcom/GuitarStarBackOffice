@@ -1,7 +1,10 @@
-﻿using GuitarStarBackOffice.ServerSide.Services;
+﻿using GuitarStarBackOffice.ServerSide.Constants;
+using GuitarStarBackOffice.ServerSide.Services;
 using GuitarStarBackOffice.ServerSide.Services.EmployeeService;
+using GuitarStarBackOffice.ServerSide.Services.ExportService;
 using GuitarStarBackOffice.Shared;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using Radzen;
 using Radzen.Blazor;
 
@@ -17,6 +20,12 @@ public partial class EmployeePage
     [Inject] private DialogService DialogService { get; set; }
 
     [Inject] private NorthwindService service { get; set; }
+    [Inject] private ExportService ExportService { get; set; }
+
+    [Inject] private IJSRuntime JS { get; set; }
+
+    [Inject] protected NotificationService NotificationService { get; set; }
+
 
     private EmployeeEditor employeeEditor;
     protected override async void OnInitialized()
@@ -35,14 +44,14 @@ public partial class EmployeePage
     {
         await DialogService.OpenAsync<EmployeeEditor>("Редактировать сотрудника", new Dictionary<string, object>() 
                { { "editedEmployeeId", editedEmployee.IdEmployee } },
-               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
         await grid.Reload();
     }
 
     private async Task AddEmployee()
     {
         await DialogService.OpenAsync<AddEmployee>("Добавить сотрудника",null,
-               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
         employees = await EmployeeService.GetEmployees();
 
         await grid.Reload();
@@ -55,6 +64,7 @@ public partial class EmployeePage
         ConfirmOptions options = new ConfirmOptions();
         options.CancelButtonText = "Отмена";
         options.OkButtonText = "Потвердить";
+
        if( await DialogService.Confirm("Вы действительно хотите удалить запись?", 
             "Удаление записи из базы данных", options) == true)
         {
@@ -63,17 +73,23 @@ public partial class EmployeePage
             employees = await EmployeeService.GetEmployees();
 
             await grid.Reload();
+            ShowNotification(new NotificationMessage { Style = ConstantsValues.NotifyMessageStyle, Severity = NotificationSeverity.Success, Summary = "Операция завершена успешно", Duration = 4000 });
+
 
         }
     }
 
-    public void Export(string type)
-    {
-        service.Export("OrderDetails", type, new Query()
+        private async Task Export()
         {
-            OrderBy = grid.Query.OrderBy,
-            Filter = grid.Query.Filter,
-            Select = string.Join(",", grid.ColumnsCollection.Where(c => c.GetVisible()).Select(c => c.Property))
-        });
+            var downloadOptions = await ExportService.Execute("EmployeeTemplate");
+
+            await JS.InvokeVoidAsync(downloadOptions.Identifier, downloadOptions.FileName, downloadOptions.Stream);
+        }
+
+    private void ShowNotification(NotificationMessage message)
+    {
+        NotificationService.Notify(message);
+
     }
+
 }

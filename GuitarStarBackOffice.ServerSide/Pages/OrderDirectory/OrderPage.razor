@@ -2,7 +2,9 @@
 @using GuitarStarBackOffice.Shared
 @using MudBlazor.Extensions
 
-<RadzenContent>
+<AuthorizeView Roles="Администратор, Сотрудник отдела продаж, Бухгалтер" Context="_context"> 
+    <Authorized>
+        <RadzenContent>
     <ChildContent>
         <RadzenHeading Size="H1" Text="Заказы" />
         <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Добавить" Click="AddOrder"/>
@@ -84,3 +86,8 @@
         </RadzenDataGrid>
     </ChildContent>
 </RadzenContent>
+    </Authorized>
+     <NotAuthorized>
+        <RadzenLabel Style="text-align:center" Text="Права доступа отсутствуют" />
+    </NotAuthorized>
+</AuthorizeView>

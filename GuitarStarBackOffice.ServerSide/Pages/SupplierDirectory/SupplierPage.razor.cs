@@ -37,14 +37,14 @@ public partial class SupplierPage
     {
         await DialogService.OpenAsync<SupplierEditor>("Редактировать Поставщика", new Dictionary<string, object>()
                { { "editedSupplierId", editedSupplier.IdSupplier } },
-               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
         await grid.Reload();
     }
 
     private async Task AddSupplier()
     {
         await DialogService.OpenAsync<AddSupplier>("Добавить Поставщика", null,
-               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
         suppliers = await SupplierService.GetSuppliers();
 
         await grid.Reload();

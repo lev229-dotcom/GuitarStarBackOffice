@@ -9,13 +9,15 @@
             <div class="col-md-12">
                 <RadzenTemplateForm TItem="WareHouse" Data="@newWareHouse" Submit="@HandleAdd">
                     <ChildContent>
+                        <DataAnnotationsValidator />
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Адрес" style="width: 100%" />
                             <RadzenTextBox MaxLength="50" style="display: block; width: 100%" @bind-Value="@newWareHouse.Address" />
+                            <ValidationMessage For="@(() => newWareHouse.Address)" />
                         </div>
 
                         <div class="row footer">
-                            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сохранить">
+                            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Disabled="IsActive" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сохранить">
 
                             </RadzenButton>
                         </div>

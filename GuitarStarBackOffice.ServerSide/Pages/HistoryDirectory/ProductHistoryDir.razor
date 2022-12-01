@@ -1,0 +1,33 @@
+﻿@page "/ProductHistoryDir"
+@using GuitarStarBackOffice.Shared
+@using MudBlazor.Extensions
+
+<AuthorizeView Roles="Администратор" Context="_context">
+    <Authorized>
+        <RadzenContent>
+    <ChildContent>
+        <RadzenHeading Size="H1" Text="История изменений наименований" />
+        <RadzenDataGrid ColumnWidth="100px"
+                        AllowFiltering="true" AllowColumnResize="true"
+                        AllowAlternatingRows="false" FilterMode="FilterMode.Advanced"
+                        AllowSorting="true" PageSize="5" AllowPaging="true"
+                        AllowColumnReorder="true"
+                        PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                        @ref="grid"
+                        Data="@product"
+                        TItem="ProductHistory">
+            <Columns>
+                <RadzenDataGridColumn TItem="ProductHistory" Property="EventType" Title="Событие" />
+                <RadzenDataGridColumn  Width="550px" TItem="ProductHistory" Property="EventInfo" Title="Информация" />
+            </Columns>
+
+        </RadzenDataGrid>
+    </ChildContent>
+</RadzenContent>
+    </Authorized>
+     <NotAuthorized>
+        <RadzenLabel Style="text-align:center" Text="Права доступа отсутствуют" />
+    </NotAuthorized>
+</AuthorizeView>
+
+

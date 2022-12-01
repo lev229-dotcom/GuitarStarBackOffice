@@ -1,4 +1,5 @@
-﻿using GuitarStarBackOffice.ServerSide.Services;
+﻿using GuitarStarBackOffice.ServerSide.Constants;
+using GuitarStarBackOffice.ServerSide.Services;
 using GuitarStarBackOffice.ServerSide.Services.SupplierService;
 using GuitarStarBackOffice.Shared;
 using Microsoft.AspNetCore.Components;
@@ -18,16 +19,20 @@ public partial class AddWareHouse
 
     WareHouse newWareHouse = new ();
 
+    private bool IsActive => string.IsNullOrWhiteSpace(newWareHouse.Address);
+
     private async Task HandleAdd()
     {
         try
         {
             await WareHouseService.AddWareHouse(newWareHouse);
             await Close(null);
+            ShowNotification(new NotificationMessage { Style = ConstantsValues.NotifyMessageStyle, Severity = NotificationSeverity.Success, Summary = "Операция завершена успешно", Duration = 4000 });
+
         }
         catch (Exception ex)
         {
-            ShowNotification(new NotificationMessage { Style = "position: absolute; ", Severity = NotificationSeverity.Error, Summary = "Произошла ошибка", Detail = $"{ex.Message}", Duration = 4000 });
+            ShowNotification(new NotificationMessage { Style = ConstantsValues.NotifyMessageStyle, Severity = NotificationSeverity.Error, Summary = "Произошла ошибка", Detail = $"{ex.Message}", Duration = 4000 });
         }
     }
 

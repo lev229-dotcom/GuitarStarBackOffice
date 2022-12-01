@@ -45,7 +45,7 @@ public partial class ProfileEditor
     protected override async Task OnInitializedAsync()
     {
         employee = await EmployeeService.GetEmployeeById(cuurentAccountId);
-       // editContext = new EditContext(employee);
+       // editContext = new EditContext(product);
        // editContext.OnFieldChanged += FieldChanged;
     }
     //private void FieldChanged(object sender, FieldChangedEventArgs args)

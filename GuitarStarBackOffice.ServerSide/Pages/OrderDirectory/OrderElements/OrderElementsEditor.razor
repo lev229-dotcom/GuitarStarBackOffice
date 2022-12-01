@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <RadzenTemplateForm TItem="OrderElement" Data="@editedOrderElement" Submit="@HandleEdit">
                     <ChildContent>
-
+                        <DataAnnotationsValidator />
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Количество элементов" style="width: 100%" />
                             <MudNumericField Min="1" @bind-Value="@editedOrderElement.ElementsCount" />
@@ -18,7 +18,7 @@
                        
 
                         <div class="row footer">
-                            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сохранить" />
+                            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Disabled="(!IsActive)" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сохранить" />
                         </div>
                     </ChildContent>
                 </RadzenTemplateForm>

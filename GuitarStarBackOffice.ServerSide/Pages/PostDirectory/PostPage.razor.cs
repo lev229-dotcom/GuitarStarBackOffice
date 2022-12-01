@@ -32,7 +32,7 @@ public partial class PostPage
     private async Task AddPost()
     {
         await DialogService.OpenAsync<AddPost>("Добавить должность", null,
-               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
         posts = await PostService.GetPosts();
 
         await grid.Reload();
@@ -42,7 +42,7 @@ public partial class PostPage
     {
         await DialogService.OpenAsync<PostEditor>("Редактировать должность", new Dictionary<string, object>()
                { { "editedPostId", editedPost.IdPost } },
-               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
         await grid.Reload();
     }
 

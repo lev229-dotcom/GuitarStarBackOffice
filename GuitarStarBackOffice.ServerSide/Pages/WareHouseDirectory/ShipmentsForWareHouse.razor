@@ -16,19 +16,19 @@
                 <RadzenDataGridColumn TItem="Shipment" Title="Действия" Frozen="true" Filterable="false" Sortable="false">
                     <Template>
                         @{
-                            var shipmnet = (Shipment)context;
+                            var shipment = (Shipment)context;
                             <MudMenu Label="Действия" Dense="true" AnchorOrigin="@Origin.BottomCenter"
                                  TransformOrigin="@Origin.TopCenter" StartIcon="@Icons.Filled.Hive"
                                  EndIcon="@Icons.Filled.KeyboardArrowDown">
 
-                                <MudMenuItem OnClick="@(() => OpenEditor(shipmnet))">
+                                <MudMenuItem OnClick="@(() => OpenEditor(shipment))">
                                     <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
                                          Icon="@Icons.Material.Filled.Edit" />
                                     Изменить
                                 </MudMenuItem>
 
 
-                                <MudMenuItem OnClick="@(() => DeleteShipment(shipmnet))">
+                                <MudMenuItem OnClick="@(() => DeleteShipment(shipment))">
                                     <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
                                          Icon="@Icons.Material.Filled.Delete" />
                                     Удалить

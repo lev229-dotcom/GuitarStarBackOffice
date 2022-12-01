@@ -33,7 +33,7 @@ public partial class WareHousePage
     {
         await DialogService.OpenAsync<WareHouseEditor>("Редактировать Склад", new Dictionary<string, object>()
                { { "editedWareHouseId", editedWareHouse.IdEWareHouse } },
-               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
         await grid.Reload();
     }
 
@@ -41,7 +41,7 @@ public partial class WareHousePage
     {
         await DialogService.OpenAsync<ShipmentsForWareHouse>("Поставки данного склада", new Dictionary<string, object>()
                { { "currentWareHouseId", currentWareHouse.IdEWareHouse } },
-              new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+              new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
         await grid.Reload();
     } 
     
@@ -49,7 +49,7 @@ public partial class WareHousePage
     {
         await DialogService.OpenAsync<ProductsForWareHouse>("Товары данного склада", new Dictionary<string, object>()
                { { "currentWareHouseId", currentWareHouse.IdEWareHouse } },
-              new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+              new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
         await grid.Reload();
     }
 
@@ -57,7 +57,7 @@ public partial class WareHousePage
     {
         await DialogService.OpenAsync<AddShipmentForWareHouse>("Добавить Поставку", new Dictionary<string, object>()
                { { "currentWareHouseId", currentWareHouseId.IdEWareHouse } },
-             new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+             new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
         wareHouses = await WareHouseService.GetWareHouses();
 
         await grid.Reload();
@@ -66,7 +66,7 @@ public partial class WareHousePage
     private async Task AddWareHouse()
     {
         await DialogService.OpenAsync<AddWareHouse>("Добавить Склад", null,
-               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
         wareHouses = await WareHouseService.GetWareHouses();
 
         await grid.Reload();

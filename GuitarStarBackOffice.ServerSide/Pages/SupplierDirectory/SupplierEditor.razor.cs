@@ -1,6 +1,7 @@
 ﻿using GuitarStarBackOffice.ServerSide.Services.SupplierService;
 using GuitarStarBackOffice.Shared;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor.Extensions;
 using Radzen;
@@ -18,9 +19,29 @@ public  partial class SupplierEditor
     public Guid editedSupplierId { get; set; }
     Supplier editedSupplier = new Supplier();
 
+    EditContext editContext;
+
+    private bool IsActive = false;
+//    private bool IsActive => !string.IsNullOrWhiteSpace(editedSupplier.SupplierName) && !string.IsNullOrWhiteSpace(editedSupplier.Representive)
+//&& !string.IsNullOrWhiteSpace(editedSupplier.PhoneNumber) && !string.IsNullOrWhiteSpace(editedSupplier.SupplierAddress);
+
     protected override async Task OnInitializedAsync()
     {
         editedSupplier = await SupplierService.GetSupplierById(editedSupplierId);
+
+        await Test();
+
+    }
+
+    private async Task Test()
+    {
+        editContext = new EditContext(editedSupplier);
+        editContext.OnFieldChanged += FieldChanged;
+
+    }
+    private void FieldChanged(object sender, FieldChangedEventArgs args)
+    {
+        IsActive = !editContext.Validate();
     }
 
     private async Task HandleEdit()

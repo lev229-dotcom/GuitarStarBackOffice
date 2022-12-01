@@ -2,21 +2,24 @@
 @layout MainLayout
 @inject Radzen.DialogService dialogService
 
-<RadzenContent Container="main">
+<RadzenContent Container="main" onclose="@CloseWindow()">
 
     <ChildContent>
         <div class="row">
             <div class="col-md-12">
                 <RadzenTemplateForm TItem="Category" Data="@editedCategory" Submit="@HandleEdit">
                     <ChildContent>
+                        <DataAnnotationsValidator />
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Название" style="width: 100%" />
                             <RadzenTextBox MaxLength="50" style="display: block; width: 100%" @bind-Value="@editedCategory.CategoryName" />
+                            <ValidationMessage For="@(() => editedCategory.CategoryName)" />
+
                         </div>
 
                         <div class="row footer">
                             <RadzenButton ButtonType="Radzen.ButtonType.Submit"
-                                          Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сохранить" />
+                                          Icon="save" ButtonStyle="ButtonStyle.Primary" Disabled="@(IsActive)" Text="Сохранить" />
                         </div>
                     </ChildContent>
                 </RadzenTemplateForm>

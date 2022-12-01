@@ -29,6 +29,7 @@ public class Product
     /// </summary>
     [Display(Name = "Стоиость товара")]
     [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
+    [Range(1,9999999, ErrorMessage ="Стоимость должна быть от 1 до 9.999.999")]
     public double ProductPrice { get; set; }
 
     #region Id Категории
@@ -37,12 +38,11 @@ public class Product
     /// Id Категории 
     /// </summary>
     [Display(Name = "Id Категории")]
-    [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
     public Category Category { get; set; }
     
     [Display(Name = "Id Категории")]
     [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
-    public Guid CategoryId { get; set; }
+    public Guid? CategoryId { get; set; }
 
     #endregion
 
@@ -52,10 +52,10 @@ public class Product
     /// Id Склада 
     /// </summary>
     [Display(Name = "Id Склада")]
-    [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
     public WareHouse WareHouse { get; set; }
 
-    public Guid WareHouseId { get; set; }
+    [Required(ErrorMessage = "Данное поле обязательно к заполнению")]
+    public Guid? WareHouseId { get; set; }
 
     #endregion
 

@@ -1,4 +1,5 @@
-﻿using GuitarStarBackOffice.ServerSide.Services.EmployeeService;
+﻿using GuitarStarBackOffice.ServerSide.Constants;
+using GuitarStarBackOffice.ServerSide.Services.EmployeeService;
 using GuitarStarBackOffice.ServerSide.Services.EmployeeService.Models;
 using GuitarStarBackOffice.Shared;
 using Microsoft.AspNetCore.Components;
@@ -19,7 +20,7 @@ public partial class Login
         };
 
         Employee? result = await EmployeeService.Authorize(input);
-        if(result is not null)
+        if (result is not null)
         {
             // начинаем сессию
             await UserSession.StartSession(result.IdEmployee.ToString(), result.Email, result.Post.PostName);
@@ -29,7 +30,7 @@ public partial class Login
         }
         else
         {
-            ShowNotification(new NotificationMessage { Style = "position: absolute; ", Severity = NotificationSeverity.Error, Summary = "Произошла ошибка", Detail = "Пользователь не найден", Duration = 4000 });
+            ShowNotification(new NotificationMessage { Style = ConstantsValues.NotifyMessageStyle, Severity = NotificationSeverity.Error, Summary = "Произошла ошибка", Detail = "Пользователь не найден", Duration = 4000 });
         }
 
     }

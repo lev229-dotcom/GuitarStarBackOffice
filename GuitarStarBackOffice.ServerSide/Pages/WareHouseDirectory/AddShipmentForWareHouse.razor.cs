@@ -1,6 +1,8 @@
-﻿using GuitarStarBackOffice.ServerSide.Services;
+﻿using GuitarStarBackOffice.ServerSide.Constants;
+using GuitarStarBackOffice.ServerSide.Services;
 using GuitarStarBackOffice.Shared;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 
@@ -23,12 +25,27 @@ public partial class AddShipmentForWareHouse
 
     Shipment newShipment = new();
 
+    EditContext editContext;
+
+    private bool IsActive = true;
+
+
+
     protected override async void OnInitialized()
     {
         base.OnInitialized();
 
         await Get();
+
+        editContext = new EditContext(newShipment);
+        editContext.OnFieldChanged += FieldChanged;
     }
+
+    private void FieldChanged(object sender, FieldChangedEventArgs args)
+    {
+        IsActive = !editContext.Validate();
+    }
+
 
     public async Task Get()
     {
@@ -43,10 +60,11 @@ public partial class AddShipmentForWareHouse
 
             await WareHouseService.AddShipmentToCurrentWareHouse(newShipment);
             await Close(null);
+            ShowNotification(new NotificationMessage { Style = ConstantsValues.NotifyMessageStyle, Severity = NotificationSeverity.Success, Summary = "Операция завершена успешно", Duration = 4000 });
         }
         catch (Exception ex)
         {
-            ShowNotification(new NotificationMessage { Style = "position: absolute; ", Severity = NotificationSeverity.Error, Summary = "Произошла ошибка", Detail = $"{ex.Message}", Duration = 4000 });
+            ShowNotification(new NotificationMessage { Style = ConstantsValues.NotifyMessageStyle, Severity = NotificationSeverity.Error, Summary = "Произошла ошибка", Detail = $"{ex.Message}", Duration = 4000 });
         }
     }
 

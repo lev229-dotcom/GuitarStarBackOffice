@@ -1,5 +1,8 @@
 ﻿@page "/Stats"
 
+<AuthorizeView Roles="Администратор, Сотрудник отдела продаж, Бухгалтер" Context="_context">
+    <Authorized>
+        
 <RadzenText TextStyle="TextStyle.H3" TagName="TagName.H1" Class="my-4">
     Статистика продаж по датам
 </RadzenText>
@@ -32,3 +35,8 @@
         </div>
     </div>
 </div>
+    </Authorized>
+     <NotAuthorized>
+        <RadzenLabel Style="text-align:center" Text="Права доступа отсутствуют" />
+    </NotAuthorized>
+</AuthorizeView>

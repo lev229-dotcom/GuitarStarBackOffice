@@ -38,9 +38,9 @@
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Пароль" style="width: 100%" />
                             <RadzenPassword style="display: block; width: 100%" @bind-Value="@newEmployee.Password" Name="Password" />
-                           @* <ValidationMessage For="@(() => newEmployee.Password)" />*@
-                            <RadzenRequiredValidator Component="Password" Text="Пароль - обязательное поле" />
-
+                            <ValidationMessage For="@(() => newEmployee.Password)" />
+@*                            <RadzenRequiredValidator Component="Password" Text="Пароль - обязательное поле" />
+*@
                         </div>
 
 
@@ -75,9 +75,10 @@
 
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Роль пользователя" style="width: 100%" />
-                            <RadzenDropDown Data="@posts" @bind-Value="@(newEmployee.PostId)"
-                                            SelectedItem="1"
+                            <RadzenDropDown Name="Post" Data="@posts" @bind-Value="@(newEmployee.PostId)"
                                             ValueProperty="IdPost" TextProperty="PostName" />
+                            <RadzenRequiredValidator Component="Post" Text="Обязательное поле" />
+
                         </div>
 
                         <div class="row footer">

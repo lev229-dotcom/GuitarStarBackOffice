@@ -18,6 +18,9 @@ namespace GuitarStarBackOffice.ServerSide.Pages.WareHouseDirectory
         public Guid editedWareHouseId { get; set; }
         WareHouse editedWareHouse = new ();
 
+        private bool IsActive => string.IsNullOrWhiteSpace(editedWareHouse.Address);
+
+
         protected override async Task OnInitializedAsync()
         {
             editedWareHouse = await WareHouseService.GetWareHouseById(editedWareHouseId);

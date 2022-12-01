@@ -18,6 +18,8 @@ public partial class PostEditor
 
     Post editedPost = new();
 
+    private bool IsActive => !string.IsNullOrWhiteSpace(editedPost.PostName) && editedPost.Salary >= 1 && editedPost.Salary < double.MaxValue;
+
     protected override async Task OnInitializedAsync()
     {
         editedPost = await PostService.GetPostById(editedPostId);

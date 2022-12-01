@@ -15,6 +15,7 @@ public partial class CategoryPage
     [Inject] private CategoryService CategoryService { get; set; }
 
     [Inject] private DialogService DialogService { get; set; }
+    [Inject] private ReloadService ReloadService { get; set; }
 
     protected override async void OnInitialized()
     {
@@ -31,7 +32,7 @@ public partial class CategoryPage
     private async Task AddCategory()
     {
         await DialogService.OpenAsync<AddCategory>("Добавить категорию", null,
-               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
         categories = await CategoryService.GetCategories();
 
         await grid.Reload();
@@ -41,8 +42,13 @@ public partial class CategoryPage
     {
         await DialogService.OpenAsync<CategoryEditor>("Редактировать категорию", new Dictionary<string, object>()
                { { "editedCategoryId", editedCategory.IdCategory } },
-               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
-        await grid.Reload();
+               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
+
+        ReloadService.Reload();
+        categories = await CategoryService.GetCategories();
+        StateHasChanged();
+
+        // await grid.Reload();
     }
 
     private async Task DeleteCategory(Category deletedCategory)

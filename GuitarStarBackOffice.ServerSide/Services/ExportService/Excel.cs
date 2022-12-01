@@ -1,4 +1,5 @@
 ﻿using GuitarStarBackOffice.ServerSide.Services.ExportService.Models;
+using GuitarStarBackOffice.Shared;
 
 namespace GuitarStarBackOffice.ServerSide.Services.ExportService;
 
@@ -22,6 +23,22 @@ public class Excel
     {
 
         var XLSXStream = await useTemplateXLSX.Generate(streamTemplate, orderExportModels);
+
+        var parametrsForDownload = new ParametersForDownloadModel
+        {
+            Identifier = "BlazorDownloadFile",
+            FileName = filename,
+            Stream = XLSXStream,
+        };
+
+        return parametrsForDownload;
+    }
+
+
+    public async Task<ParametersForDownloadModel> ReturnEmployeeOptionsToDownLoad(Stream streamTemplate, IEnumerable<Employee> orderExportModels, string filename = "exportEmployee.xlsx")
+    {
+
+        var XLSXStream = await useTemplateXLSX.GenerateEmployee(streamTemplate, orderExportModels);
 
         var parametrsForDownload = new ParametersForDownloadModel
         {

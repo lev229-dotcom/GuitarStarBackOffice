@@ -1,8 +1,11 @@
-﻿using GuitarStarBackOffice.ServerSide.Pages.EmployeeDirectory;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using GuitarStarBackOffice.ServerSide.Constants;
+using GuitarStarBackOffice.ServerSide.Pages.EmployeeDirectory;
 using GuitarStarBackOffice.ServerSide.Services;
 using GuitarStarBackOffice.ServerSide.Services.EmployeeService;
 using GuitarStarBackOffice.Shared;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor.Extensions;
 using Radzen;
@@ -22,13 +25,24 @@ public partial class AddOrder
 
     IEnumerable<Employee> employees;
 
-   
+    EditContext editContext;
+
+    private bool IsActive = true;
+
 
     protected override async void OnInitialized()
     {
         base.OnInitialized();
 
         await Get();
+
+        editContext = new EditContext(newOrder);
+        editContext.OnFieldChanged += FieldChanged;
+
+    }
+    private void FieldChanged(object sender, FieldChangedEventArgs args)
+    {
+        IsActive = !editContext.Validate();
     }
 
     public async Task Get()
@@ -48,10 +62,11 @@ public partial class AddOrder
 
             await OrderService.AddOrder(newOrder);
             await Close(null);
+            ShowNotification(new NotificationMessage { Style = ConstantsValues.NotifyMessageStyle, Severity = NotificationSeverity.Success, Summary = "Операция завершена успешно", Duration = 4000 });
         }
         catch (Exception ex)
         {
-            ShowNotification(new NotificationMessage { Style = "position: absolute; ", Severity = NotificationSeverity.Error, Summary = "Произошла ошибка", Detail = $"{ex.Message}", Duration = 4000 });
+            ShowNotification(new NotificationMessage { Style = ConstantsValues.NotifyMessageStyle, Severity = NotificationSeverity.Error, Summary = "Произошла ошибка", Detail = $"{ex.Message}", Duration = 4000 });
         }
     }
 

@@ -10,8 +10,6 @@ namespace GuitarStarBackOffice.ServerSide.Services.EmployeeService;
 public class EmployeeService
 {
     DataContext dataContext;
-    public List<Employee> Employees { get; set; } = new List<Employee>();
-
     public EmployeeService(DataContext dataContext)
     {
         this.dataContext = dataContext;
@@ -48,6 +46,11 @@ public class EmployeeService
         else
             employee.Password = employee.Password;
         dataContext.Employees.Attach(employee);
+
+        dataContext.EmployeeHistories.Add(new EmployeeHistory { 
+            EventType = "Обновлен сотрудник", 
+            EventInfo = $"Время: {Convert.ToDateTime(DateTime.Now).ToString("F")}, {Environment.NewLine}" +
+            $"Сотрудник: {employee.Surname} {employee.Name} {employee.Patronymic}{Environment.NewLine}, Должность: {employee.Post.PostName}"});
         await dataContext.SaveChangesAsync();
     }
     public async Task AddEmployee(Employee employee)
@@ -55,12 +58,18 @@ public class EmployeeService
         employee.Password = HashHelper.GetHashString(employee.Password);
 
         dataContext.Employees.Add(employee);
+        dataContext.EmployeeHistories.Add(new EmployeeHistory { EventType = "Добавлен новый сотрудник", 
+            EventInfo = $"Время: {Convert.ToDateTime(DateTime.Now).ToString("F")} {Environment.NewLine}" +
+            $"Сотрудник: {employee.Surname} {employee.Name} {employee.Patronymic} {Environment.NewLine}, Должность: {employee.Post.PostName}" });
         await dataContext.SaveChangesAsync();
     }
 
     public async Task DeleteEmployee(Employee employee)
     {
         dataContext.Employees.Remove(employee);
+        dataContext.EmployeeHistories.Add(new EmployeeHistory { EventType = "Удален сотрудник", 
+            EventInfo = $"Время: {Convert.ToDateTime(DateTime.Now).ToString("F")} {Environment.NewLine}" +
+            $"Сотрудник: {employee.Surname} {employee.Name} {employee.Patronymic} {Environment.NewLine}, Должность: {employee.Post.PostName}" });
         await dataContext.SaveChangesAsync();
     }
 

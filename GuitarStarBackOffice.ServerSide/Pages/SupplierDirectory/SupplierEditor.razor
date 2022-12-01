@@ -7,31 +7,39 @@
     <ChildContent>
         <div class="row">
             <div class="col-md-12">
-                <RadzenTemplateForm TItem="Supplier" Data="@editedSupplier" Submit="@HandleEdit">
+                <RadzenTemplateForm TItem="Supplier" Data="@editedSupplier" Submit="@HandleEdit" EditContext="editContext">
                     <ChildContent>
+                        <DataAnnotationsValidator />
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Название" style="width: 100%" />
                             <RadzenTextBox MaxLength="50" style="display: block; width: 100%" @bind-Value="@editedSupplier.SupplierName" />
+                            <ValidationMessage For="@(() => editedSupplier.SupplierName)" />
                         </div>
 
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Представитель" style="width: 100%" />
                             <RadzenTextBox MaxLength="50" style="display: block; width: 100%" @bind-Value="@editedSupplier.Representive" />
+                            <ValidationMessage For="@(() => editedSupplier.Representive)" />
+
                         </div>
 
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Номер телефона" style="width: 100%" />
                             <RadzenMask Mask="*(***) ***-**-**" CharacterPattern="[0-9]" Placeholder="+7(000) 000-00-00"
                                         style="display: block; width: 100%" @bind-Value="@editedSupplier.PhoneNumber" />
-                        </div>
+                            <ValidationMessage For="@(() => editedSupplier.PhoneNumber)" />
+
+                                    </div>
 
                         <div style="margin-bottom: 1rem" class="flex-column">
-                            <RadzenLabel Text="Почта" style="width: 100%" />
+                            <RadzenLabel Text="Адрес" style="width: 100%" />
                             <RadzenTextBox MaxLength="150" style="display: block; width: 100%" @bind-Value="@editedSupplier.SupplierAddress" />
+                            <ValidationMessage For="@(() => editedSupplier.SupplierAddress)" />
+
                         </div>
 
                         <div class="row footer">
-                            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сохранить">
+                            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" Disabled="@IsActive" ButtonStyle="ButtonStyle.Primary" Text="Сохранить">
 
                             </RadzenButton>
                         </div>

@@ -1,6 +1,7 @@
 ﻿using GuitarStarBackOffice.ServerSide.Services;
 using GuitarStarBackOffice.Shared;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 
@@ -17,12 +18,24 @@ public partial class EditShipmentForWareHouse
 
     IEnumerable<Supplier> suppliers;
 
+    EditContext editContext;
+
+    private bool IsActive = true;
+
+
     protected override async Task OnInitializedAsync()
     {
        await base.OnInitializedAsync();
         editedShipment = await WareHouseService.GetShipmentByTwoId(editedShipmentId, currentWareHouseId);
         suppliers = await WareHouseService.GetSuppliers();
 
+        editContext = new EditContext(editedShipment);
+        editContext.OnFieldChanged += FieldChanged;
+    }
+
+    private void FieldChanged(object sender, FieldChangedEventArgs args)
+    {
+        IsActive = !editContext.Validate();
     }
 
     private async Task HandleEdit()

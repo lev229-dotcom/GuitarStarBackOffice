@@ -2,7 +2,9 @@
 @using GuitarStarBackOffice.Shared
 @using MudBlazor.Extensions
 
-<RadzenContent>
+<AuthorizeView Roles="Администратор, Сотрудник склада, Сотрудник отдела продаж" Context="_context">
+    <Authorized>
+        <RadzenContent>
     <ChildContent>
         <RadzenHeading Size="H1" Text="Категории" />
         <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Добавить" Click="AddCategory">
@@ -17,26 +19,26 @@
             <Columns>
                 <RadzenDataGridColumn TItem="Category" Title="Действия" Frozen="true">
                     <Template>
-                        @{
-                            var category = (Category)context;
-                            <MudMenu Label="Действия" Dense="true" AnchorOrigin="@Origin.BottomCenter"
+                                @{
+                                    var category = (Category)context;
+                                <MudMenu Label="Действия" Dense="true" AnchorOrigin="@Origin.BottomCenter"
                                  TransformOrigin="@Origin.TopCenter" StartIcon="@Icons.Filled.Hive"
                                  EndIcon="@Icons.Filled.KeyboardArrowDown">
 
-                                <MudMenuItem OnClick="@(() => OpenEditor(category))">
-                                    <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
+                                    <MudMenuItem OnClick="@(() => OpenEditor(category))">
+                                        <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
                                          Icon="@Icons.Material.Filled.Edit" />
-                                    Изменить
-                                </MudMenuItem>
+                                        Изменить
+                                    </MudMenuItem>
 
-                                <MudMenuItem OnClick="@(() => DeleteCategory(category))">
-                                    <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
+                                    <MudMenuItem OnClick="@(() => DeleteCategory(category))">
+                                        <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
                                          Icon="@Icons.Material.Filled.Delete" />
-                                    Удалить
-                                </MudMenuItem>
+                                        Удалить
+                                    </MudMenuItem>
 
-                            </MudMenu>
-                        }
+                                </MudMenu>
+                                }
                     </Template>
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="Category" Property="CategoryName" Title="Название" />
@@ -45,3 +47,10 @@
         </RadzenDataGrid>
     </ChildContent>
 </RadzenContent>
+
+    </Authorized>
+     <NotAuthorized>
+        <RadzenLabel Style="text-align:center" Text="Права доступа отсутствуют" />
+    </NotAuthorized>
+</AuthorizeView>
+

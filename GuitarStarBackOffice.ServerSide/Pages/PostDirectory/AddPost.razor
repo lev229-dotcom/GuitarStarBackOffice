@@ -9,6 +9,7 @@
             <div class="col-md-12">
                 <RadzenTemplateForm TItem="Post" Data="@newPost" Submit="@HandleAdd">
                     <ChildContent>
+                        <DataAnnotationsValidator />
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <MudTextField Label="Название" @bind-Value="@newPost.PostName" Immediate="true"
                                           Class="mt-5" InputType="InputType.Text" Variant="MudBlazor.Variant.Outlined" Required="true"
@@ -17,14 +18,15 @@
 
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <MudNumericField Label="Оклад" @bind-Value="@newPost.Salary" Immediate="true"
-                                             Class="mt-5" Min="1" Variant="MudBlazor.Variant.Outlined" Required="true"
+                                             Class="mt-5" Min="1" Validation="@newPost.Salary" Variant="MudBlazor.Variant.Outlined" Required="true"
                                              RequiredError="Поле обязательно к заполнению" />
+                            <ValidationMessage For="@(() => newPost.Salary)" />
                         </div>
 
 
 
                         <div class="row footer">
-                            <RadzenButton Disabled="@IsActive" ButtonType="Radzen.ButtonType.Submit" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сохранить" />
+                            <RadzenButton Disabled="@(!IsActive)" ButtonType="Radzen.ButtonType.Submit" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сохранить" />
                         </div>
                     </ChildContent>
                 </RadzenTemplateForm>

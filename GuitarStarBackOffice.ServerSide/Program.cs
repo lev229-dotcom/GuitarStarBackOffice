@@ -6,6 +6,7 @@ using GuitarStarBackOffice.ServerSide.Services;
 using GuitarStarBackOffice.ServerSide.Services.BackUpService;
 using GuitarStarBackOffice.ServerSide.Services.EmployeeService;
 using GuitarStarBackOffice.ServerSide.Services.ExportService;
+using GuitarStarBackOffice.ServerSide.Services.HistoryService;
 using GuitarStarBackOffice.ServerSide.Services.SupplierService;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -43,6 +44,8 @@ builder.Services.AddScoped<UseTemplateXLSX>();
 builder.Services.AddScoped<Excel>();
 builder.Services.AddScoped<ExportService>();
 builder.Services.AddScoped<BackupService>();
+builder.Services.AddScoped<ReloadService>();
+builder.Services.AddScoped<HistoryService>();
 
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped<CustomAuthStateProvider>();

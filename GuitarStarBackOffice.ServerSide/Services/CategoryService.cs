@@ -19,7 +19,7 @@ public class CategoryService
 
     public async Task<IEnumerable<Category>> GetCategories()
     {
-        var categories = dataContext.Categories.ToList();
+        var categories = dataContext.Categories.ToList().AsEnumerable();
 
         return categories;
     }

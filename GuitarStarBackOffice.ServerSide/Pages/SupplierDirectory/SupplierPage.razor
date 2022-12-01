@@ -2,6 +2,9 @@
 @using GuitarStarBackOffice.Shared
 @using MudBlazor.Extensions
 
+<AuthorizeView Roles="Администратор, Сотрудник склада" Context="_context">
+    <Authorized>
+        
 <RadzenContent>
     <ChildContent>
         <RadzenHeading Size="H1" Text="Поставщики" />
@@ -48,3 +51,10 @@
         </RadzenDataGrid>
     </ChildContent>
 </RadzenContent>
+
+    </Authorized>
+     <NotAuthorized>
+        <RadzenLabel Style="text-align:center" Text="Права доступа отсутствуют" />
+    </NotAuthorized>
+</AuthorizeView>
+

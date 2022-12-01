@@ -3,6 +3,7 @@ using GuitarStarBackOffice.Shared;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components;
 using Radzen;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace GuitarStarBackOffice.ServerSide.Pages.ProductRepository;
 
@@ -19,11 +20,16 @@ public partial class ProductEditor
     IEnumerable<Category> categories;
     IEnumerable<WareHouse> wareHouses;
 
+
+    private bool IsActive => string.IsNullOrWhiteSpace(editedProduct.ProductName) && editedProduct.ProductPrice > 1 && editedProduct.ProductPrice < 9_999_999 && editedProduct.CategoryId is not null && editedProduct.CategoryId is not null;
+
     protected override async void OnInitialized()
     {
         base.OnInitialized();
 
         await Get();
+
+
     }
 
     public async Task Get()

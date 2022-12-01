@@ -31,7 +31,7 @@ public partial class AddEmployee
 
     EditContext editContext;
 
-    private bool IsActive = false;
+    private bool IsActive = true;
 
     protected override async Task OnInitializedAsync()
     {

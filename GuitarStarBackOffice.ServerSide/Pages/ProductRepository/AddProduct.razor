@@ -7,17 +7,19 @@
     <ChildContent>
         <div class="row">
             <div class="col-md-12">
-                <RadzenTemplateForm TItem="Product" Data="@newProduct" Submit="@HandleAdd">
+                <RadzenTemplateForm TItem="Product" Data="@newProduct" Submit="@HandleAdd" EditContext="editContext">
                     <ChildContent>
-                       
+                        <DataAnnotationsValidator />
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Название" style="width: 100%" />
                             <RadzenTextBox MaxLength="50" style="display: block; width: 100%" @bind-Value="@newProduct.ProductName" />
+                            <ValidationMessage For="@(() => newProduct.ProductName)" />
                         </div>
 
                           <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Стоимость" style="width: 100%" />
                             <RadzenNumeric Min="1" Max="100000000" style="display: block; width: 100%" @bind-Value="@newProduct.ProductPrice" />
+                            <ValidationMessage For="@(() => newProduct.ProductPrice)" />
                         </div>
 
                         <div style="margin-bottom: 1rem" class="flex-column">
@@ -25,6 +27,7 @@
                             <RadzenDropDown Data="@categories" @bind-Value="@(newProduct.CategoryId)"
                                             SelectedItem="1"
                                             ValueProperty="IdCategory" TextProperty="CategoryName" />
+                            <ValidationMessage For="@(() => newProduct.CategoryId)" />
                         </div>
 
                         <div style="margin-bottom: 1rem" class="flex-column">
@@ -32,10 +35,11 @@
                             <RadzenDropDown Data="@wareHouses" @bind-Value="@(newProduct.WareHouseId)"
                                             SelectedItem="1"
                                             ValueProperty="IdEWareHouse" TextProperty="Address" />
+                            <ValidationMessage For="@(() => newProduct.WareHouseId)" />
                         </div>
 
                         <div class="row footer">
-                            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сохранить" />
+                            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Disabled="IsActive" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сохранить" />
                         </div>
                     </ChildContent>
                 </RadzenTemplateForm>

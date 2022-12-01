@@ -9,22 +9,24 @@
             <div class="col-md-12">
                 <RadzenTemplateForm TItem="OrderElement" Data="@newOrderElement" Submit="@HandleAdd">
                     <ChildContent>
-
+                        <DataAnnotationsValidator />
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Товар" style="width: 100%" />
                             <RadzenDropDown Data="@products" @bind-Value="@(newOrderElement.ProductId)"
                                             SelectedItem="1"
                                             ValueProperty="IdProduct" TextProperty="ProductName" />
+                            <ValidationMessage For="@(() => newOrderElement.ProductId)" />
                         </div>
 
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Количество элементов" style="width: 100%" />
                             <MudNumericField Min="1" @bind-Value="@newOrderElement.ElementsCount" />
+                            <ValidationMessage For="@(() => newOrderElement.ElementsCount)" />
                         </div>
 
 
                         <div class="row footer">
-                            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сохранить" />
+                            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Disabled="(!IsActive)" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сохранить" />
                         </div>
                     </ChildContent>
                 </RadzenTemplateForm>

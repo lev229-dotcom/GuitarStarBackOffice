@@ -1,6 +1,7 @@
 ﻿using GuitarStarBackOffice.ServerSide.Data;
 using GuitarStarBackOffice.Shared;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace GuitarStarBackOffice.ServerSide.Services;
 
@@ -46,17 +47,44 @@ public class ProductService
     public async Task UpdateProduct(Product product)
     {
         dataContext.Products.Attach(product);
+
+        dataContext.ProductHistories.Add(new ProductHistory
+        {
+            EventType = "Обновлено наименование",
+            EventInfo = $"Время: {Convert.ToDateTime(DateTime.Now).ToString("F")}" +
+            $"Название - {product.ProductName},{Environment.NewLine} " +
+            $"стоимость {((double)product.ProductPrice).ToString("C0", CultureInfo.CreateSpecificCulture("ru-RU"))},{Environment.NewLine}" +
+            $"категория: {product.Category.CategoryName} "
+        });
         await dataContext.SaveChangesAsync();
     }
     public async Task AddProduct(Product product)
     {
         dataContext.Products.Add(product);
+        dataContext.ProductHistories.Add(new ProductHistory
+        {
+            EventType = "Создано наименование",
+            EventInfo = $"Время: {Convert.ToDateTime(DateTime.Now).ToString("F")}" +
+            $"Название - {product.ProductName},{Environment.NewLine} " +
+            $"стоимость {((double)product.ProductPrice).ToString("C0", CultureInfo.CreateSpecificCulture("ru-RU"))},{Environment.NewLine}" +
+            $"категория: {product.Category.CategoryName} "
+        });
+
         await dataContext.SaveChangesAsync();
     }
 
     public async Task DeleteProduct(Product product)
     {
         dataContext.Products.Remove(product);
+        dataContext.ProductHistories.Add(new ProductHistory
+        {
+            EventType = "Удалено наименование",
+            EventInfo = $"Время: {Convert.ToDateTime(DateTime.Now).ToString("F")} " +
+            $"Название - {product.ProductName},{Environment.NewLine} " +
+            $"стоимость {((double)product.ProductPrice).ToString("C0", CultureInfo.CreateSpecificCulture("ru-RU"))},{Environment.NewLine}" +
+            $"категория: {product.Category.CategoryName} "
+        });
+
         await dataContext.SaveChangesAsync();
     }
 }

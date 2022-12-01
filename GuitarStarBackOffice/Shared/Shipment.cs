@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using GuitarStarBackOffice.Shared.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace GuitarStarBackOffice.Shared;
 
@@ -17,6 +18,7 @@ public class Shipment
     /// </summary>
     [Display(Name = "Дата поставки")]
     [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
+    [Date(50, 5, ErrorMessage = "Дата поставки должна быть между {1} и {2}")]
     public DateTime ShipmentDate { get; set; }
 
     #region Id склада
@@ -25,9 +27,9 @@ public class Shipment
     /// Id склада 
     /// </summary>
     [Display(Name = "Id склада")]
-    [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
     public WareHouse Warehouse { get; set; }
 
+    [Required(ErrorMessage = "Данное поле обязательно к заполнению")]
     public Guid WareHouseId { get; set; }
 
     #endregion
@@ -38,10 +40,10 @@ public class Shipment
     /// Id поставщика 
     /// </summary>
     [Display(Name = "Id поставщика")]
-    [Required(ErrorMessage ="Данное поле обязательно к заполнению")]
     public Supplier Supplier { get; set; }
 
-    public Guid SupplierId { get; set; }
+    [Required(ErrorMessage = "Данное поле обязательно к заполнению")]
+    public Guid? SupplierId { get; set; }
 
     #endregion
 }

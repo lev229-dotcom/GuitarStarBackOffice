@@ -35,7 +35,7 @@ public partial class ProfilePage
     {
         await DialogService.OpenAsync<ProfileEditor>("Изменение данных профиля", new Dictionary<string, object>()
         { {"cuurentAccountId", currentEmployee.IdEmployee}},
-               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
         currentEmployee = await EmployeeService.GetEmployeeById(Guid.Parse(UserSession.FullName));
     }
 }

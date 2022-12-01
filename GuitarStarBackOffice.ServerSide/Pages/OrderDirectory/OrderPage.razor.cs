@@ -23,6 +23,8 @@ public partial class OrderPage
 
     [Inject] private DialogService DialogService { get; set; }
     [Inject] private IJSRuntime JS { get; set; }
+    [Inject] private ReloadService ReloadService { get; set; }
+
 
     protected override async void OnInitialized()
     {
@@ -42,7 +44,7 @@ public partial class OrderPage
     {
         await DialogService.OpenAsync<OrderElementsPage>("Состав заказа", new Dictionary<string, object>()
                { { "currentOrderId", currentOrder.IdOrder } },
-              new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+              new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
         await grid.Reload();
     }
 
@@ -51,7 +53,7 @@ public partial class OrderPage
     private async Task AddOrder()
     {
         await DialogService.OpenAsync<AddOrder>("Добавить заказ", null,
-               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
         orders = await OrderService.GetOrders();
 
         await grid.Reload();
@@ -61,7 +63,8 @@ public partial class OrderPage
     {
         await DialogService.OpenAsync<OrderEditor>("Редактировать заказ", new Dictionary<string, object>()
                { { "editedOrderId", editedOrder.IdOrder } },
-               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+               new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
+        ReloadService.Reload();
         await grid.Reload();
     }
 

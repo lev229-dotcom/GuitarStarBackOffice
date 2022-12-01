@@ -18,6 +18,7 @@ public class Employee
     public string Email { get; set; }
 
     [MinLength(6, ErrorMessage = "Минимальная длина 6 символов")]
+    [Required(ErrorMessage = "Данное поле обязательно к заполнению")]
     public string Password { get; set; }
     public DateTime AccountCreateDate { get; set; }
 
@@ -86,7 +87,7 @@ public class Employee
 
     [Display(Name = "Id Должности")]
     [Required(ErrorMessage ="Данное поле обязательно к заполнению IdPost")]
-    public Guid PostId { get; set; }
+    public Guid? PostId { get; set; }
 
 
     /// <summary>

@@ -39,7 +39,7 @@ public partial class AdminPage
             await BackupService.RestoreBatabase(data);
             NotificationService.Notify(new NotificationMessage { Style = ConstantsValues.NotifyMessageStyle, Severity = NotificationSeverity.Success, Summary = "Бекап завершен успешно", Duration = 4000 });
         }
-        catch
+        catch(Exception ex)
         {
             NotificationService.Notify(new NotificationMessage { Style = ConstantsValues.NotifyMessageStyle, Severity = NotificationSeverity.Error, Summary = "Произошла ошибка", Duration = 4000 });
         }

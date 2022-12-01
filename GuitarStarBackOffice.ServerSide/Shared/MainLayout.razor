@@ -21,7 +21,6 @@
                             <div class="col-6 d-flex align-items-center">
                                 <RadzenSidebarToggle Click="@ToggleNavMenu">  </RadzenSidebarToggle>
                                 <RadzenLabel Text="Информационная система Guitar Star"></RadzenLabel>
-                                <MudButton Color="Color.Warning" OnClick="@Logout"> Выход из аккаунта</MudButton>
                             </div>
                             <div class="col-6 text-right">
                             </div>
@@ -40,14 +39,80 @@
                 <RadzenSidebar @ref="SideBar0">
                     <ChildContent>
                         <RadzenPanelMenu>
-                            <RadzenPanelMenuItem Text="Сотрудники" Path="Emp" />
-                            <RadzenPanelMenuItem Text="Должности" Path="Post" />
-                            <RadzenPanelMenuItem Text="Поставщики" Path="Supplier" />
-                            <RadzenPanelMenuItem Text="Склады" Path="WareHouse" />
-                            <RadzenPanelMenuItem Text="Категория" Path="Category" />
-                            <RadzenPanelMenuItem Text="Товары" Path="Product" />
-                            <RadzenPanelMenuItem Text="Заказ" Path="Order" />
-                            <RadzenPanelMenuItem Text="Статистика" Path="Stats" />
+<AuthorizeView Roles="Администратор, Сотрудник отдела кадров, Бухгалтер" Context="_context">
+    <Authorized>
+        <RadzenPanelMenuItem Text="Сотрудники" Path="Emp" />
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="Администратор, Сотрудник отдела кадров, Бухгалтер" Context="_context">
+    <Authorized>
+        <RadzenPanelMenuItem Text="Должности" Path="Post" />
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="Администратор, Сотрудник склада" Context="_context">
+    <Authorized>
+        <RadzenPanelMenuItem Text="Поставщики" Path="Supplier" />
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="Администратор, Сотрудник склада" Context="_context">
+    <Authorized>
+        <RadzenPanelMenuItem Text="Склады" Path="WareHouse" />
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="Администратор, Сотрудник склада, Сотрудник отдела продаж" Context="_context">
+    <Authorized>
+        <RadzenPanelMenuItem Text="Категория" Path="Category" />
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="Администратор, Сотрудник склада, Сотрудник отдела продаж" Context="_context">
+    <Authorized>
+        <RadzenPanelMenuItem Text="Товары" Path="Product" />
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="Администратор, Сотрудник отдела продаж, Бухгалтер" Context="_context">
+    <Authorized>
+        <RadzenPanelMenuItem Text="Заказы" Path="Order" />
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="Администратор, Бухгалтер, Сотрудник отдела продаж" Context="_context">
+    <Authorized>
+        <RadzenPanelMenuItem Text="Статистика" Path="Stats" />
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="Администратор" Context="_context">
+    <Authorized>
+        <RadzenPanelMenuItem Text="Администрирование базы данных" Path="admin" />
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="Администратор" Context="_context">
+    <Authorized>
+        <RadzenPanelMenuItem Text="История изменений данных сотрудников" Path="EmployeeHistory" />
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="Администратор" Context="_context">
+    <Authorized>
+        <RadzenPanelMenuItem Text="История изменений данных наименований" Path="ProductHistoryDir" />
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Context="_context">
+    <Authorized>
+            <MudButton Color="Color.Primary" OnClick="@Logout"> Выход из аккаунта</MudButton>
+    </Authorized>
+</AuthorizeView>
+@* <MudButton Color="Color.Warning" OnClick="@Logout"> Выход из аккаунта</MudButton>
+*@
+
                         </RadzenPanelMenu>
                     </ChildContent>
                 </RadzenSidebar>

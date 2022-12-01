@@ -15,12 +15,14 @@ public partial class OrderElementsEditor
     OrderElement editedOrderElement = new();
     Order currentOrder = new();
 
+    private bool IsActive => editedOrderElement.ElementsCount >= 1 && editedOrderElement.ElementsCount <= 9_999_999;
 
     protected override async Task OnInitializedAsync()
     {
-        currentOrder = await OrderService.GetOrderById(editedOrderElementId);
-
         editedOrderElement = await OrderService.GetOrderElementById(editedOrderElementId);
+
+        currentOrder = await OrderService.GetOrderById(editedOrderElement.OrderId);
+
     
     
     }
@@ -31,7 +33,7 @@ public partial class OrderElementsEditor
 
         await OrderService.UpdateElement(editedOrderElement);
 
-        currentOrder.TotalOrderAmount = await OrderService.GetOrderTotalAmount(editedOrderElementId);
+        currentOrder.TotalOrderAmount = await OrderService.GetOrderTotalAmount(currentOrder.IdOrder);
 
         await OrderService.UpdateOrder(currentOrder);
 
