@@ -26,6 +26,9 @@ public partial class EmployeePage
 
     [Inject] protected NotificationService NotificationService { get; set; }
 
+    [Inject] private ReloadService ReloadService { get; set; }
+
+
 
     private EmployeeEditor employeeEditor;
     protected override async void OnInitialized()
@@ -45,6 +48,8 @@ public partial class EmployeePage
         await DialogService.OpenAsync<EmployeeEditor>("Редактировать сотрудника", new Dictionary<string, object>() 
                { { "editedEmployeeId", editedEmployee.IdEmployee } },
                new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
+
+        ReloadService.Reload();
         await grid.Reload();
     }
 

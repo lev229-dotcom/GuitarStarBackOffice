@@ -15,6 +15,8 @@ public partial class ProductPage
     [Inject] private ProductService ProductService { get; set; }
 
     [Inject] private DialogService DialogService { get; set; }
+    [Inject] private ReloadService ReloadService { get; set; }
+
 
     protected override async void OnInitialized()
     {
@@ -42,6 +44,7 @@ public partial class ProductPage
         await DialogService.OpenAsync<ProductEditor>("Редактировать наименование", new Dictionary<string, object>()
                { { "editedProductId", editedProduct.IdProduct } },
                new DialogOptions() { Width = "700px", Height = "512px", Resizable = true , ShowClose = false });
+        ReloadService.Reload();
         await grid.Reload();
     }
 

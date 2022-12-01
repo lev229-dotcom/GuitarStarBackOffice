@@ -12,6 +12,8 @@ public partial class OrderElementsPage
     [Inject]protected DialogService DialogService { get; set; }
 
     [Inject] private OrderService OrderService { get; set; }
+    [Inject] private ReloadService ReloadService { get; set; }
+
 
     [Parameter]
     public Guid currentOrderId { get; set; }
@@ -47,6 +49,7 @@ public partial class OrderElementsPage
         await DialogService.OpenAsync<OrderElementsEditor>("Редактировать элемент заказа", new Dictionary<string, object>()
                { { "editedOrderElementId", editedOrderElement.IdOrderElement } },
                new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
+        ReloadService.Reload();
         await grid.Reload();
     }
 

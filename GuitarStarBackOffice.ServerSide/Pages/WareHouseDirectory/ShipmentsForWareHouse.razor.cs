@@ -13,6 +13,8 @@ public partial class ShipmentsForWareHouse
     protected DialogService DialogService { get; set; }
 
     [Inject] private WareHouseService WareHouseService { get; set; }
+    [Inject] private ReloadService ReloadService { get; set; }
+
 
     [Parameter]
     public Guid currentWareHouseId { get; set; }
@@ -34,6 +36,7 @@ public partial class ShipmentsForWareHouse
                { { "editedShipmentId", editedShipment.IdShipment },
             { "currentWareHouseId", currentWareHouseId } },
                new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
+        ReloadService.Reload();
         await grid.Reload();
     }
 

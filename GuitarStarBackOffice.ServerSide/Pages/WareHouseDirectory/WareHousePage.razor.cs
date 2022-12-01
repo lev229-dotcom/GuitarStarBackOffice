@@ -16,6 +16,7 @@ public partial class WareHousePage
     [Inject] private WareHouseService WareHouseService { get; set; }
 
     [Inject] private DialogService DialogService { get; set; }
+    [Inject] private ReloadService ReloadService { get; set; }
 
     protected override async void OnInitialized()
     {
@@ -34,6 +35,7 @@ public partial class WareHousePage
         await DialogService.OpenAsync<WareHouseEditor>("Редактировать Склад", new Dictionary<string, object>()
                { { "editedWareHouseId", editedWareHouse.IdEWareHouse } },
                new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
+        ReloadService.Reload();
         await grid.Reload();
     }
 

@@ -20,6 +20,8 @@ public partial class SupplierPage
     [Inject] private DialogService DialogService { get; set; }
 
     [Inject] private NorthwindService service { get; set; }
+    [Inject] private ReloadService ReloadService { get; set; }
+
 
     protected override async void OnInitialized()
     {
@@ -38,6 +40,7 @@ public partial class SupplierPage
         await DialogService.OpenAsync<SupplierEditor>("Редактировать Поставщика", new Dictionary<string, object>()
                { { "editedSupplierId", editedSupplier.IdSupplier } },
                new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
+       ReloadService.Reload();
         await grid.Reload();
     }
 

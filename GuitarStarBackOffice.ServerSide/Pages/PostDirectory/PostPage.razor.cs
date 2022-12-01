@@ -16,6 +16,8 @@ public partial class PostPage
     [Inject] private PostService PostService { get; set; }
 
     [Inject] private DialogService DialogService { get; set; }
+    [Inject] private ReloadService ReloadService { get; set; }
+
 
     protected override async void OnInitialized()
     {
@@ -43,7 +45,8 @@ public partial class PostPage
         await DialogService.OpenAsync<PostEditor>("Редактировать должность", new Dictionary<string, object>()
                { { "editedPostId", editedPost.IdPost } },
                new DialogOptions() { Width = "700px", Height = "512px", Resizable = true  });
-        await grid.Reload();
+        ReloadService.Reload();
+         await grid.Reload();
     }
 
     private async Task DeletePost(Post deletedPost)

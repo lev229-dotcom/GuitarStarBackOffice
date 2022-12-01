@@ -38,6 +38,7 @@ public partial class OrderElementsEditor
         await OrderService.UpdateOrder(currentOrder);
 
         await Close(null);
+
     }
 
     protected async Task Close(MouseEventArgs? args)
