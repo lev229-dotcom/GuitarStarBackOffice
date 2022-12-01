@@ -4,56 +4,59 @@
 
 <AuthorizeView Roles="Администратор, Сотрудник отдела продаж, Сотрудник склада" Context="_context">
     <Authorized>
-        
-<RadzenContent>
-    <ChildContent>
-        <RadzenHeading Size="H1" Text="Товары" />
-        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Добавить" Click="AddProduct">
-        </RadzenButton>
-        <RadzenDataGrid ColumnWidth="150px"
-                        AllowFiltering="true" AllowColumnResize="true"
-                        AllowAlternatingRows="false" FilterMode="FilterMode.Advanced"
-                        AllowSorting="true" PageSize="5" AllowPaging="true"
-                        AllowColumnReorder="true"
-                        PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-                        @ref="grid" Data="@products" TItem="Product">
-            <Columns>
-                <RadzenDataGridColumn TItem="Product" Title="Действия" Frozen="true">
-                    <Template>
-                        @{
-                            var product = (Product)context;
-                            <MudMenu Label="Действия" Dense="true" AnchorOrigin="@Origin.BottomCenter"
-                                 TransformOrigin="@Origin.TopCenter" StartIcon="@Icons.Filled.Hive"
-                                 EndIcon="@Icons.Filled.KeyboardArrowDown">
 
-                                <MudMenuItem OnClick="@(() => OpenEditor(product))">
-                                    <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
-                                         Icon="@Icons.Material.Filled.Edit" />
-                                    Изменить
-                                </MudMenuItem>
+        <RadzenContent>
+            <ChildContent>
+                <RadzenHeading Size="H1" Text="Товары" />
+                <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Добавить" Click="AddProduct">
+                </RadzenButton>
+                <RadzenDataGrid ColumnWidth="150px"
+                                AllowFiltering="true" AllowColumnResize="true"
+                                AllowAlternatingRows="false" FilterMode="FilterMode.Advanced"
+                                AllowSorting="true" PageSize="5" AllowPaging="true"
+                                AllowColumnReorder="true"
+                                PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                                @ref="grid" Data="@products" TItem="Product"
+                                EmptyText="Нет данных" EqualsText="Равно" NotEqualsText="Не равно" ContainsText="Содержит" DoesNotContainText="Не содержит" IsNotEmptyText="Не пустое" AndOperatorText="И" OrOperatorText="Или"
+                                StartsWithText="Начинается с" EndsWithText="Заказнчивается с" IsNullText="Не записано" IsNotNullText="Записано" IsEmptyText="Пустое" LessThanText="Меньше чем" LessThanOrEqualsText="Меньше или равно"
+                                GreaterThanText="Больше чем" GreaterThanOrEqualsText="Больше или равно" FilterText="Фильтр" ApplyFilterText="Применить" ClearFilterText="Очистить">
+                    <Columns>
+                        <RadzenDataGridColumn TItem="Product" Title="Действия" Frozen="true" Filterable=false Sortable=false>
+                            <Template>
+                                @{
+                                    var product = (Product)context;
+                                    <MudMenu Label="Действия" Dense="true" AnchorOrigin="@Origin.BottomCenter"
+                                         TransformOrigin="@Origin.TopCenter" StartIcon="@Icons.Filled.Hive"
+                                         EndIcon="@Icons.Filled.KeyboardArrowDown">
 
-                                <MudMenuItem OnClick="@(() => DeleteProduct(product))">
-                                    <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
-                                         Icon="@Icons.Material.Filled.Delete" />
-                                    Удалить
-                                </MudMenuItem>
+                                        <MudMenuItem OnClick="@(() => OpenEditor(product))">
+                                            <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
+                                                 Icon="@Icons.Material.Filled.Edit" />
+                                            Изменить
+                                        </MudMenuItem>
 
-                            </MudMenu>
-                        }
-                    </Template>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Product" Property="ProductName" Title="Название" />
-                <RadzenDataGridColumn TItem="Product" Property="ProductPrice" Title="Стоимость" />
-                <RadzenDataGridColumn TItem="Product" Property="Category.CategoryName" Title="Категория" />
-                <RadzenDataGridColumn TItem="Product" Property="WareHouse.Address" Title="Склад" />
-            </Columns>
+                                        <MudMenuItem OnClick="@(() => DeleteProduct(product))">
+                                            <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
+                                                 Icon="@Icons.Material.Filled.Delete" />
+                                            Удалить
+                                        </MudMenuItem>
 
-        </RadzenDataGrid>
-    </ChildContent>
-</RadzenContent>
+                                    </MudMenu>
+                                }
+                            </Template>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Product" Property="ProductName" Title="Название" />
+                        <RadzenDataGridColumn TItem="Product" Property="ProductPrice" Title="Стоимость" />
+                        <RadzenDataGridColumn TItem="Product" Property="Category.CategoryName" Title="Категория" />
+                        <RadzenDataGridColumn TItem="Product" Property="WareHouse.Address" Title="Склад" />
+                    </Columns>
+
+                </RadzenDataGrid>
+            </ChildContent>
+        </RadzenContent>
 
     </Authorized>
-     <NotAuthorized>
+    <NotAuthorized>
         <RadzenLabel Style="text-align:center" Text="Права доступа отсутствуют" />
     </NotAuthorized>
 </AuthorizeView>

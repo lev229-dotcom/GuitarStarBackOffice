@@ -5,75 +5,78 @@
 <AuthorizeView Roles="Администратор, Сотрудник отдела кадров, Бухгалтер" Context="_context">
     <Authorized>
         <RadzenContent>
-    <ChildContent>
-        <RadzenHeading Size="H1" Text="Сотрудники" />
-        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Добавить" Click="AddEmployee">
-        </RadzenButton>
-        <RadzenButton style="margin-bottom: 10px" Text="Экспорт" Click="Export" />
-        <RadzenDataGrid ColumnWidth="150px"
-                        AllowFiltering="true" AllowColumnResize="true"
-                        AllowAlternatingRows="false" FilterMode="FilterMode.Advanced"
-                        AllowSorting="true" PageSize="5" AllowPaging="true"
-                        AllowColumnReorder="true"
-                        PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-                        @ref="grid" Data="@employees" TItem="Employee">
-            <Columns>
-                <RadzenDataGridColumn TItem="Employee" Title="Действия" Frozen="true">
-                    <Template>
-                        @{
-                            var emp = (Employee)context;
-                            <MudMenu Label="Действия" Dense="true" AnchorOrigin="@Origin.BottomCenter"
-                                 TransformOrigin="@Origin.TopCenter" StartIcon="@Icons.Filled.Hive"
-                                 EndIcon="@Icons.Filled.KeyboardArrowDown">
+            <ChildContent>
+                <RadzenHeading Size="H1" Text="Сотрудники" />
+                <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Добавить" Click="AddEmployee">
+                </RadzenButton>
+                <RadzenButton style="margin-bottom: 10px" Text="Экспорт" Click="Export" />
+                <RadzenDataGrid ColumnWidth="150px"
+                                AllowFiltering="true" AllowColumnResize="true"
+                                AllowAlternatingRows="false" FilterMode="FilterMode.Advanced"
+                                AllowSorting="true" PageSize="5" AllowPaging="true"
+                                AllowColumnReorder="true"
+                                PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                                @ref="grid" Data="@employees" TItem="Employee"
+                                EmptyText="Нет данных" EqualsText="Равно" NotEqualsText="Не равно" ContainsText="Содержит" DoesNotContainText="Не содержит" IsNotEmptyText="Не пустое" AndOperatorText="И" OrOperatorText="Или"
+                                StartsWithText="Начинается с" EndsWithText="Заказнчивается с" IsNullText="Не записано" IsNotNullText="Записано" IsEmptyText="Пустое" LessThanText="Меньше чем" LessThanOrEqualsText="Меньше или равно"
+                                GreaterThanText="Больше чем" GreaterThanOrEqualsText="Больше или равно" FilterText="Фильтр" ApplyFilterText="Применить" ClearFilterText="Очистить">
+                    <Columns>
+                        <RadzenDataGridColumn TItem="Employee" Title="Действия" Frozen="true" Filterable=false Sortable=false>
+                            <Template>
+                                @{
+                                    var emp = (Employee)context;
+                                    <MudMenu Label="Действия" Dense="true" AnchorOrigin="@Origin.BottomCenter"
+                                         TransformOrigin="@Origin.TopCenter" StartIcon="@Icons.Filled.Hive"
+                                         EndIcon="@Icons.Filled.KeyboardArrowDown">
 
-                                <MudMenuItem OnClick="@(() => OpenEditor(emp))">
-                                    <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
-                                         Icon="@Icons.Material.Filled.Edit" />
-                                    Изменить
-                                </MudMenuItem>
+                                        <MudMenuItem OnClick="@(() => OpenEditor(emp))">
+                                            <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
+                                                 Icon="@Icons.Material.Filled.Edit" />
+                                            Изменить
+                                        </MudMenuItem>
 
-                                <MudMenuItem OnClick="@(() => DeleteEmployee(emp))">
-                                    <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
-                                         Icon="@Icons.Material.Filled.Delete" />
-                                    Удалить
-                                </MudMenuItem>
+                                        <MudMenuItem OnClick="@(() => DeleteEmployee(emp))">
+                                            <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
+                                                 Icon="@Icons.Material.Filled.Delete" />
+                                            Удалить
+                                        </MudMenuItem>
 
-                            </MudMenu>
-                        }
-                    </Template>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Employee" Property="Email" Frozen="true" Title="Email" />
-                <RadzenDataGridColumn TItem="Employee" Property="Name" Frozen="true" Title="Name" />
-                <RadzenDataGridColumn TItem="Employee" Property="Surname" Title="Surname" />
-                <RadzenDataGridColumn TItem="Employee" Property="Patronymic" Title="Patronymic" />
-                <RadzenDataGridColumn TItem="Employee" Property="PasportSeries" Title="PasportSeries" />
-                <RadzenDataGridColumn TItem="Employee" Property="PasportNumber" Title="PasportNumber" />
-                <RadzenDataGridColumn TItem="Employee" Property="DateOfBirth" Title="DateOfBirth">
-                    <Template>
-                        @{
-                            var employee = (Employee)context;
-                            @String.Format("{0:d}", employee.DateOfBirth)
-                        }
-                    </Template>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Employee" Property="DateOfEmployment" Title="DateOfEmployment">
-                    <Template>
-                        @{
-                            var employee = (Employee)context;
-                            @String.Format("{0:d}", employee.DateOfEmployment)
-                        }
-                    </Template>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Employee" Property="Post.PostName" Title="Должность">
-                    
-                </RadzenDataGridColumn>
-            </Columns>
-        </RadzenDataGrid>
+                                    </MudMenu>
+                                }
+                            </Template>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Employee" Property="Email" Frozen="true" Title="Почта" />
+                        <RadzenDataGridColumn TItem="Employee" Property="Name" Frozen="true" Title="Имя" />
+                        <RadzenDataGridColumn TItem="Employee" Property="Surname" Title="Фамилия" />
+                        <RadzenDataGridColumn TItem="Employee" Property="Patronymic" Title="Отчество" />
+                        <RadzenDataGridColumn TItem="Employee" Property="PasportSeries" Title="Серия паспорта" />
+                        <RadzenDataGridColumn TItem="Employee" Property="PasportNumber" Title="Номер паспорта" />
+                        <RadzenDataGridColumn TItem="Employee" Property="DateOfBirth" Title="Дата рождения">
+                            <Template>
+                                @{
+                                    var employee = (Employee)context;
+                                    @String.Format("{0:d}", employee.DateOfBirth)
+                                }
+                            </Template>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Employee" Property="DateOfEmployment" Title="Дата устройства на работу">
+                            <Template>
+                                @{
+                                    var employee = (Employee)context;
+                                    @String.Format("{0:d}", employee.DateOfEmployment)
+                                }
+                            </Template>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Employee" Property="Post.PostName" Title="Должность">
 
-    </ChildContent>
-</RadzenContent>
+                        </RadzenDataGridColumn>
+                    </Columns>
+                </RadzenDataGrid>
+
+            </ChildContent>
+        </RadzenContent>
     </Authorized>
-     <NotAuthorized>
+    <NotAuthorized>
         <RadzenLabel Style="text-align:center" Text="Права доступа отсутствуют" />
     </NotAuthorized>
 </AuthorizeView>

@@ -2,92 +2,97 @@
 @using GuitarStarBackOffice.Shared
 @using MudBlazor.Extensions
 
-<AuthorizeView Roles="Администратор, Сотрудник отдела продаж, Бухгалтер" Context="_context"> 
+<AuthorizeView Roles="Администратор, Сотрудник отдела продаж, Бухгалтер" Context="_context">
     <Authorized>
         <RadzenContent>
-    <ChildContent>
-        <RadzenHeading Size="H1" Text="Заказы" />
-        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Добавить" Click="AddOrder"/>
-        <RadzenButton style="margin-bottom: 10px" Text="Экспорт" Click="Export" />
-        @*<RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Экспорт" Click="Export"/>*@
-        <RadzenDataGrid ColumnWidth="250px"
-                        AllowFiltering="true" AllowColumnResize="true"
-                        AllowAlternatingRows="false" FilterMode="FilterMode.Advanced"
-                        AllowSorting="true" PageSize="5" AllowPaging="true"
-                        AllowColumnReorder="true"
-                        PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-                        @ref="grid" Data="@orders" TItem="Order">
-            <Columns>
-                <RadzenDataGridColumn TItem="Order" Title="Действия" Frozen="true">
-                    <Template>
-                        @{
-                            var order = (Order)context;
-                            <MudMenu Label="Действия" Dense="true" AnchorOrigin="@Origin.BottomCenter"
-                                 TransformOrigin="@Origin.TopCenter" StartIcon="@Icons.Filled.Hive"
-                                 EndIcon="@Icons.Filled.KeyboardArrowDown">
+            <ChildContent>
+                <RadzenHeading Size="H1" Text="Заказы" />
+                <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Добавить" Click="AddOrder" />
+                <RadzenButton style="margin-bottom: 10px" Text="Экспорт" Click="Export" />
+                @*<RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Экспорт" Click="Export"/>*@
+                <RadzenDataGrid ColumnWidth="250px"
+                                AllowFiltering="true" AllowColumnResize="true"
+                                AllowAlternatingRows="false" FilterMode="FilterMode.Advanced"
+                                AllowSorting="true" PageSize="5" AllowPaging="true"
+                                AllowColumnReorder="true"
+                                PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                                @ref="grid" Data="@orders" TItem="Order"
+                                EmptyText="Нет данных" EqualsText="Равно" NotEqualsText="Не равно" ContainsText="Содержит" DoesNotContainText="Не содержит" IsNotEmptyText="Не пустое" AndOperatorText="И" OrOperatorText="Или"
+                                StartsWithText="Начинается с" EndsWithText="Заказнчивается с" IsNullText="Не записано" IsNotNullText="Записано" IsEmptyText="Пустое" LessThanText="Меньше чем" LessThanOrEqualsText="Меньше или равно"
+                                GreaterThanText="Больше чем" GreaterThanOrEqualsText="Больше или равно" FilterText="Фильтр" ApplyFilterText="Применить" ClearFilterText="Очистить">
+                    <Columns>
+                        <RadzenDataGridColumn TItem="Order" Title="Действия" Frozen="true" Filterable=false Sortable=false>
+                            <Template>
+                                @{
+                                    var order = (Order)context;
+                                    <MudMenu Label="Действия" Dense="true" AnchorOrigin="@Origin.BottomCenter"
+                                         TransformOrigin="@Origin.TopCenter" StartIcon="@Icons.Filled.Hive"
+                                         EndIcon="@Icons.Filled.KeyboardArrowDown">
 
-                                <MudMenuItem OnClick="@(() => OpenEditor(order))">
-                                    <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
-                                         Icon="@Icons.Material.Filled.Edit" />
-                                    Изменить
-                                </MudMenuItem>
+                                        <MudMenuItem OnClick="@(() => OpenEditor(order))">
+                                            <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
+                                                 Icon="@Icons.Material.Filled.Edit" />
+                                            Изменить
+                                        </MudMenuItem>
 
-                                <MudMenuItem OnClick="@(() => DeleteOrder(order))">
-                                    <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
-                                         Icon="@Icons.Material.Filled.Delete" />
-                                    Удалить
-                                </MudMenuItem>
+                                        <MudMenuItem OnClick="@(() => DeleteOrder(order))">
+                                            <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
+                                                 Icon="@Icons.Material.Filled.Delete" />
+                                            Удалить
+                                        </MudMenuItem>
 
-                                <MudMenuItem OnClick="@(() => OpenOrderElements(order))">
-                                    <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"/>
-                                    Просмотр состава заказа
-                                </MudMenuItem>
+                                        <MudMenuItem OnClick="@(() => OpenOrderElements(order))">
+                                            <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small" />
+                                            Просмотр состава заказа
+                                        </MudMenuItem>
 
-                            </MudMenu>
-                        }
-                    </Template>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Order" Property="OrderNumber" Title="Номер заказа" />
-                <RadzenDataGridColumn TItem="Order" Property="OrderDate" Title="Дата создания" />
-                <RadzenDataGridColumn TItem="Order" Property="TotalOrderAmount" Title="Общая стоимость" >
-                    <Template>
-                        @{
-                            var order = (Order)context;
-                            <a>@Math.Round(order.TotalOrderAmount, 2)</a>
-                        }
-                    </Template>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Order"  Title="Сотрудник" >
-                    <Template>
-                        @{
-                            var employee = (Order)context;
-                            <a>@employee.Employee.Name</a> <a>@employee.Employee.Surname</a> <a>@employee.Employee.Patronymic</a>
-                        }
-                    </Template>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Order"  Title="Статус оплаты" >
-                    <Template>
-                        @{
-                            var order = (Order)context;
-                            @order.payementStatus.ToDescriptionString();
-                        }
-                    </Template>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Order"  Title="Статус работ" >
-                    <Template>
-                        @{
-                            var order = (Order)context;
-                            @order.orderStatus.ToDescriptionString();
-                        }
-                    </Template>
-                </RadzenDataGridColumn>
-            </Columns>
+                                    </MudMenu>
+                                }
+                            </Template>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Order" Property="OrderNumber" Title="Номер заказа" />
+                        <RadzenDataGridColumn TItem="Order" Property="OrderDate" Title="Дата создания" />
+                        <RadzenDataGridColumn TItem="Order" Property="TotalOrderAmount" Title="Общая стоимость">
+                            <Template>
+                                @{
+                                    var order = (Order)context;
+                                    <a>@Math.Round(order.TotalOrderAmount, 2)</a>
+                                }
+                            </Template>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Order" Title="Сотрудник">
+                            <Template>
+                                @{
+                                    var employee = (Order)context;
+                                    <a>@employee.Employee.Name</a> <a>@employee.Employee.Surname</a> <a>@employee.Employee.Patronymic</a>
+                                }
+                            </Template>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Order" Title="Статус оплаты">
+                            <Template>
+                                @{
+                                    var order = (Order)context;
+                                    @order.payementStatus.ToDescriptionString()
+                                    ;
+                                }
+                            </Template>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Order" Title="Статус работ">
+                            <Template>
+                                @{
+                                    var order = (Order)context;
+                                    @order.orderStatus.ToDescriptionString()
+                                    ;
+                                }
+                            </Template>
+                        </RadzenDataGridColumn>
+                    </Columns>
 
-        </RadzenDataGrid>
-    </ChildContent>
-</RadzenContent>
+                </RadzenDataGrid>
+            </ChildContent>
+        </RadzenContent>
     </Authorized>
-     <NotAuthorized>
+    <NotAuthorized>
         <RadzenLabel Style="text-align:center" Text="Права доступа отсутствуют" />
     </NotAuthorized>
 </AuthorizeView>

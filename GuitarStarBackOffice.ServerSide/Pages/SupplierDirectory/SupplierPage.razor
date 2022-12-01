@@ -4,56 +4,59 @@
 
 <AuthorizeView Roles="Администратор, Сотрудник склада" Context="_context">
     <Authorized>
-        
-<RadzenContent>
-    <ChildContent>
-        <RadzenHeading Size="H1" Text="Поставщики" />
-        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Добавить" Click="AddSupplier">
-        </RadzenButton>
-        <RadzenDataGrid ColumnWidth="150px"
-                        AllowFiltering="true" AllowColumnResize="true"
-                        AllowAlternatingRows="false" FilterMode="FilterMode.Advanced"
-                        AllowSorting="true" PageSize="5" AllowPaging="true"
-                        AllowColumnReorder="true"
-                        PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-                        @ref="grid" Data="@suppliers" TItem="Supplier">
-            <Columns>
-                <RadzenDataGridColumn TItem="Supplier" Title="Действия" Frozen="true">
-                    <Template>
-                        @{
-                            var supplier = (Supplier)context;
-                            <MudMenu Label="Действия" Dense="true" AnchorOrigin="@Origin.BottomCenter"
-                                 TransformOrigin="@Origin.TopCenter" StartIcon="@Icons.Filled.Hive"
-                                 EndIcon="@Icons.Filled.KeyboardArrowDown">
 
-                                <MudMenuItem OnClick="@(() => OpenEditor(supplier))">
-                                    <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
-                                         Icon="@Icons.Material.Filled.Edit" />
-                                    Изменить
-                                </MudMenuItem>
+        <RadzenContent>
+            <ChildContent>
+                <RadzenHeading Size="H1" Text="Поставщики" />
+                <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Добавить" Click="AddSupplier">
+                </RadzenButton>
+                <RadzenDataGrid ColumnWidth="150px"
+                                AllowFiltering="true" AllowColumnResize="true"
+                                AllowAlternatingRows="false" FilterMode="FilterMode.Advanced"
+                                AllowSorting="true" PageSize="5" AllowPaging="true"
+                                AllowColumnReorder="true"
+                                PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                                @ref="grid" Data="@suppliers" TItem="Supplier"
+                                EmptyText="Нет данных" EqualsText="Равно" NotEqualsText="Не равно" ContainsText="Содержит" DoesNotContainText="Не содержит" IsNotEmptyText="Не пустое" AndOperatorText="И" OrOperatorText="Или"
+                                StartsWithText="Начинается с" EndsWithText="Заказнчивается с" IsNullText="Не записано" IsNotNullText="Записано" IsEmptyText="Пустое" LessThanText="Меньше чем" LessThanOrEqualsText="Меньше или равно"
+                                GreaterThanText="Больше чем" GreaterThanOrEqualsText="Больше или равно" FilterText="Фильтр" ApplyFilterText="Применить" ClearFilterText="Очистить">
+                    <Columns>
+                        <RadzenDataGridColumn TItem="Supplier" Title="Действия" Frozen="true" Filterable=false Sortable=false>
+                            <Template>
+                                @{
+                                    var supplier = (Supplier)context;
+                                    <MudMenu Label="Действия" Dense="true" AnchorOrigin="@Origin.BottomCenter"
+                                         TransformOrigin="@Origin.TopCenter" StartIcon="@Icons.Filled.Hive"
+                                         EndIcon="@Icons.Filled.KeyboardArrowDown">
 
-                                <MudMenuItem OnClick="@(() => DeleteSupplier(supplier))">
-                                    <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
-                                         Icon="@Icons.Material.Filled.Delete" />
-                                    Удалить
-                                </MudMenuItem>
+                                        <MudMenuItem OnClick="@(() => OpenEditor(supplier))">
+                                            <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
+                                                 Icon="@Icons.Material.Filled.Edit" />
+                                            Изменить
+                                        </MudMenuItem>
 
-                            </MudMenu>
-                        }
-                    </Template>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Supplier" Property="SupplierName"  Title="Название" />
-                <RadzenDataGridColumn TItem="Supplier" Property="Representive"  Title="Представитель" />
-                <RadzenDataGridColumn TItem="Supplier" Property="PhoneNumber"  Title="Телефон" />
-                <RadzenDataGridColumn TItem="Supplier" Property="SupplierAddress"  Title="Адрес" />
-            </Columns>
+                                        <MudMenuItem OnClick="@(() => DeleteSupplier(supplier))">
+                                            <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
+                                                 Icon="@Icons.Material.Filled.Delete" />
+                                            Удалить
+                                        </MudMenuItem>
 
-        </RadzenDataGrid>
-    </ChildContent>
-</RadzenContent>
+                                    </MudMenu>
+                                }
+                            </Template>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Supplier" Property="SupplierName" Title="Название" />
+                        <RadzenDataGridColumn TItem="Supplier" Property="Representive" Title="Представитель" />
+                        <RadzenDataGridColumn TItem="Supplier" Property="PhoneNumber" Title="Телефон" />
+                        <RadzenDataGridColumn TItem="Supplier" Property="SupplierAddress" Title="Адрес" />
+                    </Columns>
+
+                </RadzenDataGrid>
+            </ChildContent>
+        </RadzenContent>
 
     </Authorized>
-     <NotAuthorized>
+    <NotAuthorized>
         <RadzenLabel Style="text-align:center" Text="Права доступа отсутствуют" />
     </NotAuthorized>
 </AuthorizeView>

@@ -5,27 +5,30 @@
 <AuthorizeView Roles="Администратор" Context="_context">
     <Authorized>
         <RadzenContent>
-    <ChildContent>
-        <RadzenHeading Size="H1" Text="История изменений данных сотрудников" />
-        <RadzenDataGrid ColumnWidth="100px"
-                        AllowFiltering="true" AllowColumnResize="true"
-                        AllowAlternatingRows="false" FilterMode="FilterMode.Advanced"
-                        AllowSorting="true" PageSize="5" AllowPaging="true"
-                        AllowColumnReorder="true"
-                        PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-                        @ref="grid"
-                        Data="@employee"
-                        TItem="EmployeeHistory">
-            <Columns>
-                <RadzenDataGridColumn TItem="EmployeeHistory" Property="EventType" Title="Событие" />
-                <RadzenDataGridColumn  Width="550px" TItem="EmployeeHistory" Property="EventInfo" Title="Информация"  />
-            </Columns>
+            <ChildContent>
+                <RadzenHeading Size="H1" Text="История изменений данных сотрудников" />
+                <RadzenDataGrid ColumnWidth="100px"
+                                AllowFiltering="true" AllowColumnResize="true"
+                                AllowAlternatingRows="false" FilterMode="FilterMode.Advanced"
+                                AllowSorting="true" PageSize="5" AllowPaging="true"
+                                AllowColumnReorder="true"
+                                PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                                @ref="grid"
+                                Data="@employee"
+                                TItem="EmployeeHistory"
+                                EmptyText="Нет данных" EqualsText="Равно" NotEqualsText="Не равно" ContainsText="Содержит" DoesNotContainText="Не содержит" IsNotEmptyText="Не пустое" AndOperatorText="И" OrOperatorText="Или"
+                                StartsWithText="Начинается с" EndsWithText="Заказнчивается с" IsNullText="Не записано" IsNotNullText="Записано" IsEmptyText="Пустое" LessThanText="Меньше чем" LessThanOrEqualsText="Меньше или равно"
+                                GreaterThanText="Больше чем" GreaterThanOrEqualsText="Больше или равно" FilterText="Фильтр" ApplyFilterText="Применить" ClearFilterText="Очистить">
+                    <Columns>
+                        <RadzenDataGridColumn TItem="EmployeeHistory" Property="EventType" Title="Событие" />
+                        <RadzenDataGridColumn Width="550px" TItem="EmployeeHistory" Property="EventInfo" Title="Информация" />
+                    </Columns>
 
-        </RadzenDataGrid>
-    </ChildContent>
-</RadzenContent>
+                </RadzenDataGrid>
+            </ChildContent>
+        </RadzenContent>
     </Authorized>
-     <NotAuthorized>
+    <NotAuthorized>
         <RadzenLabel Style="text-align:center" Text="Права доступа отсутствуют" />
     </NotAuthorized>
 </AuthorizeView>

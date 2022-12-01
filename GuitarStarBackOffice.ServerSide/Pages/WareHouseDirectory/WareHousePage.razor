@@ -5,68 +5,71 @@
 
 <AuthorizeView Roles="Администратор, Сотрудник отдела кадров" Context="_context">
     <Authorized>
-        
-<RadzenContent>
-    <ChildContent>
-        <RadzenHeading Size="H1" Text="Склады" />
-        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Добавить" Click="AddWareHouse">
-        </RadzenButton>
-        <RadzenDataGrid ColumnWidth="150px"
-                        AllowFiltering="true" AllowColumnResize="true"
-                        AllowAlternatingRows="false" FilterMode="FilterMode.Advanced"
-                        AllowSorting="true" PageSize="5" AllowPaging="true"
-                        AllowColumnReorder="true"
-                        PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-                        @ref="grid" Data="@wareHouses" TItem="WareHouse">
-            <Columns>
-                <RadzenDataGridColumn TItem="WareHouse" Title="Действия" Frozen="true" Filterable="false" Sortable="false">
-                    <Template>
-                        @{
-                            var wareHouse = (WareHouse)context;
-                            <MudMenu Label="Действия" Dense="true" AnchorOrigin="@Origin.BottomCenter"
-                                 TransformOrigin="@Origin.TopCenter" StartIcon="@Icons.Filled.Hive"
-                                 EndIcon="@Icons.Filled.KeyboardArrowDown">
 
-                                <MudMenuItem OnClick="@(() => OpenEditor(wareHouse))">
-                                    <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
-                                         Icon="@Icons.Material.Filled.Edit" />
-                                    Изменить
-                                </MudMenuItem>
+        <RadzenContent>
+            <ChildContent>
+                <RadzenHeading Size="H1" Text="Склады" />
+                <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Добавить" Click="AddWareHouse">
+                </RadzenButton>
+                <RadzenDataGrid ColumnWidth="150px"
+                                AllowFiltering="true" AllowColumnResize="true"
+                                AllowAlternatingRows="false" FilterMode="FilterMode.Advanced"
+                                AllowSorting="true" PageSize="5" AllowPaging="true"
+                                AllowColumnReorder="true"
+                                PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                                @ref="grid" Data="@wareHouses" TItem="WareHouse"
+                                EmptyText="Нет данных" EqualsText="Равно" NotEqualsText="Не равно" ContainsText="Содержит" DoesNotContainText="Не содержит" IsNotEmptyText="Не пустое" AndOperatorText="И" OrOperatorText="Или"
+                                StartsWithText="Начинается с" EndsWithText="Заказнчивается с" IsNullText="Не записано" IsNotNullText="Записано" IsEmptyText="Пустое" LessThanText="Меньше чем" LessThanOrEqualsText="Меньше или равно"
+                                GreaterThanText="Больше чем" GreaterThanOrEqualsText="Больше или равно" FilterText="Фильтр" ApplyFilterText="Применить" ClearFilterText="Очистить">
+                    <Columns>
+                        <RadzenDataGridColumn TItem="WareHouse" Title="Действия" Frozen="true" Filterable="false" Sortable="false">
+                            <Template>
+                                @{
+                                    var wareHouse = (WareHouse)context;
+                                    <MudMenu Label="Действия" Dense="true" AnchorOrigin="@Origin.BottomCenter"
+                                         TransformOrigin="@Origin.TopCenter" StartIcon="@Icons.Filled.Hive"
+                                         EndIcon="@Icons.Filled.KeyboardArrowDown">
 
-                                <MudMenuItem OnClick="@(() => DeleteWareHouse(wareHouse))">
-                                    <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
-                                         Icon="@Icons.Material.Filled.Delete" />
-                                    Удалить
-                                </MudMenuItem>
+                                        <MudMenuItem OnClick="@(() => OpenEditor(wareHouse))">
+                                            <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
+                                                 Icon="@Icons.Material.Filled.Edit" />
+                                            Изменить
+                                        </MudMenuItem>
 
-                                <MudMenuItem OnClick="@(() => GetShipmnets(wareHouse))">
-                                    <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"/>
-                                    Поставки данного склада
-                                </MudMenuItem>
+                                        <MudMenuItem OnClick="@(() => DeleteWareHouse(wareHouse))">
+                                            <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"
+                                                 Icon="@Icons.Material.Filled.Delete" />
+                                            Удалить
+                                        </MudMenuItem>
 
-                                <MudMenuItem OnClick="@(() => AddShipment(wareHouse))">
-                                    <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"/>
-                                    Добавить новые поставки
-                                </MudMenuItem>
+                                        <MudMenuItem OnClick="@(() => GetShipmnets(wareHouse))">
+                                            <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small" />
+                                            Поставки данного склада
+                                        </MudMenuItem>
 
-                                <MudMenuItem OnClick="@(() => GetProducts(wareHouse))">
-                                    <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small"/>
-                                    Товары на данном складе
-                                </MudMenuItem>
+                                        <MudMenuItem OnClick="@(() => AddShipment(wareHouse))">
+                                            <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small" />
+                                            Добавить новые поставки
+                                        </MudMenuItem>
 
-                            </MudMenu>
-                        }
-                    </Template>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WareHouse" Property="Address" Title="Адрес" />
-            </Columns>
+                                        <MudMenuItem OnClick="@(() => GetProducts(wareHouse))">
+                                            <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small" />
+                                            Товары на данном складе
+                                        </MudMenuItem>
 
-        </RadzenDataGrid>
-    </ChildContent>
-</RadzenContent>
+                                    </MudMenu>
+                                }
+                            </Template>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="WareHouse" Property="Address" Title="Адрес" />
+                    </Columns>
+
+                </RadzenDataGrid>
+            </ChildContent>
+        </RadzenContent>
 
     </Authorized>
-     <NotAuthorized>
+    <NotAuthorized>
         <RadzenLabel Style="text-align:center" Text="Права доступа отсутствуют" />
     </NotAuthorized>
 </AuthorizeView>

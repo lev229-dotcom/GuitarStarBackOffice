@@ -15,7 +15,10 @@
                         PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
                         @ref="grid"
                         Data="@product"
-                        TItem="ProductHistory">
+                        TItem="ProductHistory"
+                                EmptyText="Нет данных" EqualsText="Равно" NotEqualsText="Не равно" ContainsText="Содержит" DoesNotContainText="Не содержит" IsNotEmptyText="Не пустое" AndOperatorText="И" OrOperatorText="Или"
+                                StartsWithText="Начинается с" EndsWithText="Заказнчивается с" IsNullText="Не записано" IsNotNullText="Записано" IsEmptyText="Пустое" LessThanText="Меньше чем" LessThanOrEqualsText="Меньше или равно"
+                                GreaterThanText="Больше чем" GreaterThanOrEqualsText="Больше или равно" FilterText="Фильтр" ApplyFilterText="Применить" ClearFilterText="Очистить">
             <Columns>
                 <RadzenDataGridColumn TItem="ProductHistory" Property="EventType" Title="Событие" />
                 <RadzenDataGridColumn  Width="550px" TItem="ProductHistory" Property="EventInfo" Title="Информация" />
