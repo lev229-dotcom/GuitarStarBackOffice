@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GuitarStarBackOffice.Shared.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -64,5 +65,9 @@ public class Product
     /// </summary>
     [Display(Name = "Элементы заказа")]
     public ICollection<OrderElement> OrderElemnts { get; set; } = new HashSet<OrderElement>();
+
+    public FileIMG FileImage { get; set; }
+
+    public Guid? FileImageId { get; set; }
 
 }

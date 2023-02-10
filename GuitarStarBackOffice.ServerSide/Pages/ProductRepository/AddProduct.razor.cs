@@ -25,6 +25,8 @@ public partial class AddProduct
 
     private bool IsActive = true;
 
+    public string? ImageData { get; set; }
+
     protected override async void OnInitialized()
     {
         base.OnInitialized();
@@ -49,7 +51,10 @@ public partial class AddProduct
     {
         try
         {
-            await ProductService.AddProduct(newProduct);
+            if (ImageData != null)
+                await ProductService.AddProduct(newProduct, ImageData);
+            else
+                await ProductService.AddProduct(newProduct);
             await Close(null);
             ShowNotification(new NotificationMessage { Style = ConstantsValues.NotifyMessageStyle, Severity = NotificationSeverity.Success, Summary = "Операция завершена успешно", Duration = 4000 });
         }
@@ -68,5 +73,10 @@ public partial class AddProduct
     {
         NotificationService.Notify(message);
 
+    }
+
+    private async Task ImportFileImage(IBrowserFile file)
+    {
+        ImageData = await GetFileDataRule.GetData(file);
     }
 }

@@ -18,8 +18,6 @@ public partial class SupplierPage
     [Inject] private SupplierService SupplierService { get; set; }
 
     [Inject] private DialogService DialogService { get; set; }
-
-    [Inject] private NorthwindService service { get; set; }
     [Inject] private ReloadService ReloadService { get; set; }
 
 

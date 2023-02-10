@@ -38,6 +38,19 @@
                             <ValidationMessage For="@(() => newProduct.WareHouseId)" />
                         </div>
 
+                        <MudFileUpload id="FileIMGUpload" Accept=".png, jpg"
+                                       T="IBrowserFile" FilesChanged="ImportFileImage">
+                            <ButtonTemplate Context="FileIMGUpload">
+                                <MudButton HtmlTag="label"
+                                            Variant="MudBlazor.Variant.Filled"
+                                            Color="Color.Primary"
+                                            StartIcon="@Icons.Filled.CloudUpload"
+                                            for="FileIMGUpload">
+                                    Загрузить фото товара
+                                </MudButton>
+                            </ButtonTemplate>
+                        </MudFileUpload>
+
                         <div class="row footer">
                             <RadzenButton ButtonType="Radzen.ButtonType.Submit" Disabled="IsActive" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сохранить" />
                         </div>

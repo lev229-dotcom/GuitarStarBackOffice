@@ -28,6 +28,7 @@ public class DataContext : DbContext
         #region Employee
 
         modelBuilder.Entity<Employee>().HasKey(i => i.IdEmployee);
+        
         modelBuilder.Entity<Employee>()
             .HasOne(i => i.Post)
             .WithMany(i => i.Employees)
@@ -65,6 +66,18 @@ public class DataContext : DbContext
 
         #endregion
 
+        #region FileIMG
+        modelBuilder.Entity<FileIMG>().HasKey(i => i.Id);
+
+        modelBuilder.Entity<FileIMG>()
+            .HasMany(i => i.Products)
+            .WithOne(i => i.FileImage)
+            .HasForeignKey(i => i.FileImageId)
+            .IsRequired(false)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        #endregion
+
         #region Product
 
         modelBuilder.Entity<Product>().HasKey(i => i.IdProduct);
@@ -88,6 +101,13 @@ public class DataContext : DbContext
              .HasForeignKey(i => i.WareHouseId)
              .IsRequired()
              .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Product>()
+            .HasOne(i => i.FileImage)
+            .WithMany(i => i.Products)
+            .HasForeignKey(i => i.FileImageId)
+            .IsRequired(false)
+            .OnDelete(DeleteBehavior.Cascade);
 
 
         #endregion
@@ -154,24 +174,6 @@ public class DataContext : DbContext
            .IsRequired()
            .OnDelete(DeleteBehavior.Cascade);
 
-        #endregion       
-
-        #region Order
-
-        modelBuilder.Entity<Order>().HasKey(i => i.IdOrder);
-        modelBuilder.Entity<Order>()
-            .HasOne(i => i.Employee)
-            .WithMany(i => i.Orders)
-            .HasForeignKey(i => i.EmployeeId)
-            .IsRequired()
-            .OnDelete(DeleteBehavior.Cascade);
-
-        modelBuilder.Entity<Order>()
-               .HasMany(i => i.OrderElements)
-                .WithOne(i => i.Order)
-                .HasForeignKey(i => i.OrderId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
         #endregion
 
         #region OrderElement
@@ -192,6 +194,27 @@ public class DataContext : DbContext
 
         #endregion
 
+
+
+        #region Order
+
+        modelBuilder.Entity<Order>().HasKey(i => i.IdOrder);
+        modelBuilder.Entity<Order>()
+            .HasOne(i => i.Employee)
+            .WithMany(i => i.Orders)
+            .HasForeignKey(i => i.EmployeeId)
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Order>()
+               .HasMany(i => i.OrderElements)
+                .WithOne(i => i.Order)
+                .HasForeignKey(i => i.OrderId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+        #endregion
+
+        #region DefaultRecords
         modelBuilder.Entity<Post>()
             .HasData(
             new Post { IdPost = Guid.NewGuid(), PostName = "Сотрудник отдела продаж", Salary = 45_000 },
@@ -263,7 +286,8 @@ public class DataContext : DbContext
                 ProductName = "Классическая гитара Doff RGC",
                 ProductPrice = 9999.99,
                 CategoryId = Guid.Parse("11A0D7CE-007C-44AC-9DA6-FE333BA042BE"),
-                WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30")
+                WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
+                FileImageId = null
             },
             new Product
             {
@@ -271,7 +295,8 @@ public class DataContext : DbContext
                 ProductName = "Акустическая гитара Doff D016A",
                 ProductPrice = 9999.99,
                 CategoryId = Guid.Parse("11A0D7CE-007C-44AC-9DA6-FE333BA042BE"),
-                WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30")
+                WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
+                FileImageId = null
             },
             new Product
             {
@@ -279,7 +304,8 @@ public class DataContext : DbContext
                 ProductName = "Электрогитара Fabio ST100 N",
                 ProductPrice = 9999.99,
                 CategoryId = Guid.Parse("4B94A8DB-AC66-4A7F-9045-59672FF62E64"),
-                WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30")
+                WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
+                FileImageId = null
             },
             new Product
             {
@@ -287,7 +313,8 @@ public class DataContext : DbContext
                 ProductName = "Электрогитара Caraya E235BK",
                 ProductPrice = 9999.99,
                 CategoryId = Guid.Parse("4B94A8DB-AC66-4A7F-9045-59672FF62E64"),
-                WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30")
+                WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
+                FileImageId = null
             },
             new Product
             {
@@ -295,7 +322,8 @@ public class DataContext : DbContext
                 ProductName = "Бас-гитара Cort Action-HH4-TLB Action Series",
                 ProductPrice = 9999.99,
                 CategoryId = Guid.Parse("DA7D35D3-735C-40F7-B16C-CB65C1AC0D3F"),
-                WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30")
+                WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
+                FileImageId = null
             },
             new Product
             {
@@ -303,7 +331,8 @@ public class DataContext : DbContext
                 ProductName = "Бас-гитара Prodipe JMFJB80MAASH4C JB80MA MA",
                 ProductPrice = 9999.99,
                 CategoryId = Guid.Parse("DA7D35D3-735C-40F7-B16C-CB65C1AC0D3F"),
-                WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30")
+                WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
+                FileImageId = null
             },
             new Product
             {
@@ -311,7 +340,8 @@ public class DataContext : DbContext
                 ProductName = "RFU10S Friends Series Укулеле сопрано, Ortega",
                 ProductPrice = 9999.99,
                 CategoryId = Guid.Parse("497D6809-488D-4252-9CCA-D04956BAA87B"),
-                WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30")
+                WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
+                FileImageId = null
             },
             new Product
             {
@@ -319,7 +349,8 @@ public class DataContext : DbContext
                 ProductName = "Укулеле концерт LAG TKU-130C",
                 ProductPrice = 9999.99,
                 CategoryId = Guid.Parse("497D6809-488D-4252-9CCA-D04956BAA87B"),
-                WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30")
+                WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
+                FileImageId = null
             },
             new Product
             {
@@ -327,7 +358,8 @@ public class DataContext : DbContext
                 ProductName = "Балалайка 3-струнная DOFF BBM Bass Master",
                 ProductPrice = 9999.99,
                 CategoryId = Guid.Parse("E571E876-CCE6-4CDE-ADE1-D36732F3761D"),
-                WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30")
+                WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
+                FileImageId = null
             },
             new Product
             {
@@ -335,8 +367,9 @@ public class DataContext : DbContext
                 ProductName = "SBF-RRE Русский рок Балалайка электроакустическая, трехструнная, Балалайкеръ",
                 ProductPrice = 9999.99,
                 CategoryId = Guid.Parse("E571E876-CCE6-4CDE-ADE1-D36732F3761D"),
-                WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30")
-            });
+                WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
+                FileImageId = null
+            }) ;
 
         modelBuilder.Entity<Order>()
             .HasData(
@@ -441,13 +474,12 @@ public class DataContext : DbContext
                 orderStatus = OrderStatus.Done,
                 payementStatus = PayementStatus.Payed
             });
-
+        #endregion
     }
 
     public DbSet<Category> Categories { get; set; }
     public DbSet<Employee> Employees { get; set; }
     public DbSet<Order> Orders { get; set; }
-    public DbSet<OrderElement> OrderElements { get; set; }
     public DbSet<Post> Posts { get; set; }
     //public DbSet<PostEmployee> PostEmployees { get; set; }
     public DbSet<Product> Products { get; set; }
@@ -456,4 +488,7 @@ public class DataContext : DbContext
     public DbSet<WareHouse> WareHouses { get; set; }
     public DbSet<EmployeeHistory> EmployeeHistories { get; set; }
     public DbSet<ProductHistory> ProductHistories { get; set; }
+    public DbSet<OrderElement> OrderElements { get; set; }
+
+    public DbSet<FileIMG> Files { get; set; }
 }

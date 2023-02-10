@@ -1,0 +1,723 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GuitarStarBackOffice.ServerSide.Constants.ConstantsValues">
+    <Position X="29.25" Y="0.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Constants\ConstantsValues.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Data.DataContext">
+    <Position X="23" Y="14.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAJAABABQAAAAGABgEAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Data\DataContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Migrations.DataContextModelSnapshot">
+    <Position X="31.25" Y="0.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Migrations\DataContextModelSnapshot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.AdminDirectory.AdminPage">
+    <Position X="26.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAgAEAAAACAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\AdminDirectory\AdminPage.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="BackupService" />
+      <Property Name="NotificationService" />
+      <Property Name="blazorDownloadFileService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.CategoryDirectory.AddCategory">
+    <Position X="18.75" Y="22.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQEQAAEEAAAAAAAAAAAAACQAAAAECAEAA=</HashCode>
+      <FileName>Pages\CategoryDirectory\AddCategory.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DialogService" />
+      <Property Name="CategoryService" />
+      <Property Name="NotificationService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.CategoryDirectory.CategoryEditor">
+    <Position X="14.75" Y="7" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAIAQAEQAAkEAAAAAAAAAAAAACQAAAAACAEAA=</HashCode>
+      <FileName>Pages\CategoryDirectory\CategoryEditor.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DialogService" />
+      <Property Name="CategoryService" />
+      <Property Name="NotificationService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.CategoryDirectory.CategoryPage">
+    <Position X="19" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAYAAQBAAAAAAAAQAAAAAAAACAAAAAAgEAA=</HashCode>
+      <FileName>Pages\CategoryDirectory\CategoryPage.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CategoryService" />
+      <Property Name="DialogService" />
+      <Property Name="ReloadService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.DiagramsDirectory.OrderStats">
+    <Position X="33.25" Y="19.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAhAACAAAAAAAAAAAAAgCAABAAAAQBA=</HashCode>
+      <FileName>Pages\DiagramsDirectory\OrderStats.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DiagramService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.EmployeeDirectory.AddEmployee">
+    <Position X="22.75" Y="20" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAABQAAAAUEcAAEEAAAAAAAAAAAAgCQAAAEACAAAA=</HashCode>
+      <FileName>Pages\EmployeeDirectory\AddEmployee.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="NavigationManager" />
+      <Property Name="DialogService" />
+      <Property Name="EmployeeService" />
+      <Property Name="PostService" />
+      <Property Name="NotificationService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.EmployeeDirectory.EmployeeEditor">
+    <Position X="7.75" Y="16.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAhQAAAAEMYAAEEAgAAAAAAAAEAgDQAAAGACAAAA=</HashCode>
+      <FileName>Pages\EmployeeDirectory\EmployeeEditor.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="NavigationManager" />
+      <Property Name="DialogService" />
+      <Property Name="PostService" />
+      <Property Name="EmployeeService" />
+      <Property Name="NotificationService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.EmployeeDirectory.EmployeePage">
+    <Position X="9.5" Y="7.75" Width="1.5" />
+    <AssociationLine Name="EmployeeService" Type="GuitarStarBackOffice.ServerSide.Services.EmployeeService.EmployeeService" ManuallyRouted="true">
+      <Path>
+        <Point X="11" Y="9.669" />
+        <Point X="11.042" Y="9.669" Type="JumpStart" />
+        <Point X="11.208" Y="9.669" Type="JumpEnd" />
+        <Point X="11.667" Y="9.669" Type="JumpStart" />
+        <Point X="11.833" Y="9.669" Type="JumpEnd" />
+        <Point X="13.792" Y="9.669" Type="JumpStart" />
+        <Point X="13.958" Y="9.669" Type="JumpEnd" />
+        <Point X="14.167" Y="9.669" Type="JumpStart" />
+        <Point X="14.333" Y="9.669" Type="JumpEnd" />
+        <Point X="14.5" Y="9.669" />
+        <Point X="14.5" Y="11.035" />
+        <Point X="15.26" Y="11.035" Type="JumpStart" />
+        <Point X="15.427" Y="11.035" Type="JumpEnd" />
+        <Point X="15.667" Y="11.035" Type="JumpStart" />
+        <Point X="15.833" Y="11.035" Type="JumpEnd" />
+        <Point X="16.174" Y="11.035" Type="JumpStart" />
+        <Point X="16.341" Y="11.035" Type="JumpEnd" />
+        <Point X="16.573" Y="11.035" Type="JumpStart" />
+        <Point X="16.74" Y="11.035" Type="JumpEnd" />
+        <Point X="16.807" Y="11.035" Type="JumpStart" />
+        <Point X="17.38" Y="11.035" Type="JumpEnd" />
+        <Point X="17.667" Y="11.035" Type="JumpStart" />
+        <Point X="17.833" Y="11.035" Type="JumpEnd" />
+        <Point X="17.917" Y="11.035" Type="JumpStart" />
+        <Point X="18.333" Y="11.035" Type="JumpEnd" />
+        <Point X="18.417" Y="11.035" Type="JumpStart" />
+        <Point X="18.583" Y="11.035" Type="JumpEnd" />
+        <Point X="18.938" Y="11.035" />
+        <Point X="18.938" Y="12.91" />
+        <Point X="20.667" Y="12.91" Type="JumpStart" />
+        <Point X="20.833" Y="12.91" Type="JumpEnd" />
+        <Point X="22.667" Y="12.91" Type="JumpStart" />
+        <Point X="22.833" Y="12.91" Type="JumpEnd" />
+        <Point X="24.917" Y="12.91" Type="JumpStart" />
+        <Point X="25.083" Y="12.91" Type="JumpEnd" />
+        <Point X="25.26" Y="12.91" Type="JumpStart" />
+        <Point X="25.427" Y="12.91" Type="JumpEnd" />
+        <Point X="25.87" Y="12.91" Type="JumpStart" />
+        <Point X="26.036" Y="12.91" Type="JumpEnd" />
+        <Point X="26.671" Y="12.91" Type="JumpStart" />
+        <Point X="26.837" Y="12.91" Type="JumpEnd" />
+        <Point X="26.862" Y="12.91" Type="JumpStart" />
+        <Point X="27.177" Y="12.91" Type="JumpEnd" />
+        <Point X="27.276" Y="12.91" Type="JumpStart" />
+        <Point X="27.443" Y="12.91" Type="JumpEnd" />
+        <Point X="28" Y="12.91" />
+        <Point X="28" Y="22.417" />
+        <Point X="27.672" Y="22.417" />
+        <Point X="27.672" Y="23.25" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAkAAAAIEAQBAAEAIBAAAAAACAAAASEAAEAAgACA=</HashCode>
+      <FileName>Pages\EmployeeDirectory\EmployeePage.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="EmployeeService" />
+      <Property Name="DialogService" />
+      <Property Name="ExportService" />
+      <Property Name="JS" />
+      <Property Name="NotificationService" />
+      <Property Name="ReloadService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.EmployeeDirectory.EmployeeRoleDdlModel">
+    <Position X="29.25" Y="8" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAEAAAAAA=</HashCode>
+      <FileName>Pages\EmployeeDirectory\EmployeeRoleDdlModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.HistoryDirectory.EmployeeHistories">
+    <Position X="34" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAABAAQAIAAAQAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Pages\HistoryDirectory\EmployeeHistories.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="HistoryService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.HistoryDirectory.ProductHistoryDir">
+    <Position X="31" Y="19.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgIAAABAAQAAAAAQAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Pages\HistoryDirectory\ProductHistoryDir.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="HistoryService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.OrderDirectory.OrderElements.AddOrderElements">
+    <Position X="6.75" Y="8" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAASAQAAEEAAQAAAAAAAAAACQgAABACAAAA=</HashCode>
+      <FileName>Pages\OrderDirectory\OrderElements\AddOrderElements.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DialogService" />
+      <Property Name="OrderService" />
+      <Property Name="ProductService" />
+      <Property Name="NotificationService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.OrderDirectory.OrderElements.OrderElementsEditor">
+    <Position X="9.75" Y="22.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAEQAAEAAAAAAAAAAAAABCAgAAAACAAAA=</HashCode>
+      <FileName>Pages\OrderDirectory\OrderElements\OrderElementsEditor.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DialogService" />
+      <Property Name="OrderService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.OrderDirectory.OrderElements.OrderElementsPage">
+    <Position X="14.75" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAEAIAAQAAAAAAAAAAAAAggAACAAAAAACgAAI=</HashCode>
+      <FileName>Pages\OrderDirectory\OrderElements\OrderElementsPage.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DialogService" />
+      <Property Name="OrderService" />
+      <Property Name="ReloadService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.OrderDirectory.AddOrder">
+    <Position X="16" Y="22.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAQEQBAEEAIAAAAAAAAAAACSAAAEACAAIA=</HashCode>
+      <FileName>Pages\OrderDirectory\AddOrder.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DialogService" />
+      <Property Name="OrderService" />
+      <Property Name="EmployeeService" />
+      <Property Name="NotificationService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.OrderDirectory.OrderEditor">
+    <Position X="5.75" Y="2.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACAAABAAAAAAEQBAEEAIAAAAAAAAAAECSAAAEADAAAA=</HashCode>
+      <FileName>Pages\OrderDirectory\OrderEditor.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DialogService" />
+      <Property Name="OrderService" />
+      <Property Name="EmployeeService" />
+      <Property Name="NotificationService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.OrderDirectory.OrderPage">
+    <Position X="12.25" Y="12" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAhIAIEAQBAAAAABAAAAAAAAAACCEAAAAAgACA=</HashCode>
+      <FileName>Pages\OrderDirectory\OrderPage.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="OrderService" />
+      <Property Name="ExportService" />
+      <Property Name="DialogService" />
+      <Property Name="JS" />
+      <Property Name="ReloadService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.OrderDirectory.OrderStatusDdlModel">
+    <Position X="31" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\OrderDirectory\OrderStatusDdlModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.OrderDirectory.PaymentStatusDdlModel">
+    <Position X="30" Y="11.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Pages\OrderDirectory\PaymentStatusDdlModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.PostDirectory.AddPost">
+    <Position X="21" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAQEQAAEEAAAAAAAAAAAAAEQAAAAACAAAA=</HashCode>
+      <FileName>Pages\PostDirectory\AddPost.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DialogService" />
+      <Property Name="PostService" />
+      <Property Name="NotificationService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.PostDirectory.PostEditor">
+    <Position X="23.75" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEQAAAIAEQAAEAAAAAAAAAAAAAACAAAAAACAAAA=</HashCode>
+      <FileName>Pages\PostDirectory\PostEditor.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DialogService" />
+      <Property Name="PostService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.PostDirectory.PostPage">
+    <Position X="18" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgQAAAYEAQBAAAAAAAAAAAAAAAAACAAAAgAgAAA=</HashCode>
+      <FileName>Pages\PostDirectory\PostPage.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="PostService" />
+      <Property Name="DialogService" />
+      <Property Name="ReloadService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.ProductRepository.AddProduct">
+    <Position X="11" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAQERBAEEAAQAAQAAAAAAAASAAEAACAAAA=</HashCode>
+      <FileName>Pages\ProductRepository\AddProduct.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DialogService" />
+      <Property Name="ProductService" />
+      <Property Name="NotificationService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.ProductRepository.ProductEditor">
+    <Position X="25.75" Y="18.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAERBAGAAAQAAQAAAAAAACCAAAAACAAAA=</HashCode>
+      <FileName>Pages\ProductRepository\ProductEditor.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DialogService" />
+      <Property Name="ProductService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.ProductRepository.ProductPage">
+    <Position X="25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAIAAQBAAAAAQAgAAAAAAAAACAAABAAgAAA=</HashCode>
+      <FileName>Pages\ProductRepository\ProductPage.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ProductService" />
+      <Property Name="DialogService" />
+      <Property Name="ReloadService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.ProfileDirectory.ProfileEditor">
+    <Position X="25.75" Y="14.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAEQAAEEAIAAAAAAAABAACQAAAEACAAAA=</HashCode>
+      <FileName>Pages\ProfileDirectory\ProfileEditor.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DialogService" />
+      <Property Name="EmployeeService" />
+      <Property Name="UserSession" />
+      <Property Name="NotificationService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.ProfileDirectory.ProfilePage">
+    <Position X="16.25" Y="16.5" Width="1.75" />
+    <AssociationLine Name="EmployeeService" Type="GuitarStarBackOffice.ServerSide.Services.EmployeeService.EmployeeService" ManuallyRouted="true">
+      <Path>
+        <Point X="17.906" Y="18.377" />
+        <Point X="17.906" Y="26.393" />
+        <Point X="23.497" Y="26.393" />
+        <Point X="23.497" Y="25.851" />
+        <Point X="25.844" Y="25.851" />
+        <Point X="25.844" Y="26.064" />
+        <Point X="27" Y="26.064" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAQAAQAAAAAAAAAAABAACAAAAFAAAAAA=</HashCode>
+      <FileName>Pages\ProfileDirectory\ProfilePage.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="LocalStorageService" />
+      <Property Name="CustomAuthStateProvider" />
+      <Property Name="EmployeeService" />
+      <Property Name="UserSession" />
+      <Property Name="DialogService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.SupplierDirectory.AddSupplier">
+    <Position X="12" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAQEQAAEEAAAAAAAAAAAEAASAAAAACAAAA=</HashCode>
+      <FileName>Pages\SupplierDirectory\AddSupplier.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DialogService" />
+      <Property Name="SupplierService" />
+      <Property Name="NotificationService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.SupplierDirectory.SupplierEditor">
+    <Position X="6.75" Y="22" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAABIAAAAAEQAAEAAAAAAAAAAAAEAiAAAACACAAAA=</HashCode>
+      <FileName>Pages\SupplierDirectory\SupplierEditor.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DialogService" />
+      <Property Name="SupplierService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.SupplierDirectory.SupplierPage">
+    <Position X="12" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAIAAQBACACAAAAAAAAAAEAACAAAAAAwAAA=</HashCode>
+      <FileName>Pages\SupplierDirectory\SupplierPage.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SupplierService" />
+      <Property Name="DialogService" />
+      <Property Name="ReloadService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.WareHouseDirectory.AddShipmentForWareHouse">
+    <Position X="21.5" Y="8.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAiBAAAAAQEQBAEECAAAAAAAAAAAAASAAAAACAAIA=</HashCode>
+      <FileName>Pages\WareHouseDirectory\AddShipmentForWareHouse.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DialogService" />
+      <Property Name="WareHouseService" />
+      <Property Name="NotificationService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.WareHouseDirectory.AddWareHouse">
+    <Position X="18" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAQAQAAEEAAAAAAAAAAAAAAQAAAAACAAIA=</HashCode>
+      <FileName>Pages\WareHouseDirectory\AddWareHouse.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DialogService" />
+      <Property Name="WareHouseService" />
+      <Property Name="NotificationService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.WareHouseDirectory.EditShipmentForWareHouse">
+    <Position X="8.5" Y="2.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAgBAAAAAAEQAAEACAQAAAAAAAAAACAAAAAACAAIQ=</HashCode>
+      <FileName>Pages\WareHouseDirectory\EditShipmentForWareHouse.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DialogService" />
+      <Property Name="WareHouseService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.WareHouseDirectory.ProductsForWareHouse">
+    <Position X="12.75" Y="21.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAIAAQAAAAAAAAAAAAAAAAACAAAAAACAAIQ=</HashCode>
+      <FileName>Pages\WareHouseDirectory\ProductsForWareHouse.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DialogService" />
+      <Property Name="WareHouseService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.WareHouseDirectory.ShipmentsForWareHouse">
+    <Position X="4.75" Y="16.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAggAAAAIAARAAAAAAAAAAAAAAAAACBAAAAAAgAIA=</HashCode>
+      <FileName>Pages\WareHouseDirectory\ShipmentsForWareHouse.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DialogService" />
+      <Property Name="WareHouseService" />
+      <Property Name="ReloadService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.WareHouseDirectory.WareHouseEditor">
+    <Position X="5.75" Y="12.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAEQAAEAIAAAAAAAAAAAACAAAAAACAAIA=</HashCode>
+      <FileName>Pages\WareHouseDirectory\WareHouseEditor.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DialogService" />
+      <Property Name="WareHouseService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.WareHouseDirectory.WareHousePage">
+    <Position X="20.75" Y="1" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAIAARBAAAIAAAAEAAAAAAAASAAAAAAgAIA=</HashCode>
+      <FileName>Pages\WareHouseDirectory\WareHousePage.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="WareHouseService" />
+      <Property Name="DialogService" />
+      <Property Name="ReloadService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.ErrorModel">
+    <Position X="31.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAQAAAAAAAAAIAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Pages\Error.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Pages.Login">
+    <Position X="26.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAIAAQEAAAAAAAAAABBACQAAAEAAAAAA=</HashCode>
+      <FileName>Pages\Login.razor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="UserSession" />
+      <Property Name="NavigationManager" />
+      <Property Name="NotificationService" />
+      <Property Name="EmployeeService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Services.BackUpService.BackupService">
+    <Position X="35" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAAAACAAAAAAgAQAAAABAAAAAAAAIAAEAAAAAAAA=</HashCode>
+      <FileName>Services\BackUpService\BackupService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Services.DiagramModels.OrderDiagramModel">
+    <Position X="28.75" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\DiagramModels\OrderDiagramModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Services.EmployeeService.Models.AuthenticateInputModel">
+    <Position X="28.5" Y="6.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Services\EmployeeService\Models\AuthenticateInputModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Services.EmployeeService.EmployeeService">
+    <Position X="27" Y="23.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAEIAgAAAAAAAIAAAAAAAAAAICAAAAIAAAAA=</HashCode>
+      <FileName>Services\EmployeeService\EmployeeService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Services.ExportService.Models.ExportOrderModel">
+    <Position X="32.75" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>CAAAQAIAAAIAABAQAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\ExportService\Models\ExportOrderModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Services.ExportService.Models.ParametersForDownloadModel">
+    <Position X="30" Y="9.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAQABAAAA=</HashCode>
+      <FileName>Services\ExportService\Models\ParametersForDownloadModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Services.ExportService.Excel">
+    <Position X="32.5" Y="12" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAQAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Services\ExportService\Excel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="useTemplateXLSX" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Services.ExportService.ExportService">
+    <Position X="9" Y="12.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAQAAAAEAAAAAABAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Services\ExportService\ExportService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Services.ExportService.UseTemplateXLSX">
+    <Position X="33.25" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAEAAAAA=</HashCode>
+      <FileName>Services\ExportService\UseTemplateXLSX.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Services.Hash.HashHelper">
+    <Position X="33.75" Y="6.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAQAIAAAA=</HashCode>
+      <FileName>Services\Hash\HashHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Services.HistoryService.HistoryService">
+    <Position X="31" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAIIAAAA=</HashCode>
+      <FileName>Services\HistoryService\HistoryService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Services.SupplierService.SupplierService">
+    <Position X="2.25" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAIAICAAAAAAAAAAAAAAAAAAAAIAQAAA=</HashCode>
+      <FileName>Services\SupplierService\SupplierService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Services.CategoryService">
+    <Position X="28.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAYAAAAAAAAAIAAAAQAAEAAAAAAAAIAAAAg=</HashCode>
+      <FileName>Services\CategoryService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Services.DiagramService">
+    <Position X="30.25" Y="22.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAIAAEAA=</HashCode>
+      <FileName>Services\DiagramService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Services.DiagramServiceModel">
+    <Position X="33.25" Y="9.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Services\DiagramServiceModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Services.OrderService">
+    <Position X="2.75" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AQEAAQAiAAIBAAAAAAIAgAAAAQAEAAAAAEAAAIAAIAA=</HashCode>
+      <FileName>Services\OrderService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Services.PostService">
+    <Position X="28.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAQBAAAAAAAAAAAAAAAIEAAAoAAAAA=</HashCode>
+      <FileName>Services\PostService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Services.ProductService">
+    <Position X="16.25" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAiAAQAAAAAAQAAAAYAAAQQ=</HashCode>
+      <FileName>Services\ProductService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Services.ReloadService">
+    <Position X="15.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAIAAAAA=</HashCode>
+      <FileName>Services\ReloadService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.Services.WareHouseService">
+    <Position X="1.75" Y="8.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAECBgAAAAAAhAIAAgQAAAEAAAAEAQICgAAAYAAAAA=</HashCode>
+      <FileName>Services\WareHouseService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuitarStarBackOffice.ServerSide.CustomAuthStateProvider">
+    <Position X="19" Y="16" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAIAIAgEQEAQCgAAAAAIABAAAABBCABAgA=</HashCode>
+      <FileName>CustomAuthStateProvider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider">
+    <Position X="19" Y="13.25" Width="2.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Radzen.DialogService">
+    <Position X="15" Y="11.75" Width="2.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Radzen.NotificationService">
+    <Position X="24" Y="2.25" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Microsoft.EntityFrameworkCore.DbContext" Collapsed="true">
+    <Position X="23" Y="13.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Microsoft.AspNetCore.Components.NavigationManager" Collapsed="true">
+    <Position X="22" Y="25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="Microsoft.JSInterop.IJSRuntime" Collapsed="true">
+    <Position X="12" Y="10.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Blazored.LocalStorage.ILocalStorageService">
+    <Position X="13.25" Y="16.75" Width="2" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="BlazorDownloadFile.IBlazorDownloadFileService" Collapsed="true">
+    <Position X="29.25" Y="2.75" Width="2.25" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

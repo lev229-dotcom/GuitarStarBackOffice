@@ -32,7 +32,7 @@ public class ProductService
 
     public async Task<IEnumerable<Product>> GetProducts()
     {
-        var products = dataContext.Products.Include(w => w.WareHouse).Include(c => c.Category).ToList();
+        var products = dataContext.Products.Include(f => f.FileImage).Include(w => w.WareHouse).Include(c => c.Category).ToList();
 
         return products;
     }
@@ -60,6 +60,24 @@ public class ProductService
     }
     public async Task AddProduct(Product product)
     {
+        dataContext.Products.Add(product);
+        dataContext.ProductHistories.Add(new ProductHistory
+        {
+            EventType = "Создано наименование",
+            EventInfo = $"Время: {Convert.ToDateTime(DateTime.Now).ToString("F")}" +
+            $"Название - {product.ProductName},{Environment.NewLine} " +
+            $"стоимость {((double)product.ProductPrice).ToString("C0", CultureInfo.CreateSpecificCulture("ru-RU"))},{Environment.NewLine}" +
+            $"категория: {product.Category.CategoryName} "
+        });
+
+        await dataContext.SaveChangesAsync();
+    }
+
+    public async Task AddProduct(Product product, string fileData)
+    {
+        var file = new FileIMG { FileName = $"New photo {DateTime.Now}", Data = fileData, Id = Guid.NewGuid() };
+        dataContext.Files.Add(file);
+        product.FileImageId = file.Id;
         dataContext.Products.Add(product);
         dataContext.ProductHistories.Add(new ProductHistory
         {

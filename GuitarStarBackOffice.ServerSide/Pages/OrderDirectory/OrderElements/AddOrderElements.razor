@@ -7,7 +7,7 @@
     <ChildContent>
         <div class="row">
             <div class="col-md-12">
-                <RadzenTemplateForm TItem="OrderElement" Data="@newOrderElement" Submit="@HandleAdd">
+                <RadzenTemplateForm TItem="OrderElement" Data="@newOrderElement" >
                     <ChildContent>
                         <DataAnnotationsValidator />
                         <div style="margin-bottom: 1rem" class="flex-column">
@@ -26,7 +26,7 @@
 
 
                         <div class="row footer">
-                            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Disabled="(!IsActive)" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сохранить" />
+                            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Disabled="(!IsActive)" Click="@HandleAdd" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сохранить" />
                         </div>
                     </ChildContent>
                 </RadzenTemplateForm>
