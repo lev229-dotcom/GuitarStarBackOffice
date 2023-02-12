@@ -1,0 +1,72 @@
+﻿@page "/products/{Id:guid}/{ProductName}"
+@using Portal.Shared.Common
+@using Portal.Shared.Products
+@*@attribute [Authorize]*@
+
+@if (product == null)
+{
+    <LoadingScreen />
+}
+else
+{
+    <section class="section-content padding-y bg">
+        <div class="container">
+            <div class="card">
+                <div class="row no-gutters">
+                    @if (product.FileImage != null)
+                    {
+                        <aside class="col-md-6">
+                            <article class="gallery-wrap">
+                                <div class="img-big-wrap">
+                                    <a><img src="data:image/jpeg;base64, @product.FileImage?.Data" /></a>
+                                </div>
+                            </article>
+                        </aside>
+
+                    }
+                    else
+                    {
+                        <aside class="col-md-6">
+                            <article class="gallery-wrap">
+                                <div class="img-big-wrap">
+                                    <a><img src="https://i.ebayimg.com/images/g/55gAAOSwIqtfW63B/s-l500.png" /></a>
+                                </div>
+                            </article>
+                        </aside>
+                    }
+                    <main class="col-md-6 border-left">
+                        <article class="content-body">
+
+                            <h2 class="title">@product.ProductName</h2>
+
+                            <div class="mb-3">
+                                <var class="price h4">$@product.ProductPrice</var>
+                            </div>
+
+                            @*TODO:
+                            <p>@product.Description</p>*@
+                            <p>There will be description</p>
+
+                            <dl class="row">
+
+                                <dt class="col-sm-3">Category</dt>
+                                <dd class="col-sm-9">@product.Category.CategoryName</dd>
+
+                                <dt class="col-sm-3">Quantity</dt>
+@*                                TODO:
+                                <dd class="col-sm-9">@product.Quantity</dd>
+*@                            
+                                <dd class="col-sm-9">10</dd>
+                                </dl>
+
+                            <hr />
+
+                            <AddToCartForm ProductId="@product.IdProduct" ProductName="@product.ProductName" ProductQuantity="1" />
+
+                        </article>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </section>
+}
