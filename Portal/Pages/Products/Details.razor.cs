@@ -18,5 +18,8 @@ public partial class Details
     public string ProductName { get; set; }
 
     protected override async Task OnInitializedAsync()
-        => product = await ProductService.GetProductById(Id);
+    {
+        product = await ProductService.GetProductById(Id);
+
+    }
 }

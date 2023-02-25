@@ -26,10 +26,13 @@
             totalPrice = (decimal)cartProducts.Sum(p => p.Product.ProductPrice * p.ElementsCount);
         }
 
-        private async Task OnRemoveAsync(Guid productId)
+        private async Task OnRemoveAsync(OrderElement productId)
         {
-            //await this.ShoppingCartsService.RemoveProduct(productId);
+            await OrderService.RemoveProductInCart(productId);
 
+            cartProducts = await OrderService.GetElementsInMemory();
+
+            StateHasChanged();
             //this.NavigationManager.NavigateTo("/cart", forceLoad: true);
         }
 
@@ -61,9 +64,9 @@
             //}
         }
 
-        private async Task CreateTestOrder()
-        {
-            await OrderService.CreateOrderTest();
-        }
+        //private async Task CreateTestOrder()
+        //{
+        //    await OrderService.CreateOrderTest();
+        //}
     }
 }

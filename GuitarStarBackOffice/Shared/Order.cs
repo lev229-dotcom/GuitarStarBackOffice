@@ -58,4 +58,11 @@ public class Order
     [Display(Name = "Состав заказа")]
 	public ICollection<OrderElement> OrderElements { get; set; } = new HashSet<OrderElement>();
 
+	public string CustomerName { get; set; }
+
+	public string CustomerEmail { get; set; }
+
+	public string CustomerNumber { get; set; }
+
+	public string CustomerAddress { get; set; }
 }

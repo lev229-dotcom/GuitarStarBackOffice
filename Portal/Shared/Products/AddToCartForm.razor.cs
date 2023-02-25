@@ -76,7 +76,7 @@ public partial class AddToCartForm
 
     private void IncrementQuantity()
     {
-        if (model.Quantity < ProductQuantity)
+        if (model.Quantity < 10)
         {
             model.Quantity++;
             ShowErrors = false;

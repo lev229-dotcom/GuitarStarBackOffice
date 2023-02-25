@@ -39,7 +39,14 @@ public class OrderService
         orderElements.Add(orderElement);
     }
 
-    public async Task CreateOrderTest()
+    public async Task RemoveProductInCart(OrderElement productId)
+    {
+        var orderElements = getCurrentList();
+
+        orderElements.Remove(productId);
+    }
+
+    public async Task<int> CreateOrderTest(string fullAddress, string CustomerName, string CusomerNumber, string CustomerEmail, decimal totalPrice)
     {
         var orderElements = getCurrentList();
         var number = await GetLastOrder();
@@ -47,11 +54,15 @@ public class OrderService
         {
             payementStatus = PayementStatus.NotPayed,
             orderStatus = OrderStatus.Accepted,
-            TotalOrderAmount = -1,
+            TotalOrderAmount = (double)totalPrice,
             OrderDate = DateTime.UtcNow,
             OrderNumber = number,
             //OrderElements = orderElements,
-            EmployeeId = Guid.Parse("CAF7B5FF-56CF-40D7-93D2-685191C8774A")
+            EmployeeId = Guid.Parse("CAF7B5FF-56CF-40D7-93D2-685191C8774A"),
+            CustomerName = CustomerName,
+            CustomerEmail = CustomerEmail,
+            CustomerNumber = CusomerNumber,
+            CustomerAddress = fullAddress
         };
         order.IdOrder = Guid.NewGuid();
         foreach (var item in orderElements)
@@ -62,7 +73,7 @@ public class OrderService
         order.OrderElements = orderElements;
         dataContext.Orders.Add(order);
         await dataContext.SaveChangesAsync();
-
+        return order.OrderNumber;
     }
 
 

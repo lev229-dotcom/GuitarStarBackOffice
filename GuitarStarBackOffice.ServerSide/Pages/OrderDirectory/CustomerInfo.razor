@@ -1,0 +1,38 @@
+﻿@using GuitarStarBackOffice.Shared
+@layout MainLayout
+@inject Radzen.DialogService dialogService
+
+<RadzenContent Container="main">
+
+    <ChildContent>
+        <div class="row">
+            <div class="col-md-12">
+                <RadzenTemplateForm TItem="Order" >
+                    <ChildContent>
+                        <div style="margin-bottom: 1rem" class="flex-column">
+                            <RadzenLabel Text="ФИО:" style="width: 100%"></RadzenLabel>
+                            <RadzenLabel Text="@CurrentOrderCustomer?.CustomerName" style="width: 100%" ></RadzenLabel>
+                        </div>
+
+                        <div style="margin-bottom: 1rem" class="flex-column">
+                            <RadzenLabel Text="Почта:" style="width: 100%"></RadzenLabel>
+                            <RadzenLabel Text="@CurrentOrderCustomer?.CustomerEmail" style="width: 100%"></RadzenLabel>
+                        </div>
+
+                        <div style="margin-bottom: 1rem" class="flex-column">
+                            <RadzenLabel Text="Номер телефона:" style="width: 100%"></RadzenLabel>
+                            <RadzenLabel Text="@CurrentOrderCustomer?.CustomerNumber" style="width: 100%" ></RadzenLabel>
+                        </div>
+
+                        <div style="margin-bottom: 1rem" class="flex-column">
+                            Номер телефона: <RadzenLabel Text="@CurrentOrderCustomer?.CustomerAddress" style="width: 100%"></RadzenLabel>
+                        </div>
+
+                        <div class="row footer">
+                        </div>
+                    </ChildContent>
+                </RadzenTemplateForm>
+            </div>
+        </div>
+    </ChildContent>
+</RadzenContent>

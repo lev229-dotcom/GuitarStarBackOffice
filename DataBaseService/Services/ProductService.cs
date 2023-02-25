@@ -39,7 +39,7 @@ public class ProductService
 
     public async Task<Product> GetProductById(Guid id)
     {
-        Product products = await dataContext.Products.Where(i => i.IdProduct == id).FirstOrDefaultAsync();
+        Product products = await dataContext.Products.Include(f => f.FileImage).Include(c => c.Category).Where(i => i.IdProduct == id).FirstOrDefaultAsync();
 
         return await Task.FromResult(products);
     }

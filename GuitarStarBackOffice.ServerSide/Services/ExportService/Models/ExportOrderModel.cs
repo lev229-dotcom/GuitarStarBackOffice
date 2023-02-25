@@ -17,4 +17,6 @@ public class ExportOrderModel
 
     public string paymentStatus { get; set; }
 
+    public string CustomerEmail { get; set; }
+
 }

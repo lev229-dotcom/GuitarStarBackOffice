@@ -46,6 +46,11 @@
                                             Просмотр состава заказа
                                         </MudMenuItem>
 
+                                        <MudMenuItem OnClick="@(() => OpenCustomerInfo(order))">
+                                            <MudIcon Style="vertical-align:text-bottom" Class="mr-1" Size="Size.Small" />
+                                            Информация о клиенте
+                                        </MudMenuItem>
+
                                     </MudMenu>
                                 }
                             </Template>

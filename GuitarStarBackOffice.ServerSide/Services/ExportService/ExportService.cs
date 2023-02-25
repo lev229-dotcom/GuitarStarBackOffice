@@ -31,7 +31,8 @@ public class ExportService
 								   TotalOrderAmount = element.TotalOrderAmount,
 								   orderStatus = element.orderStatus.ToDescriptionString(),
 								   paymentStatus = element.payementStatus.ToDescriptionString(),
-								   EmployeeFullName = $"{element.Employee.Surname} {element.Employee.Name} {element.Employee.Patronymic}"
+								   EmployeeFullName = $"{element.Employee.Surname} {element.Employee.Name} {element.Employee.Patronymic}",
+								   CustomerEmail =  element.CustomerEmail.ToLower(),
 							   };
 		if(filePath == "TemplateCatalog")
 		result = await ExportCatalogBytemplate(orderExportModel, filePath);

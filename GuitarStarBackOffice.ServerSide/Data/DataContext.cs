@@ -246,27 +246,27 @@ public class DataContext : DbContext
             new Category
             {
                 IdCategory = Guid.Parse("11A0D7CE-007C-44AC-9DA6-FE333BA042BE"),
-                CategoryName = "Акустическая гитара"
+                CategoryName = "Игровые консоли"
             },
             new Category
             {
                 IdCategory = Guid.Parse("4B94A8DB-AC66-4A7F-9045-59672FF62E64"),
-                CategoryName = "Электро гитара"
+                CategoryName = "Наушники"
             },
             new Category
             {
                 IdCategory = Guid.Parse("DA7D35D3-735C-40F7-B16C-CB65C1AC0D3F"),
-                CategoryName = "Бас гитара"
+                CategoryName = "Часы"
             },
             new Category
              {
                  IdCategory = Guid.Parse("497D6809-488D-4252-9CCA-D04956BAA87B"),
-                 CategoryName = "Укулеле"
+                 CategoryName = "Планшеты"
              },
             new Category
              {
                  IdCategory = Guid.Parse("E571E876-CCE6-4CDE-ADE1-D36732F3761D"),
-                 CategoryName = "Балалайка"
+                 CategoryName = "Ноутбуки"
              });
 
         modelBuilder.Entity<WareHouse>()
@@ -283,8 +283,8 @@ public class DataContext : DbContext
             new Product
             {
                 IdProduct = Guid.Parse("5E19D537-D1EB-4A96-97EC-008B1874EC80"),
-                ProductName = "Классическая гитара Doff RGC",
-                ProductPrice = 9999.99,
+                ProductName = "Игровая консоль Playstation 5",
+                ProductPrice = 45999.99,
                 CategoryId = Guid.Parse("11A0D7CE-007C-44AC-9DA6-FE333BA042BE"),
                 WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
                 FileImageId = null
@@ -292,8 +292,8 @@ public class DataContext : DbContext
             new Product
             {
                 IdProduct = Guid.Parse("A53B5791-5769-4723-8996-5839ADD00BD3"),
-                ProductName = "Акустическая гитара Doff D016A",
-                ProductPrice = 9999.99,
+                ProductName = "Игровая консоль Xbox series X",
+                ProductPrice = 50999.99,
                 CategoryId = Guid.Parse("11A0D7CE-007C-44AC-9DA6-FE333BA042BE"),
                 WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
                 FileImageId = null
@@ -301,8 +301,8 @@ public class DataContext : DbContext
             new Product
             {
                 IdProduct = Guid.Parse("7E3A380B-4EB3-4081-8872-B9FA93B2910F"),
-                ProductName = "Электрогитара Fabio ST100 N",
-                ProductPrice = 9999.99,
+                ProductName = "Наушники беспроводные Sony WHX-4",
+                ProductPrice = 16999.99,
                 CategoryId = Guid.Parse("4B94A8DB-AC66-4A7F-9045-59672FF62E64"),
                 WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
                 FileImageId = null
@@ -310,8 +310,8 @@ public class DataContext : DbContext
             new Product
             {
                 IdProduct = Guid.Parse("691D0935-F356-49A8-A857-01CDA670FBF0"),
-                ProductName = "Электрогитара Caraya E235BK",
-                ProductPrice = 9999.99,
+                ProductName = "Наушники беспроводные Apple Airpods Pro",
+                ProductPrice = 20999.99,
                 CategoryId = Guid.Parse("4B94A8DB-AC66-4A7F-9045-59672FF62E64"),
                 WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
                 FileImageId = null
@@ -319,8 +319,8 @@ public class DataContext : DbContext
             new Product
             {
                 IdProduct = Guid.Parse("A70046B5-3427-4FEE-B0DE-5EE1445DDAC4"),
-                ProductName = "Бас-гитара Cort Action-HH4-TLB Action Series",
-                ProductPrice = 9999.99,
+                ProductName = "Часы Apple Watch 7",
+                ProductPrice = 25999.99,
                 CategoryId = Guid.Parse("DA7D35D3-735C-40F7-B16C-CB65C1AC0D3F"),
                 WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
                 FileImageId = null
@@ -328,8 +328,8 @@ public class DataContext : DbContext
             new Product
             {
                 IdProduct = Guid.Parse("483359BA-0F10-4224-94B1-20F6DC8457DE"),
-                ProductName = "Бас-гитара Prodipe JMFJB80MAASH4C JB80MA MA",
-                ProductPrice = 9999.99,
+                ProductName = "Смарт браслет Xiaomi mi smart band 6",
+                ProductPrice = 2999.99,
                 CategoryId = Guid.Parse("DA7D35D3-735C-40F7-B16C-CB65C1AC0D3F"),
                 WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
                 FileImageId = null
@@ -337,8 +337,8 @@ public class DataContext : DbContext
             new Product
             {
                 IdProduct = Guid.Parse("DCDD60D8-385F-400C-9597-726F67BBF18B"),
-                ProductName = "RFU10S Friends Series Укулеле сопрано, Ortega",
-                ProductPrice = 9999.99,
+                ProductName = "Планшет Apple Ipad Air (2021)",
+                ProductPrice = 69999.99,
                 CategoryId = Guid.Parse("497D6809-488D-4252-9CCA-D04956BAA87B"),
                 WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
                 FileImageId = null
@@ -346,8 +346,8 @@ public class DataContext : DbContext
             new Product
             {
                 IdProduct = Guid.Parse("E21D96DB-DA7C-4FF9-8025-DAB8B66961E6"),
-                ProductName = "Укулеле концерт LAG TKU-130C",
-                ProductPrice = 9999.99,
+                ProductName = "Планшет Samsung Tab 7 pro",
+                ProductPrice = 59999.99,
                 CategoryId = Guid.Parse("497D6809-488D-4252-9CCA-D04956BAA87B"),
                 WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
                 FileImageId = null
@@ -355,8 +355,8 @@ public class DataContext : DbContext
             new Product
             {
                 IdProduct = Guid.Parse("76ACD5F8-B37E-4954-82CE-FDCB41DEEBCD"),
-                ProductName = "Балалайка 3-струнная DOFF BBM Bass Master",
-                ProductPrice = 9999.99,
+                ProductName = "Ноутбук Apple MacBook Pro 16' M2 (2022)",
+                ProductPrice = 169999.99,
                 CategoryId = Guid.Parse("E571E876-CCE6-4CDE-ADE1-D36732F3761D"),
                 WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
                 FileImageId = null
@@ -364,8 +364,8 @@ public class DataContext : DbContext
             new Product
             {
                 IdProduct = Guid.Parse("FAEB4309-E0A0-44A6-B8EC-5F2E73C3FC2F"),
-                ProductName = "SBF-RRE Русский рок Балалайка электроакустическая, трехструнная, Балалайкеръ",
-                ProductPrice = 9999.99,
+                ProductName = "Ноутбук Apple MacBook Air 14' M1 (2021)",
+                ProductPrice = 109999.99,
                 CategoryId = Guid.Parse("E571E876-CCE6-4CDE-ADE1-D36732F3761D"),
                 WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
                 FileImageId = null
@@ -381,7 +381,11 @@ public class DataContext : DbContext
                 TotalOrderAmount = 9999.99,
                 EmployeeId = Guid.Parse("CAF7B5FF-56CF-40D7-93D2-685191C8774A"),
                 orderStatus = OrderStatus.Done,
-                payementStatus = PayementStatus.Payed
+                payementStatus = PayementStatus.Payed,
+                CustomerName = "Фролов Дмитрий Анатольевич",
+                CustomerEmail = "Leox555@yandex.ru",
+                CustomerNumber = "+79671525380",
+                CustomerAddress = "Москва, ул. Кутузовская, д. 32"
             }, 
             new Order
             {
@@ -391,7 +395,11 @@ public class DataContext : DbContext
                 TotalOrderAmount = 9999.99,
                 EmployeeId = Guid.Parse("CAF7B5FF-56CF-40D7-93D2-685191C8774A"),
                 orderStatus = OrderStatus.Done,
-                payementStatus = PayementStatus.Payed
+                payementStatus = PayementStatus.Payed,
+                CustomerName = "Фролов Дмитрий Анатольевич",
+                CustomerEmail = "Leox555@yandex.ru",
+                CustomerNumber = "+79671525380",
+                CustomerAddress = "Москва, ул. Кутузовская, д. 32"
             }, 
             
             new Order
@@ -402,7 +410,11 @@ public class DataContext : DbContext
                 TotalOrderAmount = 19999.99,
                 EmployeeId = Guid.Parse("CAF7B5FF-56CF-40D7-93D2-685191C8774A"),
                 orderStatus = OrderStatus.Done,
-                payementStatus = PayementStatus.Payed
+                payementStatus = PayementStatus.Payed,
+                CustomerName = "Фролов Дмитрий Анатольевич",
+                CustomerEmail = "Leox555@yandex.ru",
+                CustomerNumber = "+79671525380",
+                CustomerAddress = "Москва, ул. Кутузовская, д. 32"
             },
             new Order
             {
@@ -412,7 +424,11 @@ public class DataContext : DbContext
                 TotalOrderAmount = 19999.99,
                 EmployeeId = Guid.Parse("CAF7B5FF-56CF-40D7-93D2-685191C8774A"),
                 orderStatus = OrderStatus.Done,
-                payementStatus = PayementStatus.Payed
+                payementStatus = PayementStatus.Payed,
+                CustomerName = "Фролов Дмитрий Анатольевич",
+                CustomerEmail = "Leox555@yandex.ru",
+                CustomerNumber = "+79671525380",
+                CustomerAddress = "Москва, ул. Кутузовская, д. 32"
             },
             new Order
             {
@@ -422,7 +438,11 @@ public class DataContext : DbContext
                 TotalOrderAmount = 9999.99,
                 EmployeeId = Guid.Parse("CAF7B5FF-56CF-40D7-93D2-685191C8774A"),
                 orderStatus = OrderStatus.Done,
-                payementStatus = PayementStatus.Payed
+                payementStatus = PayementStatus.Payed,
+                CustomerName = "Фролов Дмитрий Анатольевич",
+                CustomerEmail = "Leox555@yandex.ru",
+                CustomerNumber = "+79671525380",
+                CustomerAddress = "Москва, ул. Кутузовская, д. 32"
             },
             new Order
             {
@@ -432,7 +452,11 @@ public class DataContext : DbContext
                 TotalOrderAmount = 9999.99,
                 EmployeeId = Guid.Parse("CAF7B5FF-56CF-40D7-93D2-685191C8774A"),
                 orderStatus = OrderStatus.Done,
-                payementStatus = PayementStatus.Payed
+                payementStatus = PayementStatus.Payed,
+                CustomerName = "Иванов Иван Иванович",
+                CustomerEmail = "Tomlev418@yandex.ru",
+                CustomerNumber = "+79671524411",
+                CustomerAddress = "Москва, ул. Пролетарская, д. 65А, к. 2"
             },
             new Order
             {
@@ -442,7 +466,11 @@ public class DataContext : DbContext
                 TotalOrderAmount = 9999.99,
                 EmployeeId = Guid.Parse("CAF7B5FF-56CF-40D7-93D2-685191C8774A"),
                 orderStatus = OrderStatus.Done,
-                payementStatus = PayementStatus.Payed
+                payementStatus = PayementStatus.Payed,
+                CustomerName = "Иванов Иван Иванович",
+                CustomerEmail = "Tomlev418@yandex.ru",
+                CustomerNumber = "+79671524411",
+                CustomerAddress = "Москва, ул. Пролетарская, д. 65А, к. 2"
             },
             new Order
             {
@@ -452,7 +480,11 @@ public class DataContext : DbContext
                 TotalOrderAmount = 9999.99,
                 EmployeeId = Guid.Parse("CAF7B5FF-56CF-40D7-93D2-685191C8774A"),
                 orderStatus = OrderStatus.Done,
-                payementStatus = PayementStatus.Payed
+                payementStatus = PayementStatus.Payed,
+                CustomerName = "Иванов Иван Иванович",
+                CustomerEmail = "Tomlev418@yandex.ru",
+                CustomerNumber = "+79671524411",
+                CustomerAddress = "Москва, ул. Пролетарская, д. 65А, к. 2"
             },
             new Order
             {
@@ -462,7 +494,11 @@ public class DataContext : DbContext
                 TotalOrderAmount = 9999_99,
                 EmployeeId = Guid.Parse("CAF7B5FF-56CF-40D7-93D2-685191C8774A"),
                 orderStatus = OrderStatus.Done,
-                payementStatus = PayementStatus.Payed
+                payementStatus = PayementStatus.Payed,
+                CustomerName = "Иванов Иван Иванович",
+                CustomerEmail = "Tomlev418@yandex.ru",
+                CustomerNumber = "+79671524411",
+                CustomerAddress = "Москва, ул. Пролетарская, д. 65А, к. 2"
             }, 
             new Order
             {
@@ -472,7 +508,11 @@ public class DataContext : DbContext
                 TotalOrderAmount = 100_000,
                 EmployeeId = Guid.Parse("CAF7B5FF-56CF-40D7-93D2-685191C8774A"),
                 orderStatus = OrderStatus.Done,
-                payementStatus = PayementStatus.Payed
+                payementStatus = PayementStatus.Payed,
+                CustomerName = "Иванов Иван Иванович",
+                CustomerEmail = "Tomlev418@yandex.ru",
+                CustomerNumber = "+79671524411",
+                CustomerAddress = "Москва, ул. Пролетарская, д. 65А, к. 2"
             });
         #endregion
     }

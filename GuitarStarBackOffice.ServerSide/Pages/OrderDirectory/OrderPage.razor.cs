@@ -48,6 +48,14 @@ public partial class OrderPage
         await grid.Reload();
     }
 
+    private async Task OpenCustomerInfo(Order currentOrder)
+    {
+        await DialogService.OpenAsync<CustomerInfo>("Информация о клиенте", new Dictionary<string, object>()
+               { { "currentOrderId", currentOrder.IdOrder } },
+              new DialogOptions() { Width = "700px", Height = "512px", Resizable = true });
+        await grid.Reload();
+    }
+
     #endregion OrderElements
 
     private async Task AddOrder()

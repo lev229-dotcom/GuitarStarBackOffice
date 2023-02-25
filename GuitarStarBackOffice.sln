@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuitarStarBackOffice.Shared
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuitarStarBackOffice.ServerSide", "GuitarStarBackOffice.ServerSide\GuitarStarBackOffice.ServerSide.csproj", "{EE6AD291-47AF-458D-ABA1-0188F46832BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal", "Portal\Portal.csproj", "{16AC6203-A3E1-438A-AF05-333BA43A8C7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal", "Portal\Portal.csproj", "{16AC6203-A3E1-438A-AF05-333BA43A8C7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseService", "DataBaseService\DataBaseService.csproj", "{E295E7A4-65C0-431E-AA78-4ABCB0C89B2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBaseService", "DataBaseService\DataBaseService.csproj", "{E295E7A4-65C0-431E-AA78-4ABCB0C89B2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

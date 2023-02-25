@@ -14,122 +14,132 @@ else
         </div>
     </section>
 
-    <section class="section-content padding-y">
-        <div class="container">
+    if (cartProducts.Count() > 0){
+        <section class="section-content padding-y">
+            <div class="container">
 
-            <div class="row">
-                <main class="col-md-9">
-                    <div class="card">
+                <div class="row">
+                    <main class="col-md-9">
+                        <div class="card">
 
-                        <table class="table table-borderless table-shopping-cart">
-                            <thead class="text-muted">
-                                <tr class="small text-uppercase">
-                                    <th scope="col">Product</th>
-                                    <th scope="col" width="120">Quantity</th>
-                                    <th scope="col" width="120">Price</th>
-                                    <th scope="col" class="text-right" width="200"> </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var product in cartProducts)
-                                {
-                                    <tr>
-                                        <td>
-                                            <figure class="itemside">
-                                                <div class="aside">
-                                                    @if (product.Product?.FileImage != null){
-                                                        <img src="data:image/jpeg;base64, @product.Product?.FileImage" class="img-sm">
-                                                    }
-                                                    else{
-                                                        <img src="https://i.ebayimg.com/images/g/55gAAOSwIqtfW63B/s-l500.png" />
-                                                    }
-                                                </div>
-                                                <figcaption class="info">
-                                                    <a href="/products/@product.Product?.IdProduct/@product.Product?.ProductName" class="title text-dark">
-                                                        @product.Product?.ProductName
-                                                    </a>
-                                                </figcaption>
-                                            </figure>
-                                        </td>
-                                        <td>
-                                            <div class="input-group input-spinner">
-                                                <div class="input-group-prepend">
-                                                    <button @onclick="() => DecrementQuantity(product.IdOrderElement, product.ElementsCount)"
-                                                            class="btn btn-light"
-                                                            type="button"
-                                                            id="button-minus">
-                                                        &minus;
-                                                    </button>
-                                                </div>
-                                                <input @bind-value="@product.ElementsCount" type="text" class="form-control" readonly />
-                                                <div class="input-group-append">
-                                                    <button @onclick="() => IncrementQuantity(product.IdOrderElement, product.ElementsCount)"
-                                                            class="btn btn-light"
-                                                            type="button"
-                                                            id="button-plus">
-                                                        +
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="price-wrap">
-                                                <var class="price">$@(product.Product?.ProductPrice * product.ElementsCount)</var>
-                                                <small class="text-muted"> $@product.Product?.ProductPrice each </small>
-                                            </div>
-                                        </td>
-                                        <td class="text-right">
-                                            <a @onclick="() => OnRemoveAsync(product.IdOrderElement)"
-                                               @onclick:preventDefault
-                                               href="#"
-                                               class="btn btn-light">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </td>
+                            <table class="table table-borderless table-shopping-cart">
+                                <thead class="text-muted">
+                                    <tr class="small text-uppercase">
+                                        <th scope="col">Product</th>
+                                        <th scope="col" width="120">Quantity</th>
+                                        <th scope="col" width="120">Price</th>
+                                        <th scope="col" class="text-right" width="200"> </th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach (var product in cartProducts)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <figure class="itemside">
+                                                    <div class="aside">
+                                                        @if (product.Product?.FileImage != null)
+                                                        {
+                                                            <img src="data:image/jpeg;base64, @product.Product?.FileImage.Data" class="img-sm">
+                                                        }
+                                                        else
+                                                        {
+                                                            <img src="https://www.mynameisdan.co.uk/wp-content/uploads/2016/07/PS4-Case.png" class="img-sm" />
+                                                        }
+                                                    </div>
+                                                    <figcaption class="info">
+                                                        <a href="/products/@product.Product?.IdProduct/@product.Product?.ProductName" class="title text-dark">
+                                                            @product.Product?.ProductName
+                                                        </a>
+                                                    </figcaption>
+                                                </figure>
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-spinner">
+                                                    <div class="input-group-prepend">
+                                                        <button @onclick="() => DecrementQuantity(product.IdOrderElement, product.ElementsCount)"
+                                                    class="btn btn-light"
+                                                    type="button"
+                                                    id="button-minus">
+                                                            &minus;
+                                                        </button>
+                                                    </div>
+                                                    <input @bind-value="@product.ElementsCount" type="text" class="form-control" readonly />
+                                                    <div class="input-group-append">
+                                                        <button @onclick="() => IncrementQuantity(product.IdOrderElement, product.ElementsCount)"
+                                                    class="btn btn-light"
+                                                    type="button"
+                                                    id="button-plus">
+                                                            +
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="price-wrap">
+                                                    <var class="price">@(product.Product?.ProductPrice * product.ElementsCount)₽</var>
+                                                    <small class="text-muted"> @product.Product?.ProductPrice₽ каждый </small>
+                                                </div>
+                                            </td>
+                                            <td class="text-right">
+                                                <a @onclick="() => OnRemoveAsync(product)"
+                                       @onclick:preventDefault
+                                       href="#"
+                                       class="btn btn-light">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
 
-                        <div class="card-body border-top">
-                            <a  class="btn btn-primary float-md-right" @onclick="() => CreateTestOrder()"> Make Purchase <i class="fa fa-chevron-right"></i> </a>
-                            <a href="/products/page/1" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Continue shopping </a>
+                            <div class="card-body border-top">
+                                <a href="/checkout" class="btn btn-primary float-md-right"> Make Purchase <i class="fa fa-chevron-right"></i> </a>
+                                <a href="/products/page/1" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Continue shopping </a>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="alert alert-success mt-3">
-                        <p class="icontext"><i class="icon text-success fa fa-truck"></i> Free Delivery within 1-2 weeks</p>
-                    </div>
-
-                </main>
-                <aside class="col-md-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <dl class="dlist-align">
-                                <dt>Total price:</dt>
-                                <dd class="text-right">$@totalPrice</dd>
-                            </dl>
-                            <dl class="dlist-align">
-                                <dt>Discount:</dt>
-                                <dd class="text-right">$0</dd>
-                            </dl>
-                            <dl class="dlist-align">
-                                <dt>Total:</dt>
-                                <dd class="text-right  h5"><strong>$@totalPrice</strong></dd>
-                            </dl>
-                            <hr>
-                            <p class="text-center mb-3">
-                                <img src="images/misc/payments.png" height="26" />
-                            </p>
-
+                        <div class="alert alert-success mt-3">
+                            <p class="icontext"><i class="icon text-success fa fa-truck"></i> Free Delivery within 1-2 weeks</p>
                         </div>
-                    </div>
-                </aside>
+
+                    </main>
+                    <aside class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <dl class="dlist-align">
+                                    <dt>Total price:</dt>
+                                    <dd class="text-right">@totalPrice₽</dd>
+                                </dl>
+                                <dl class="dlist-align">
+                                    <dt>Discount:</dt>
+                                    <dd class="text-right">$0</dd>
+                                </dl>
+                                <dl class="dlist-align">
+                                    <dt>Total:</dt>
+                                    <dd class="text-right  h5"><strong>@totalPrice₽</strong></dd>
+                                </dl>
+                                <hr>
+                                <p class="text-center mb-3">
+                                    <img src="images/misc/payments.png" height="26" />
+                                </p>
+
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+
             </div>
-
-        </div>
-    </section>
-
+        </section>
+    }
+    else{
+        <section class="section-pagetop bg">
+            <div class="container">
+                <h2 class="title-page">Корзина пуста</h2>
+            </div>
+        </section>
+    }
     <section class="section-name bg padding-y">
         <div class="container">
             <h6>Payment and refund policy</h6>

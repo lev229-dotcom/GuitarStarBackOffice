@@ -1,0 +1,26 @@
+﻿@page "/order/confirmed/{Id:int}"
+
+
+<section class="section-pagetop bg">
+    <div class="container text-center">
+        <h1 class="title-page text-success">
+            <i class="fas fa-check-circle"></i>
+        </h1>
+        <h1 class="title-page">
+            Спасибо за ваш заказ!
+        </h1>
+        <h5 class="text-muted">
+            Ваш заказ #@Id, принят в обработку, позже с вами свяжется наши менеджеры
+        </h5>
+
+        <br />
+
+        <a class="btn btn-primary" href="/order/details/@Id"> Order details </a>
+        <a class="btn btn-outline-primary-light" href="/"> Back to shop </a>
+    </div>
+</section>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+}
