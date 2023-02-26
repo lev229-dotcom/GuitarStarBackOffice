@@ -31,6 +31,25 @@
 
                         </div>
 
+                        <MudFileUpload id="FileIMGUpload" Accept=".png, jpg"
+                                       T="IBrowserFile" FilesChanged="ImportFileImage">
+                            <ButtonTemplate Context="FileIMGUpload">
+                                <MudButton HtmlTag="label"
+                                           Variant="MudBlazor.Variant.Filled"
+                                           Color="Color.Primary"
+                                           StartIcon="@Icons.Filled.CloudUpload"
+                                           for="FileIMGUpload">
+                                    Загрузить фото товара
+                                </MudButton>
+                            </ButtonTemplate>
+                        </MudFileUpload>
+                        @if (ImageData != null || editedProduct.FileImage != null)
+                        {
+                            if (editedProduct.FileImage != null && ImageData != null){
+                                <img style='width:80px; height:auto;' src="data:image/jpeg;base64, @ImageData" />
+                            }
+                        }
+
                         <div style="margin-bottom: 1rem" class="flex-column">
                             <RadzenLabel Text="Склад" style="width: 100%" />
                             <RadzenDropDown Data="@wareHouses" @bind-Value="@(editedProduct.WareHouseId)"

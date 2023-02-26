@@ -50,6 +50,17 @@
                                 </MudButton>
                             </ButtonTemplate>
                         </MudFileUpload>
+                        @if (newProduct.FileImage != null || ImageData != null)
+                        {
+                            if (newProduct.FileImage != null && ImageData == null)
+                            {
+                                <img style='width:80px; height:auto;' src="data:image/jpeg;base64, @newProduct.FileImage" />
+                            }
+                            else
+                            {
+                                <img style='width:80px; height:auto;' src="data:image/jpeg;base64, @ImageData" />
+                            }
+                        }
 
                         <div class="row footer">
                             <RadzenButton ButtonType="Radzen.ButtonType.Submit" Disabled="IsActive" Icon="save" ButtonStyle="ButtonStyle.Primary" Text="Сохранить" />

@@ -16,8 +16,8 @@
                     </ul>
 
                     <ul class="nav">
-                        <li><a href="#" class="nav-link"> <i class="fa fa-comment"></i> Contact </a></li>
-                        <li><a href="#" class="nav-link"> <i class="fa fa-phone"></i> Call us </a></li>
+                        <li><a href="#" class="nav-link"> <i class="fa fa-comment"></i> Контакты </a></li>
+                        <li><a href="#" class="nav-link"> <i class="fa fa-phone"></i> Позвоните нам </a></li>
                     </ul>
                 </nav>
             </div>
@@ -111,9 +111,9 @@
                 <div class="collapse navbar-collapse" id="dropdown6">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link pl-0" href="/"> <strong>Home</strong></a>
+                            <a class="nav-link pl-0" href="/"> <strong>Домашняя страница</strong></a>
                         </li>
-                        <li class="nav-item">
+                       @* <li class="nav-item">
                             <a class="nav-link" href="/wishlist">Wishlist</a>
                         </li>
                         <li class="nav-item">
@@ -129,16 +129,16 @@
                                 Categories
                             </a>
                             <div class="dropdown-menu">
-                               @* @foreach (var category in categories)
-                                {*@
+                                @foreach (var category in categories)
+                                {
                                     <a class="dropdown-item"
                                        
                                     >
                                         category.Name
                                     </a>
-                                @*}*@
+                                }
                             </div>
-                        </li>
+                        </li>*@
                     </ul>
 
                    @* <AuthorizeView Roles="@Constants.AdministratorRole">

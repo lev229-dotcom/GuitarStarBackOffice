@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components;
 using Radzen;
 using Microsoft.AspNetCore.Components.Forms;
+using DocumentFormat.OpenXml.Vml;
 
 namespace GuitarStarBackOffice.ServerSide.Pages.ProductRepository;
 
@@ -19,7 +20,7 @@ public partial class ProductEditor
 
     IEnumerable<Category> categories;
     IEnumerable<WareHouse> wareHouses;
-
+    public string? ImageData { get; set; }
 
     private bool IsActive => string.IsNullOrWhiteSpace(editedProduct.ProductName) && editedProduct.ProductPrice > 1 && editedProduct.ProductPrice < 9_999_999 && editedProduct.CategoryId is not null && editedProduct.CategoryId is not null;
 
@@ -46,7 +47,11 @@ public partial class ProductEditor
 
     private async Task HandleEdit()
     {
-        await ProductService.UpdateProduct(editedProduct);
+
+        if (ImageData != null)
+            await ProductService.UpdateProduct(editedProduct, ImageData);
+        else
+            await ProductService.UpdateProduct(editedProduct);
         await Close(null);
     }
 
@@ -54,4 +59,11 @@ public partial class ProductEditor
     {
         DialogService.Close(null);
     }
+
+    private async Task ImportFileImage(IBrowserFile file)
+    {
+        ImageData = await GetFileDataRule.GetData(file);
+        StateHasChanged();
+    }
+
 }

@@ -9,7 +9,7 @@ else
 {
     <section class="section-pagetop bg">
         <div class="container">
-            <h2 class="title-page text-center">Checkout</h2>
+            <h2 class="title-page text-center">Оформление заказа</h2>
         </div>
     </section>
 
@@ -21,7 +21,7 @@ else
                     <div class="card mb-3">
                         <article class="card-body">
                             <header class="mb-4">
-                                <h4 class="card-title">Review cart</h4>
+                                <h4 class="card-title">Ваша корзина</h4>
                             </header>
                             <div class="row">
 
@@ -57,13 +57,13 @@ else
                                 <dd class="col-sm-4 text-right"><strong>@totalPrice₽</strong></dd>
 
                                 <dt class="col-sm-8">Скидка: <span class="float-right text-muted">0%</span></dt>
-                                <dd class="col-sm-4 text-danger text-right"><strong>0₽</strong></dd>
+                                <dd class="col-sm-4 text-success text-right"><strong>0₽</strong></dd>
 
-                                <dt class="col-sm-8">Delivery charge: <span class="float-right text-muted">Standard Delivery</span></dt>
-                                <dd class="col-sm-4 text-right"><strong>Free</strong></dd>
+                                <dt class="col-sm-8">Способ доставки: <span class="float-right text-muted">Стандартная доставка</span></dt>
+                                <dd class="col-sm-4 text-right"><strong>Бесплатно</strong></dd>
 
                                 <dt class="col-sm-8">Налог: <span class="float-right text-muted">0%</span></dt>
-                                <dd class="col-sm-4 text-right text-success"><strong>0₽</strong></dd>
+                                <dd class="col-sm-4 text-right text-danger"><strong>0₽</strong></dd>
 
                                 <dt class="col-sm-8">Итого:</dt>
                                 <dd class="col-sm-4 text-right"><strong class="h5 text-dark">@totalPrice₽</strong></dd>
@@ -77,7 +77,7 @@ else
                     <div class="card mb-4">
                         <div class="card-body">
 
-                            <h4 class="card-title mb-4">Delivery info</h4>
+                            <h4 class="card-title mb-4">Информация о доставке</h4>
                             <EditForm Model="address" OnValidSubmit="SubmitAsync">
 
                                 <DataAnnotationsValidator />
@@ -86,7 +86,7 @@ else
                                 <div class="form-group">
                                     <label class="custom-control custom-radio custom-control-inline">
                                         <input class="custom-control-input" checked="" type="radio" name="gender" value="option1">
-                                        <span class="custom-control-label"> Standard Delivery <br /> Free </span>
+                                        <span class="custom-control-label"> Стандартная доставка </span>
                                     </label>
                                 </div>
 
@@ -107,41 +107,40 @@ else
 
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label>Country</label>
+                                        <label>Страна</label>
                                         <InputSelect @bind-Value="address.Country" id="inputState" class="form-control">
-                                            <option value="Uzbekistan">Uzbekistan</option>
                                             <option value="Russia">Russia</option>
-                                            <option value="United States">United States</option>
-                                            <option value="Bulgaria" selected="">Bulgaria</option>
-                                            <option value="India">India</option>
-                                            <option value="Afghanistan">Afghanistan</option>
+                                            <option value="United States">США</option>
+                                            <option value="Bulgaria" selected="">Болгария</option>
+                                            <option value="India">Индия</option>
+                                            <option value="Afghanistan">Китай</option>
                                         </InputSelect>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label>State</label>
+                                        <label>Область</label>
                                         <InputText @bind-Value="address.State" type="text" class="form-control" />
                                     </div>
                                 </div>
 
                                 <div class="form-row">
                                     <div class="col form-group">
-                                        <label>City</label>
+                                        <label>Город</label>
                                         <InputText @bind-Value="address.City" type="text" class="form-control" />
                                     </div>
                                     <div class="col form-group">
-                                        <label>Postcode</label>
+                                        <label>Индекс</label>
                                         <InputText @bind-Value="address.PostalCode" type="text" class="form-control" />
                                     </div>
                                 </div>
 
 
                                 <div class="form-group">
-                                    <label>Address</label>
+                                    <label>Адрес</label>
                                     <InputTextArea @bind-Value="address.Description" class="form-control" rows="2"></InputTextArea>
                                 </div>
 
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block"> Place order </button>
+                                    <button type="submit" class="btn btn-primary btn-block"> Оформить заказ </button>
                                 </div>
 
                             </EditForm>

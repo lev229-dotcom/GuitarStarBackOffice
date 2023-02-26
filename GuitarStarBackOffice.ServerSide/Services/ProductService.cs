@@ -58,6 +58,23 @@ public class ProductService
         });
         await dataContext.SaveChangesAsync();
     }
+    public async Task UpdateProduct(Product product, string fileData)
+    {
+        var file = new FileIMG { FileName = $"New photo {DateTime.Now}", Data = fileData, Id = Guid.NewGuid() };
+        dataContext.Files.Add(file);
+        product.FileImageId = file.Id;
+        dataContext.Products.Attach(product);
+
+        dataContext.ProductHistories.Add(new ProductHistory
+        {
+            EventType = "Обновлено наименование",
+            EventInfo = $"Время: {Convert.ToDateTime(DateTime.Now).ToString("F")}" +
+            $"Название - {product.ProductName},{Environment.NewLine} " +
+            $"стоимость {((double)product.ProductPrice).ToString("C0", CultureInfo.CreateSpecificCulture("ru-RU"))},{Environment.NewLine}" +
+            $"категория: {product.Category.CategoryName} "
+        });
+        await dataContext.SaveChangesAsync();
+    }
     public async Task AddProduct(Product product)
     {
         dataContext.Products.Add(product);
