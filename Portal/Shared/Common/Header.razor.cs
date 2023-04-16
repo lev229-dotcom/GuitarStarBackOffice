@@ -1,5 +1,8 @@
 ﻿namespace Portal.Shared.Common
 {
+    using DataBaseService.Services;
+    using GuitarStarBackOffice.Shared;
+    using Microsoft.AspNetCore.Components;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -7,9 +10,11 @@
 
     public partial class Header
     {
-        //private IEnumerable<CategoriesListingResponseModel> categories;
+        [Inject] private CategoryService CategoryService { get; set; }
 
-        //protected override async Task OnInitializedAsync()
-        //    => categories = await this.CategoriesService.All();
+        private IEnumerable<Category> categories;
+
+        protected override async Task OnInitializedAsync()
+            => categories = await CategoryService.GetCategories();
     }
 }

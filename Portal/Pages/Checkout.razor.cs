@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Blazored.LocalStorage;
 using DataBaseService.Services;
 using GuitarStarBackOffice.Shared;
 
@@ -14,6 +15,8 @@ public partial class Checkout
 {
     [Inject]
     protected OrderService OrderService { get; set; }
+
+    [Inject] protected ILocalStorageService LocalStorageService { get; set; }
 
     private readonly AddressesRequestModel address = new ();
     //private readonly OrdersRequestModel order = new OrdersRequestModel();
@@ -32,8 +35,10 @@ public partial class Checkout
 
     private async Task SubmitAsync()
     {
+        var id = await LocalStorageService.GetItemAsync<string>("admin.fullname");
         var fullAddress = $"Страна: {address.Country}, Область: {address.State}, Город: {address.City}, Код: {address.PostalCode}, Подробное описание: {address.Description}";
-       var orderId = await OrderService.CreateOrderTest(fullAddress, address.CustomerName, address.PhoneNumber, email, totalPrice);
+        var orderId = await OrderService.CreateOrderTest(fullAddress, address.CustomerName, address.PhoneNumber, email, totalPrice, Guid.Parse(id));
+
 
         NavigationManager.NavigateTo($"/order/confirmed/{orderId}", forceLoad: true);
     }

@@ -44,6 +44,92 @@ public class ProductService
         return await Task.FromResult(products);
     }
 
+    public async Task<IEnumerable<Product>> SearchAsync(ProductsSearchRequestModel model)
+    {
+        var products = await dataContext.Products.Include(f => f.FileImage).Include(c => c.Category).ToListAsync();
+
+        if (model.Category == null
+            && model.MaxPrice == null
+            && model.MinPrice == null
+            && model.Query == null)
+
+            return products;
+
+        else if (model.Category != null
+            && model.MaxPrice == null
+            && model.MinPrice == null
+            && model.Query == null)
+            return products.Where(c => c.Category.IdCategory == model.Category).ToList();
+
+        else if (model.Category == null
+            && model.MaxPrice != null
+            && model.MinPrice == null
+            && model.Query == null)
+            return products.Where(c => c.ProductPrice <= (double)model.MaxPrice).ToList();
+
+        else if (model.Category == null
+            && model.MaxPrice == null
+            && model.MinPrice != null
+            && model.Query == null)
+            return products.Where(c => c.ProductPrice >= (double)model.MinPrice).ToList();
+
+        else if (model.Category == null
+            && model.MaxPrice == null
+            && model.MinPrice == null
+            && model.Query != null)
+            return products.Where(c => c.ProductName.Contains(model.Query)).ToList();
+
+        else if (model.Category != null
+            && model.MaxPrice != null
+            && model.MinPrice == null
+            && model.Query == null)
+            return products.Where(c => c.Category.IdCategory == model.Category && c.ProductPrice <= (double)model.MaxPrice).ToList();
+
+        else if (model.Category != null
+            && model.MaxPrice == null
+            && model.MinPrice != null
+            && model.Query == null)
+            return products.Where(c => c.Category.IdCategory == model.Category && c.ProductPrice >= (double)model.MinPrice).ToList();
+
+        else if (model.Category != null
+            && model.MaxPrice == null
+            && model.MinPrice == null
+            && model.Query != null)
+            return products.Where(c => c.Category.IdCategory == model.Category && c.ProductName.Contains(model.Query)).ToList();
+
+        else if (model.Category == null
+            && model.MaxPrice != null
+            && model.MinPrice != null
+            && model.Query == null)
+            return products.Where(c => c.ProductPrice <= (double)model.MaxPrice && c.ProductPrice >= (double)model.MinPrice).ToList();
+
+        else if (model.Category != null
+            && model.MaxPrice != null
+            && model.MinPrice != null
+            && model.Query != null)
+
+            return products.Where(c =>
+            c.ProductPrice <= (double)model.MaxPrice
+            && c.ProductPrice >= (double)model.MinPrice
+            && c.Category.IdCategory == model.Category
+            && c.ProductName.Contains(model.Query))
+            .ToList();
+
+        else if (model.Category != null
+                && model.MaxPrice != null
+                && model.MinPrice != null
+                && model.Query == null)
+
+            return products.Where(c =>
+            c.ProductPrice <= (double)model.MaxPrice
+            && c.ProductPrice >= (double)model.MinPrice
+            && c.Category.IdCategory == model.Category)
+            .ToList();
+
+
+        return new List<Product>();
+    }
+
     public async Task UpdateProduct(Product product)
     {
         dataContext.Products.Attach(product);

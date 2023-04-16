@@ -1,14 +1,18 @@
-﻿namespace BlazorShop.Web.Client.Shared
-{
-    using Blazored.Toast.Services;
-    using System.Threading.Tasks;
+﻿using Blazored.Toast.Services;
+using Microsoft.AspNetCore.Components;
+using Portal.Authorization;
+using System.Threading.Tasks;
 
+namespace BlazorShop.Web.Client.Shared
+{
     public partial class AccountSidebar
     {
+        [Inject] protected CustomAuthStateProvider UserSession { get; set; }  
+        [Inject] protected IToastService ToastService { get; set; }  
         private async Task Submit()
         {
-            //ToastService.ShowSuccess("You have successfully logged out.");
-            //await this.AuthService.Logout();
+            this.ToastService.ShowSuccess("Вы успешно вышли из аккаунта");
+            await UserSession.FinishSession();
         }
     }
 }

@@ -23,7 +23,7 @@ public class OrderService
 
     private static List<OrderElement> OrderElements;
 
-    private List<OrderElement> getCurrentList()
+    public List<OrderElement> getCurrentList()
     {
         if (OrderElements is null)
             OrderElements = new List<OrderElement>();
@@ -46,7 +46,12 @@ public class OrderService
         orderElements.Remove(productId);
     }
 
-    public async Task<int> CreateOrderTest(string fullAddress, string CustomerName, string CusomerNumber, string CustomerEmail, decimal totalPrice)
+    public async Task<int> CreateOrderTest(string fullAddress, 
+        string CustomerName, 
+        string CusomerNumber, 
+        string CustomerEmail, 
+        decimal totalPrice,
+        Guid clientId)
     {
         var orderElements = getCurrentList();
         var number = await GetLastOrder();
@@ -62,7 +67,8 @@ public class OrderService
             CustomerName = CustomerName,
             CustomerEmail = CustomerEmail,
             CustomerNumber = CusomerNumber,
-            CustomerAddress = fullAddress
+            CustomerAddress = fullAddress,
+            ClientId = clientId
         };
         order.IdOrder = Guid.NewGuid();
         foreach (var item in orderElements)
@@ -73,6 +79,7 @@ public class OrderService
         order.OrderElements = orderElements;
         dataContext.Orders.Add(order);
         await dataContext.SaveChangesAsync();
+        OrderElements = null;
         return order.OrderNumber;
     }
 
