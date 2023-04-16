@@ -1,12 +1,22 @@
-﻿@using Portal.Shared.Common
+﻿@using Blazored.Toast.Configuration
+@using Portal.Shared.Common
 @inherits LayoutComponentBase
 
-<PageTitle>Portal</PageTitle>
+@*<PageTitle>Portal</PageTitle>
+*@
 
 <main class="main-container oh">
     <Header />
+
+    <BlazoredToasts Position="ToastPosition.BottomRight"
+                    IconType="IconType.FontAwesome"
+                    SuccessClass="success-toast-override"
+                    SuccessIcon="far fa-check-circle"
+                    ShowProgressBar="true" />
 
     @Body
 
     <Footer />
 </main>
+
+

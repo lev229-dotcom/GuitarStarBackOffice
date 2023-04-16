@@ -164,7 +164,7 @@ public class OrderService
     }
     public async Task<Order> GetOrderById(Guid id)
     {
-        Order order = await dataContext.Orders.Where(i => i.IdOrder == id).FirstOrDefaultAsync();
+        Order order = await dataContext.Orders.Include(el => el.OrderElements).ThenInclude(p => p.Product).ThenInclude(f => f.FileImage).Where(i => i.IdOrder == id).FirstOrDefaultAsync();
 
         return await Task.FromResult(order);
     }

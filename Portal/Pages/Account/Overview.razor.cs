@@ -1,33 +1,34 @@
-﻿namespace BlazorShop.Web.Client.Pages.Account
+﻿using Blazored.LocalStorage;
+using DataBaseService.Services.ClientService;
+using GuitarStarBackOffice.Shared;
+using Microsoft.AspNetCore.Components;
+
+namespace Portal.Pages.Account
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-
-    //using Infrastructure.Extensions;
-    //using Models.Orders;
-
     public partial class Overview
     {
-        //private IEnumerable<OrdersListingResponseModel> orders;
+        [Inject] private ILocalStorageService LocalStorageService { get; set; }
 
-        //private string email;
-        //private string firstName;
-        //private string lastName;
+        [Inject] protected ClientService ClientService { get; set; }
+        private string email;
+        private string firstName;
+        private string lastName;
+        private IEnumerable<Order> orders;
+        private Client client;
+        protected override async Task OnInitializedAsync() => await this.LoadDataAsync();
 
-        //protected override async Task OnInitializedAsync() => await this.LoadDataAsync();
+        private async Task LoadDataAsync()
+        {
+            var id = await LocalStorageService.GetItemAsync<string>("admin.fullname");
 
-        //private async Task LoadDataAsync()
-        //{
-        //    var state = await this.AuthState.GetAuthenticationStateAsync();
-        //    var user = state.User;
+            client = await ClientService.GetEmployeeById(Guid.Parse(id));
 
-        //    this.email = user.GetEmail();
-        //    this.firstName = user.GetFirstName();
-        //    this.lastName = user.GetLastName();
+            this.email = client.ClientEmail;
+            this.firstName = client.ClientName;
+            this.lastName = client.ClientLastName;
 
-        //    this.orders = await this.OrdersService.Mine();
-        //    this.orders = this.orders.Take(4);
-        //}
+            this.orders = client.Orders.ToList();
+            this.orders = this.orders.Take(4);
+        }
     }
 }

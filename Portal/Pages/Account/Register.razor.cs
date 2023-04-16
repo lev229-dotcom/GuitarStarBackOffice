@@ -1,37 +1,30 @@
-﻿namespace BlazorShop.Web.Client.Pages.Account
+﻿using DataBaseService.Services.ClientService;
+using GuitarStarBackOffice.Shared;
+using Microsoft.AspNetCore.Components;
+
+namespace Portal.Pages.Account
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-
-    //using Models.Identity;
-
     public partial class Register
     {
-        //private readonly RegisterRequestModel model = new RegisterRequestModel();
+        [Inject] protected ClientService ClientService { get; set; }
 
-        //public bool ShowErrors { get; set; }
+        private Client? model = new ();
 
-        //public IEnumerable<string> Errors { get; set; }
+        private async Task SubmitAsync()
+        {
+            var result = await ClientService.Register(this.model);
 
-        //private async Task SubmitAsync()
-        //{
-        //    var result = await this.AuthService.Register(this.model);
+            if (result)
+            {
+                ToastService.ShowSuccess("Вы успешно зарегистрировались");
 
-        //    if (result.Succeeded)
-        //    {
-        //        this.ShowErrors = false;
-
-        //        this.ToastService.ShowSuccess(
-        //            "You have successfully registered.\n Please login.",
-        //            "Congratulations!");
-
-        //        this.NavigationManager.NavigateTo("/account/login");
-        //    }
-        //    else
-        //    {
-        //        this.Errors = result.Errors;
-        //        this.ShowErrors = true;
-        //    }
-        //}
+                NavigationManager.NavigateTo("/account/login");
+            }
+            else
+            {
+                ToastService.ShowError("Произошла ошибка");
+                model = null;
+            }
+        }
     }
 }

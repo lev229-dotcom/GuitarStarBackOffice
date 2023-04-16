@@ -1,0 +1,72 @@
+﻿@page "/order/details/{Id:guid}"
+@using Portal.Shared.Common
+
+@if (order == null)
+{
+    <LoadingScreen />
+}
+else
+{
+    <section class="section-pagetop bg">
+        <div class="container">
+            <h2 class="title-page text-center">Order #@order.OrderNumber</h2>
+        </div>
+    </section>
+
+    <section class="section-content padding-y bg">
+        <div class="container">
+
+            <div class="card mb-3">
+                <article class="card-body">
+                    <header class="mb-4">
+                        <h4 class="card-title">Order details</h4>
+                    </header>
+                    <div class="row">
+
+                        @foreach (var orderElement in order.OrderElements)
+                        {
+                            <div class="col-md-6">
+                                <figure class="itemside  mb-3">
+                                    <div class="aside">
+                                        @if (orderElement.Product.FileImage is not null){
+                                            <img src="data:image/jpeg;base64, @orderElement.Product.FileImage.Data" class="border img-xs" />
+                                        }
+                                        else{
+                                            <img src="https://www.mynameisdan.co.uk/wp-content/uploads/2016/07/PS4-Case.png" class="border img-xs"/>
+                                        }
+                                    </div>
+                                    <figcaption class="info">
+                                        <p> @orderElement.Product.ProductName </p>
+                                        <span> @orderElement.ElementsCount x @orderElement.Product.ProductPrice ₽ = Total: @(Math.Round(orderElement.Product.ProductPrice * orderElement.ElementsCount, 2)) ₽ </span>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        }
+
+                    </div>
+                </article>
+                <article class="card-body border-top">
+
+                    <dl class="row">
+                        <dt class="col-sm-10">Created on: </dt>
+                        <dd class="col-sm-2 text-right"><strong>@order.OrderDate</strong></dd>
+
+                        <dt class="col-sm-10">Subtotal: <span class="float-right text-muted">@order.OrderElements.Count() items</span></dt>
+                        <dd class="col-sm-2 text-right"><strong>@totalPrice ₽</strong></dd>
+
+                        <dt class="col-sm-10">Discount: <span class="float-right text-muted">0%</span></dt>
+                        <dd class="col-sm-2 text-danger text-right"><strong>0 ₽</strong></dd>
+
+                        <dt class="col-sm-10">Delivery charge: <span class="float-right text-muted">Standard Delivery</span></dt>
+                        <dd class="col-sm-2 text-right"><strong>Free</strong></dd>
+
+                        <dt class="col-sm-10">Total:</dt>
+                        <dd class="col-sm-2 text-right"><strong class="h5 text-dark">@totalPrice ₽</strong></dd>
+                    </dl>
+
+                </article>
+            </div>
+
+        </div>
+    </section>
+}

@@ -1,52 +1,62 @@
-﻿namespace BlazorShop.Web.Client.Pages.Account
+﻿using Blazored.LocalStorage;
+using DataBaseService.Services.ClientService;
+using GuitarStarBackOffice.Shared;
+using Microsoft.AspNetCore.Components;
+using Portal.Authorization;
+
+namespace Portal.Pages.Account
 {
-    using System.Collections.Generic;
-    using System.Net.Http.Json;
-    using System.Threading.Tasks;
-
-    //using Infrastructure.Extensions;
-    //using Models.Identity;
-
     public partial class Settings
     {
-        //private readonly ChangeSettingsRequestModel model = new ChangeSettingsRequestModel();
+        [Inject] protected ClientService ClientService { get; set; }
 
-        //private string email;
+        [Inject] private ILocalStorageService LocalStorageService { get; set; }
+        [Inject] private CustomAuthStateProvider UserSession { get; set; }
 
-        //public bool ShowErrors { get; set; }
 
-        //public IEnumerable<string> Errors { get; set; }
+        private Client model = new Client();
 
-        //protected override async Task OnInitializedAsync() => await this.LoadDataAsync();
+        private string password;
 
-        //private async Task SubmitAsync()
-        //{
-        //    var response = await this.Http.PutAsJsonAsync("api/identity/changesettings", this.model);
+        protected override async Task OnInitializedAsync() => await this.LoadDataAsync();
 
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        this.ShowErrors = false;
+        private async Task SubmitAsync()
+        {
+            bool isOk;
+            if (!string.IsNullOrWhiteSpace(password))
+            {
+                model.ClientPassword = password;
+                isOk = await ClientService.UpdateClient(model, true);
+                await UserSession.StartSession(model.IdClient.ToString(), model.ClientName, UserSession.Role);
+            }
+            else
+            {
+                isOk = await ClientService.UpdateClient(model);
+                await UserSession.StartSession(model.IdClient.ToString(), model.ClientName, UserSession.Role);
+            }
 
-        //        await this.AuthService.Logout();
 
-        //        this.ToastService.ShowSuccess("Your account settings has been changed successfully.\n Please login.");
-        //        this.NavigationManager.NavigateTo("/account/login");
-        //    }
-        //    else
-        //    {
-        //        this.Errors = await response.Content.ReadFromJsonAsync<string[]>();
-        //        this.ShowErrors = true;
-        //    }
-        //}
+            if (isOk)
+            {
 
-        //private async Task LoadDataAsync()
-        //{
-        //    var state = await this.AuthState.GetAuthenticationStateAsync();
-        //    var user = state.User;
+                this.ToastService.ShowSuccess("Данные аккаунта были изменены, пожалуйста авторизуйтесь заново");
+                this.NavigationManager.NavigateTo("/account/login");
+            }
+            else
+            {
+                this.ToastService.ShowError("Произошла ошибка, попрбуйте еще раз");
 
-        //    this.email = user.GetEmail();
-        //    this.model.FirstName = user.GetFirstName();
-        //    this.model.LastName = user.GetLastName();
-        //}
+            }
+        }
+
+        private async Task LoadDataAsync()
+        {
+            var id = await LocalStorageService.GetItemAsync<string>("admin.fullname");
+
+
+            var user = await ClientService.GetEmployeeById(Guid.Parse(id));
+
+            model = user;
+        }
     }
 }

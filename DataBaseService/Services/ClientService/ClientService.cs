@@ -30,4 +30,50 @@ public class ClientService
         return await Task.FromResult(employee);
     }
 
+    public async Task<Client> GetEmployeeById(Guid id)
+    {
+        var client = await dataContext.Clients
+            .Include(d => d.Orders)
+            .Where(i => i.IdClient == id)
+            .FirstOrDefaultAsync();
+
+        return await Task.FromResult(client);
+    }
+
+    public async Task<bool> UpdateClient(Client client, bool IsNewPassword = false)
+    {
+        try
+        {
+            if (IsNewPassword)
+                client.ClientPassword = HashHelper.GetHashString(client.ClientPassword);
+            else
+                client.ClientPassword = client.ClientPassword;
+            dataContext.Clients.Attach(client);
+            dataContext.SaveChanges();
+
+            return true;
+        }
+        catch(Exception ex)
+        {
+            return false;
+        }
+    }
+
+
+    public async Task<bool> Register(Client client)
+    {
+        try
+        {
+            client.ClientPassword = HashHelper.GetHashString(client.ClientPassword);
+            dataContext.Clients.Add(client);
+            await dataContext.SaveChangesAsync();
+            return true;
+        }
+        catch(Exception ex)
+        {
+            return false;
+        }
+        
+    }
+
 }

@@ -15,8 +15,6 @@
     {
         private readonly AuthenticateInputModel model = new AuthenticateInputModel();
 
-
-
         [Inject] protected NotificationService NotificationService { get; set; }
 
         [Inject] private CustomAuthStateProvider UserSession { get; set; }
