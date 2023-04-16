@@ -29,9 +29,6 @@ public partial class AddToCartForm
     protected IJSRuntime JsRuntime { get; set; }
     
     [Inject]
-    protected NavigationManager NavigationManager { get; set; }
-
-    [Inject]
     protected OrderService OrderService { get; set; }
 
     private async Task OnSubmitAsync()

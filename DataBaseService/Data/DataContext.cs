@@ -198,6 +198,7 @@ public class DataContext : DbContext
         #region Order
 
         modelBuilder.Entity<Order>().HasKey(i => i.IdOrder);
+
         modelBuilder.Entity<Order>()
             .HasOne(i => i.Employee)
             .WithMany(i => i.Orders)
@@ -211,7 +212,25 @@ public class DataContext : DbContext
                 .HasForeignKey(i => i.OrderId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Order>()
+           .HasOne(i => i.Client)
+           .WithMany(i => i.Orders)
+           .HasForeignKey(i => i.ClientId)
+           .IsRequired()
+           .OnDelete(DeleteBehavior.Cascade);
         #endregion
+
+        #region Client
+        modelBuilder.Entity<Client>().HasKey(i => i.IdClient);
+
+        modelBuilder.Entity<Client>()
+              .HasMany(i => i.Orders)
+               .WithOne(i => i.Client)
+               .HasForeignKey(i => i.ClientId)
+               .IsRequired()
+               .OnDelete(DeleteBehavior.Cascade);
+        #endregion Client
 
         #region DefaultRecords
         modelBuilder.Entity<Post>()
@@ -221,7 +240,7 @@ public class DataContext : DbContext
             new Post { IdPost = Guid.NewGuid(), PostName = "Сотрудник отдела кадров", Salary = 150_000 },
             new Post { IdPost = Guid.NewGuid(), PostName = "Бухгалтер", Salary = 65_000 },
             new Post { IdPost = Guid.Parse("07CEFFEA-914D-4509-B21D-E3A8042B6BF9"), PostName = "Администратор", Salary = 1 });
-
+        #region Comment
         //modelBuilder.Entity<Employee>()
         //    .HasData(
         //    new Employee
@@ -473,9 +492,12 @@ public class DataContext : DbContext
         //        orderStatus = OrderStatus.Done,
         //        payementStatus = PayementStatus.Payed
         //    });
-        #endregion
+        #endregion Comment
+
+        #endregion DefaultRecords
     }
 
+    public DbSet<Client> Clients { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Employee> Employees { get; set; }
     public DbSet<Order> Orders { get; set; }

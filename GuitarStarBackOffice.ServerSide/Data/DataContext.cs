@@ -212,7 +212,26 @@ public class DataContext : DbContext
                 .HasForeignKey(i => i.OrderId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Order>()
+   .HasOne(i => i.Client)
+   .WithMany(i => i.Orders)
+   .HasForeignKey(i => i.ClientId)
+   .IsRequired()
+   .OnDelete(DeleteBehavior.Cascade);
+
         #endregion
+
+        #region Client
+        modelBuilder.Entity<Client>().HasKey(i => i.IdClient);
+
+        modelBuilder.Entity<Client>()
+              .HasMany(i => i.Orders)
+               .WithOne(i => i.Client)
+               .HasForeignKey(i => i.ClientId)
+               .IsRequired()
+               .OnDelete(DeleteBehavior.Cascade);
+        #endregion Client
 
         #region DefaultRecords
         modelBuilder.Entity<Post>()
@@ -240,6 +259,22 @@ public class DataContext : DbContext
                 DateOfEmployment = DateTime.Parse("13.11.2022"),
                 PostId = Guid.Parse("07CEFFEA-914D-4509-B21D-E3A8042B6BF9")
             });
+
+        modelBuilder.Entity<Client>()
+             .HasData(
+            new Client
+            {
+                IdClient = Guid.Parse("2F036EBB-A7AE-43A2-9838-3DE45598F2F7"),
+                ClientEmail = "client@client.com",
+                ClientName = "Ivan",
+                ClientNumber = "+796715257899",
+                ClientLastName = "Ivanov",
+                ClientPassword = HashHelper.GetHashString("client"),
+                ClientAddress = "Москва, ул. Пролетарская, д. 65А, к. 2"
+
+            });
+
+
 
         modelBuilder.Entity<Category>()
             .HasData(
@@ -385,7 +420,8 @@ public class DataContext : DbContext
                 CustomerName = "Фролов Дмитрий Анатольевич",
                 CustomerEmail = "Leox555@yandex.ru",
                 CustomerNumber = "+79671525380",
-                CustomerAddress = "Москва, ул. Кутузовская, д. 32"
+                CustomerAddress = "Москва, ул. Кутузовская, д. 32",
+                ClientId = Guid.Parse("2F036EBB-A7AE-43A2-9838-3DE45598F2F7")
             }, 
             new Order
             {
@@ -399,7 +435,8 @@ public class DataContext : DbContext
                 CustomerName = "Фролов Дмитрий Анатольевич",
                 CustomerEmail = "Leox555@yandex.ru",
                 CustomerNumber = "+79671525380",
-                CustomerAddress = "Москва, ул. Кутузовская, д. 32"
+                CustomerAddress = "Москва, ул. Кутузовская, д. 32",
+                ClientId = Guid.Parse("2F036EBB-A7AE-43A2-9838-3DE45598F2F7")
             }, 
             
             new Order
@@ -414,7 +451,8 @@ public class DataContext : DbContext
                 CustomerName = "Фролов Дмитрий Анатольевич",
                 CustomerEmail = "Leox555@yandex.ru",
                 CustomerNumber = "+79671525380",
-                CustomerAddress = "Москва, ул. Кутузовская, д. 32"
+                CustomerAddress = "Москва, ул. Кутузовская, д. 32",
+                ClientId = Guid.Parse("2F036EBB-A7AE-43A2-9838-3DE45598F2F7")
             },
             new Order
             {
@@ -428,7 +466,8 @@ public class DataContext : DbContext
                 CustomerName = "Фролов Дмитрий Анатольевич",
                 CustomerEmail = "Leox555@yandex.ru",
                 CustomerNumber = "+79671525380",
-                CustomerAddress = "Москва, ул. Кутузовская, д. 32"
+                CustomerAddress = "Москва, ул. Кутузовская, д. 32",
+                ClientId = Guid.Parse("2F036EBB-A7AE-43A2-9838-3DE45598F2F7")
             },
             new Order
             {
@@ -442,7 +481,8 @@ public class DataContext : DbContext
                 CustomerName = "Фролов Дмитрий Анатольевич",
                 CustomerEmail = "Leox555@yandex.ru",
                 CustomerNumber = "+79671525380",
-                CustomerAddress = "Москва, ул. Кутузовская, д. 32"
+                CustomerAddress = "Москва, ул. Кутузовская, д. 32",
+                ClientId = Guid.Parse("2F036EBB-A7AE-43A2-9838-3DE45598F2F7")
             },
             new Order
             {
@@ -456,7 +496,8 @@ public class DataContext : DbContext
                 CustomerName = "Иванов Иван Иванович",
                 CustomerEmail = "Tomlev418@yandex.ru",
                 CustomerNumber = "+79671524411",
-                CustomerAddress = "Москва, ул. Пролетарская, д. 65А, к. 2"
+                CustomerAddress = "Москва, ул. Пролетарская, д. 65А, к. 2",
+                ClientId = Guid.Parse("2F036EBB-A7AE-43A2-9838-3DE45598F2F7")
             },
             new Order
             {
@@ -470,7 +511,8 @@ public class DataContext : DbContext
                 CustomerName = "Иванов Иван Иванович",
                 CustomerEmail = "Tomlev418@yandex.ru",
                 CustomerNumber = "+79671524411",
-                CustomerAddress = "Москва, ул. Пролетарская, д. 65А, к. 2"
+                CustomerAddress = "Москва, ул. Пролетарская, д. 65А, к. 2",
+                ClientId = Guid.Parse("2F036EBB-A7AE-43A2-9838-3DE45598F2F7")
             },
             new Order
             {
@@ -484,7 +526,8 @@ public class DataContext : DbContext
                 CustomerName = "Иванов Иван Иванович",
                 CustomerEmail = "Tomlev418@yandex.ru",
                 CustomerNumber = "+79671524411",
-                CustomerAddress = "Москва, ул. Пролетарская, д. 65А, к. 2"
+                CustomerAddress = "Москва, ул. Пролетарская, д. 65А, к. 2",
+                ClientId = Guid.Parse("2F036EBB-A7AE-43A2-9838-3DE45598F2F7")
             },
             new Order
             {
@@ -498,7 +541,8 @@ public class DataContext : DbContext
                 CustomerName = "Иванов Иван Иванович",
                 CustomerEmail = "Tomlev418@yandex.ru",
                 CustomerNumber = "+79671524411",
-                CustomerAddress = "Москва, ул. Пролетарская, д. 65А, к. 2"
+                CustomerAddress = "Москва, ул. Пролетарская, д. 65А, к. 2",
+                ClientId = Guid.Parse("2F036EBB-A7AE-43A2-9838-3DE45598F2F7")
             }, 
             new Order
             {
@@ -512,10 +556,12 @@ public class DataContext : DbContext
                 CustomerName = "Иванов Иван Иванович",
                 CustomerEmail = "Tomlev418@yandex.ru",
                 CustomerNumber = "+79671524411",
-                CustomerAddress = "Москва, ул. Пролетарская, д. 65А, к. 2"
+                CustomerAddress = "Москва, ул. Пролетарская, д. 65А, к. 2",
+                ClientId = Guid.Parse("2F036EBB-A7AE-43A2-9838-3DE45598F2F7")
             });
         #endregion
     }
+    public DbSet<Client> Clients { get; set; }
 
     public DbSet<Category> Categories { get; set; }
     public DbSet<Employee> Employees { get; set; }

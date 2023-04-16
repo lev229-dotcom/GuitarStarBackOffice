@@ -1,9 +1,15 @@
+using Blazored.LocalStorage;
+using Blazored.Toast;
 using DataBaseService.Data;
 using DataBaseService.Services;
+using DataBaseService.Services.ClientService;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
+using Portal.Authorization;
 using Portal.Data;
+using Radzen;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +22,15 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<OrderService>();
+builder.Services.AddScoped<ClientService>();
+builder.Services.AddScoped<NotificationService>();
+builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddBlazoredToast();
+builder.Services.AddScoped<CustomAuthStateProvider>();
+builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<CustomAuthStateProvider>());
+builder.Services.AddOptions();
+builder.Services.AddAuthorizationCore();
+
 
 var app = builder.Build();
 

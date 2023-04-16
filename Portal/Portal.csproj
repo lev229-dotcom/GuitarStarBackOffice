@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
+    <PackageReference Include="Blazored.Toast" Version="4.1.0" />
+    <PackageReference Include="Radzen.Blazor" Version="4.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DataBaseService\DataBaseService.csproj" />
     <ProjectReference Include="..\GuitarStarBackOffice\Shared\GuitarStarBackOffice.Shared.csproj" />
   </ItemGroup>

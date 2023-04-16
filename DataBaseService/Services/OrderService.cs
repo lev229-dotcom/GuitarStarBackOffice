@@ -76,10 +76,17 @@ public class OrderService
         return order.OrderNumber;
     }
 
-
     public async Task<List<OrderElement>> GetElementsInMemory() {
         var orderElements = getCurrentList();
         return orderElements;
+    }
+
+    public async Task<List<Order>> GetOrdersForCurrentClient(Guid ClientId)
+    {
+        var orders = dataContext.Orders.Include(f => f.OrderElements)
+            .ThenInclude(i => i.Product)
+            .ThenInclude(p => p.FileImage).Where(o => o.ClientId == ClientId).ToList();
+        return orders;
     }
 
     private Guid orderNumber;

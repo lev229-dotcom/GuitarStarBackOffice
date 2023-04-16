@@ -14,10 +14,8 @@ public partial class Checkout
 {
     [Inject]
     protected OrderService OrderService { get; set; }
-    [Inject]
-    protected NavigationManager NavigationManager { get; set; }
 
-    private readonly AddressesRequestModel address = new AddressesRequestModel();
+    private readonly AddressesRequestModel address = new ();
     //private readonly OrdersRequestModel order = new OrdersRequestModel();
 
     private string email;
