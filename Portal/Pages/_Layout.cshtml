@@ -5,15 +5,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <base href="~/" />
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <meta charset="utf-8">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="max-age=604800">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <base href="/" />
+
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="fonts/fontawesome/css/all.min.css" type="text/css" rel="stylesheet" />
-    <link href="css/site.css" rel="stylesheet" />
-    <link href="css/loader.css" rel="stylesheet" type="text/css" />
     <link href="css/ui.css" rel="stylesheet" type="text/css" />
-    <link href="Portal.styles.css" rel="stylesheet" />
+    <link href="css/loader.css" rel="stylesheet" type="text/css" />
+    <link href="css/responsive.css" rel="stylesheet" type="text/css" media="only screen and (max-width: 1200px)" />
+    <link href="_content/Blazored.Toast/blazored-toast.min.css" rel="stylesheet" />
     <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
 </head>
 <body>
@@ -29,6 +33,10 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
+
+    <script src="js/jquery-2.0.0.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <script src="js/script.js" type="text/javascript"></script>
 
     <script src="_framework/blazor.server.js"></script>
 </body>
