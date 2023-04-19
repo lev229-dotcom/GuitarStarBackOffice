@@ -38,6 +38,15 @@ public class OrderService
 
         orderElements.Add(orderElement);
     }
+    public async Task AddElementInMemory(Guid productId)
+    {
+        var orderElement = new OrderElement();
+        orderElement.Product = await dataContext.Products.Where(i => i.IdProduct == productId).Include(w => w.WareHouse).Include(i => i.Category).Include(f => f.FileImage).FirstOrDefaultAsync();
+        orderElement.ProductId = orderElement.ProductId;
+        var orderElements = getCurrentList();
+
+        orderElements.Add(orderElement);
+    }
 
     public async Task RemoveProductInCart(OrderElement productId)
     {

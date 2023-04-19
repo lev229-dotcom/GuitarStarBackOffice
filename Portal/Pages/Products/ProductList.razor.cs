@@ -1,4 +1,5 @@
-﻿using DataBaseService.Services;
+﻿using Blazored.LocalStorage;
+using DataBaseService.Services;
 using GuitarStarBackOffice.Shared;
 using Microsoft.AspNetCore.Components;
 using Portal.Models;
@@ -11,6 +12,7 @@ namespace Portal.Pages.Products
 
         private ProductsSearchResponseModel searchResponse;
         private IEnumerable<Product> products;
+        private static IEnumerable<Product> allProducts;
         private IEnumerable<Category> categories;
 
         [Parameter]
@@ -34,17 +36,32 @@ namespace Portal.Pages.Products
         [Inject]
         protected OrderService OrderService { get; set; }
 
+        [Inject] public WishlistElementsService WishlistElementsService { get; set; }
+
 
         //[Inject] protected NavigationManager NavigationManager { get; set; }
 
         [Inject] protected ProductService ProductService { get; set; }
         [Inject] protected CategoryService CategoryService { get; set; }
 
+        [Inject] private ILocalStorageService LocalStorageService { get; set; }
+
+        public static bool getInstance()
+        {
+            if (allProducts == null)
+            {
+                allProducts = new List<Product>();
+
+                return true;
+            }
+            return false;
+        }
+
         protected override async Task OnInitializedAsync()
         {
-            await this.LoadData();
-            model.MaxPrice = (decimal)products.MaxBy(p => p.ProductPrice).ProductPrice;
-            model.MinPrice = (decimal)products.MinBy(p => p.ProductPrice).ProductPrice;
+            await this.LoadData2();
+            //model.MaxPrice = (decimal)products.MaxBy(p => p.ProductPrice).ProductPrice;
+            //model.MinPrice = (decimal)products.MinBy(p => p.ProductPrice).ProductPrice;
         }
 
         protected override async Task OnParametersSetAsync() => await this.LoadData(withCategories: false);
@@ -69,10 +86,39 @@ namespace Portal.Pages.Products
 
             searchResponse = new ProductsSearchResponseModel();
 
+            searchResponse.Products = await ProductService.SearchAsync(model, allProducts);
+            searchResponse.TotalPages = searchResponse.Products.Count() / 10;
+            searchResponse.Page = Page;
+            products = searchResponse.Products;
+
+            if (withCategories)
+            {
+                this.categories = await this.CategoryService.GetCategories();
+            }
+
+            this.Filter();
+
+        } 
+        
+        private async Task LoadData2(bool withCategories = true)
+        {
+            if (this.Page == 0)
+            {
+                this.Page = 1;
+            }
+
+            model.Category = CategoryId;
+            model.Query = SearchQuery;
+            model.Page = Page;
+
+            searchResponse = new ProductsSearchResponseModel();
+
             searchResponse.Products = await ProductService.SearchAsync(model);
             searchResponse.TotalPages = searchResponse.Products.Count() / 10;
             searchResponse.Page = Page;
             products = searchResponse.Products;
+            if(getInstance())
+            allProducts = searchResponse.Products;
 
             if (withCategories)
             {
@@ -85,8 +131,16 @@ namespace Portal.Pages.Products
 
         private async Task AddToWishlist(Guid id)
         {
-            //await this.WishlistsService.AddProduct(id);
-            //this.NavigationManager.NavigateTo("/wishlist");
+            var idClient = await LocalStorageService.GetItemAsync<string>("admin.fullname");
+
+            var el = new WishlistElements();
+            el.ClientId = Guid.Parse(idClient);
+            el.ProductId = id;
+            var isNewNote =  await WishlistElementsService.AddWishElement(el);
+            if (isNewNote)
+                this.NavigationManager.NavigateTo("/wishlist");
+            else
+                ToastService.ShowError("Данный товар уже есть в вашем списке избранного");
         }
 
         private async Task AddToCart(Guid id)

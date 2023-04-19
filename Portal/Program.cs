@@ -21,6 +21,7 @@ builder.Services.AddDbContext<DataContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<WishlistElementsService>();
 builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<OrderService>();
 builder.Services.AddScoped<ClientService>();

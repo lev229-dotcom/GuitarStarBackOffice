@@ -1,5 +1,8 @@
-﻿@using Portal.Pages.Account
+﻿@using Portal.Authorization
+@using Portal.Pages.Account
 @using Portal.Shared.Navigation
+
+@inject CustomAuthStateProvider userSession;
 @*@if (categories == null)
 {
     <LoadingScreen />
@@ -114,11 +117,14 @@
                         <li class="nav-item">
                             <a class="nav-link pl-0" href="/"> <strong>Домашняя страница</strong></a>
                         </li>
+                    @if (!String.IsNullOrEmpty(ClientId))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="/wishlist">Список избранного</a>
+                            </li>
+                        }
                         <li class="nav-item">
-                            <a class="nav-link" href="/wishlist">Wishlist</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/products/page/1">Products</a>
+                            <a class="nav-link" href="/products/page/1">Товары</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a @onclick:preventDefault

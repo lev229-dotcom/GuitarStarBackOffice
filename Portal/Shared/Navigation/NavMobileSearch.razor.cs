@@ -4,9 +4,9 @@
 
 //    public partial class NavMobileSearch
 //    {
-//        private readonly ProductsSearchRequestModel searchModel = new ProductsSearchRequestModel();
+//        private readonly ProductsSearchRequestModel search = new ProductsSearchRequestModel();
 
 //        private void Search() 
-//            => this.NavigationManager.NavigateTo($"/products/search/{this.searchModel.Query}/page/1");
+//            => this.NavigationManager.NavigateTo($"/products/search/{this.search.Query}/page/1");
 //    }
 //}

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace GuitarStarBackOffice.Shared;
 
@@ -24,5 +26,9 @@ public class Client
 
     public ICollection<Order> Orders { get; set; } = new HashSet<Order>();
 
-
+    /// <summary>
+    /// Список избранного
+    /// </summary>
+    [Display(Name = "Список избранного")]
+    public ICollection<WishlistElements> WishlistElements { get; set; } = new HashSet<WishlistElements>();
 }

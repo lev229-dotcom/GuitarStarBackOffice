@@ -66,6 +66,13 @@ public class Product
     [Display(Name = "Элементы заказа")]
     public ICollection<OrderElement> OrderElemnts { get; set; } = new HashSet<OrderElement>();
 
+    /// <summary>
+    /// Список избранного
+    /// </summary>
+    [Display(Name = "Список избранного")]
+    public ICollection<WishlistElements> WishlistElements { get; set; } = new HashSet<WishlistElements>();
+
+
     public FileIMG? FileImage { get; set; }
 
     public Guid? FileImageId { get; set; }

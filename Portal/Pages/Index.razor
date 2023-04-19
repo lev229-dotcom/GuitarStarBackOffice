@@ -84,7 +84,7 @@
         <div class="container">
 
             <header class="section-heading">
-                @*<a href="/products/page/1" class="btn btn-outline-primary float-right">See all</a>*@
+                <a href="/products/page/1" class="btn btn-outline-primary float-right">Посмотреть весь ассортимент</a>
                 <h3 class="section-title">Ассортимент</h3>
             </header>
 
@@ -94,9 +94,6 @@
                 {
                     <div class="col-md-3">
                         <div class="card card-product-grid">
-                           @* <a href="/products/@product.Id/@product.Name" class="img-wrap">
-                                <img src="@product.ImageSource">
-                            </a>*@
                         @if(product.FileImage != null){
                             <a href="/products/@product.IdProduct/@product.ProductName" class="img-wrap">
                                 <img src="data:image/jpeg;base64, @product.FileImage?.Data" />
@@ -110,7 +107,7 @@
                         }
 
                             <figcaption class="info-wrap">
-                                 <a href="/products/@product.IdProduct/@product.ProductName" class="title">
+                            <a href="/products/@product.IdProduct/@product.ProductName" style="white-space:nowrap; overflow: hidden; text-overflow: ellipsis; " class="title">
                                     @product.ProductName
                                 </a>
 

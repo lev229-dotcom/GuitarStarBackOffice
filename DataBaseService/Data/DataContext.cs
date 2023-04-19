@@ -193,6 +193,24 @@ public class DataContext : DbContext
 
         #endregion
 
+        #region WishlistElements
+
+        modelBuilder.Entity<WishlistElements>().HasKey(i => i.IdWishlistElement);
+
+        modelBuilder.Entity<WishlistElements>()
+                    .HasOne(i => i.Product)
+                    .WithMany(i => i.WishlistElements)
+                    .HasForeignKey(i => i.ProductId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<WishlistElements>()
+                .HasOne(i => i.Client)
+                .WithMany(i => i.WishlistElements)
+                .HasForeignKey(i => i.ClientId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+        #endregion
+
 
 
         #region Order
@@ -498,6 +516,7 @@ public class DataContext : DbContext
     }
 
     public DbSet<Client> Clients { get; set; }
+    public DbSet<WishlistElements> WishlistElements { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Employee> Employees { get; set; }
     public DbSet<Order> Orders { get; set; }

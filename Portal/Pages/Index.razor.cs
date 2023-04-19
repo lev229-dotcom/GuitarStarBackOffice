@@ -13,5 +13,6 @@ public partial class Index
     protected override async Task OnInitializedAsync()
     {
          products = await ProductService.GetProducts();
+         products = products.Take(4);
     }
 }

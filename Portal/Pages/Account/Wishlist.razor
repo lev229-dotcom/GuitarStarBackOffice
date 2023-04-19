@@ -1,0 +1,67 @@
+﻿@page "/wishlist"
+@using Portal.Shared.Common
+
+@if (products == null)
+{
+    <LoadingScreen />
+}
+else
+{
+    <section class="section-content padding-y bg">
+        <div class="container">
+            <article class="card">
+                <header class="card-header"> Список избранного </header>
+                <div class="card-body">
+                    <div class="row">
+                        @if (products.Count() == 0){
+                            <header class="card-header"> В списке избранного нет товаров </header>
+                        }
+                        @foreach (var wishListElement in products)
+                        {
+                            <div class="col-md-3">
+                                <figure class="card card-product-grid  mb-3">
+                                    <div class="img-wrap">
+                                        <a href="products/@wishListElement.Product.IdProduct/@wishListElement.Product.ProductName">
+                                            @if (wishListElement.Product.FileImage != null){
+
+                                                <img src="data:image/jpeg;base64, @wishListElement.Product.FileImage.Data" />
+                                            }
+
+                                            else
+                                            {
+                                                <img src="https://www.mynameisdan.co.uk/wp-content/uploads/2016/07/PS4-Case.png"/>
+                                            }
+                                            
+                                        </a>
+                                    </div>
+                                    <figcaption class="info-wrap">
+                                        <a href="products/@wishListElement.Product.IdProduct/@wishListElement.Product.ProductName" class="title text-truncate">
+                                            @wishListElement.Product.ProductName
+                                        </a>
+
+                                        <p class="price mb-2">@wishListElement.Product.ProductPrice ₽</p>
+
+                                        <a @onclick="() => OnSubmitAsync(wishListElement.Product.IdProduct)"
+                                           @onclick:preventDefault
+                                           href="#"
+                                           class="btn btn-primary btn-sm">
+                                            Добавить в корзину
+                                        </a>
+                                        <a @onclick="() => OnRemoveAsync(wishListElement.IdWishlistElement)"
+                                           @onclick:preventDefault
+                                           href="#"
+                                           class="btn btn-danger btn-sm"
+                                           data-toggle="tooltip"
+                                           title="Удалить из списка">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+}
