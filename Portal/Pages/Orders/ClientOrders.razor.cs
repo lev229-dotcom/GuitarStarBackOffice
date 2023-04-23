@@ -27,6 +27,8 @@ namespace Portal.Pages.Orders
             var id = await LocalStorageService.GetItemAsync<string>("admin.fullname");
 
             orders = await OrderService.GetOrdersForCurrentClient(Guid.Parse(id));
+
+            orders = orders.OrderByDescending(n => n.OrderNumber);
         }
     }
 }

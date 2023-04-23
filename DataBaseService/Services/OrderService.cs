@@ -1,25 +1,40 @@
 ﻿using DataBaseService.Data;
 using GuitarStarBackOffice.Shared;
 using Microsoft.EntityFrameworkCore;
+using Portal.TelegramBotService;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
 using System.Reflection.Metadata.Ecma335;
+using Telegram.Bot;
 
 namespace DataBaseService.Services;
 
 public class OrderService
 {
     DataContext dataContext;
+    private readonly ITelegramBotClient bot;
 
     private double TotalOrderAmount;
 
     public List<Order> Orders { get; set; } = new();
 
-    public OrderService(DataContext dataContext)
+    public OrderService(DataContext dataContext, ITelegramBotClient bot)
     {
         this.dataContext = dataContext;
+        this.bot = bot;
     }
 
+    public async Task<(byte[] Data, string FileName, string Extension)> GetFileById(Guid id)
+    {
+        var file = dataContext.Files.First(i => i.Id == id);
+
+        return (Convert.FromBase64String(file.Data), file.FileName, ".pdf");
+    }
 
     #region OrderElements
+
+
 
     private static List<OrderElement> OrderElements;
 
@@ -43,6 +58,7 @@ public class OrderService
         var orderElement = new OrderElement();
         orderElement.Product = await dataContext.Products.Where(i => i.IdProduct == productId).Include(w => w.WareHouse).Include(i => i.Category).Include(f => f.FileImage).FirstOrDefaultAsync();
         orderElement.ProductId = orderElement.ProductId;
+        orderElement.ElementsCount = 1;
         var orderElements = getCurrentList();
 
         orderElements.Add(orderElement);
@@ -79,7 +95,13 @@ public class OrderService
             CustomerAddress = fullAddress,
             ClientId = clientId
         };
+
         order.IdOrder = Guid.NewGuid();
+        var filePdf = await CreatePdfFile(order, orderElements);
+        dataContext.Files.Add(filePdf);
+        await dataContext.SaveChangesAsync();
+
+        order.FileOrderId = filePdf.Id;
         foreach (var item in orderElements)
         {
             item.Product = null;
@@ -89,7 +111,135 @@ public class OrderService
         dataContext.Orders.Add(order);
         await dataContext.SaveChangesAsync();
         OrderElements = null;
+        var orderInTg = new SendNewOrderMessageCommand(bot, order);
+        await orderInTg.SendNewOrdersAsync();
         return order.OrderNumber;
+    }
+
+    public Task<FileIMG> CreatePdfFile(Order order, List<OrderElement> orderElements)
+    {
+        var textStyleWithFallback = TextStyle.Default
+        .FontFamily(QuestPDF.Helpers.Fonts.Calibri)
+        .FontSize(11);
+
+        var generatedPdf = Document.Create(container =>
+        {
+            container.Page(page =>
+            {
+                page.Size(PageSizes.A4);
+                page.Margin(2, Unit.Centimetre);
+                page.PageColor(Colors.White);
+                page.DefaultTextStyle(textStyleWithFallback);
+
+                page.Header().Row(row =>
+                {
+
+                    row.RelativeItem().AlignLeft().Column(column =>
+                    {
+                        //column.Item().Width(1, Unit.Inch).Image(Path.Combine(Path.GetDirectoryName(AppContext.BaseDirectory), "Resources", "ITALZLogo.png"));
+                        column.Item().Width(1, Unit.Inch).Image("C:\\Users\\leox5\\МПТ\\4 курс\\курсач\\Project\\BackOffice\\GuitarStarBackOffice\\DataBaseService\\Resources\\blue-star-logo-3.png");
+                        column.Item().Text(text =>
+                        {
+                            text.Element().Width(10).Height(10).Image("C:\\Users\\leox5\\МПТ\\4 курс\\курсач\\Project\\BackOffice\\GuitarStarBackOffice\\DataBaseService\\Resources\\emailImg.png");
+                            text.Line("    info@electro-star.ru").FontColor(Colors.Blue.Medium);
+                            text.Element().Width(10).Height(10).Image("C:\\Users\\leox5\\МПТ\\4 курс\\курсач\\Project\\BackOffice\\GuitarStarBackOffice\\DataBaseService\\Resources\\phoneImg.png");
+                            text.Line("    +7 495 570 00 57");
+
+                        });
+                    });
+
+
+                    row.RelativeItem().AlignRight()
+                    .Text(text =>
+                    {
+                        text.Span("Номер заказа: ").Style(textStyleWithFallback).Bold();
+                        text.Line($"{order.OrderNumber}");
+                        text.Span("Клиент: ").Style(textStyleWithFallback).Bold();
+                        text.Line($"{order.CustomerName}");
+                        text.Span("Адрес: ").Style(textStyleWithFallback).Bold();
+                        text.Line($"{order.CustomerAddress}");
+                        text.Span("E-mail: ").Style(textStyleWithFallback).Bold();
+                        text.Line($"{order.CustomerEmail}").FontColor(Colors.Blue.Medium);
+                        if (order.CustomerNumber is not null && order.CustomerNumber.Length > 0)
+                        {
+                            text.Span("Номер телефона: ").Style(textStyleWithFallback).Bold();
+                            text.Line($"{order.CustomerNumber}");
+                        }
+                    });
+                });
+
+
+                page.Content()
+                .MinimalBox()
+                .Border(0)
+                .Table(table =>
+                {
+                    IContainer DefaultCellStyle(IContainer container, string backgroundColor)
+                    {
+                        return container
+
+                            .Background(backgroundColor)
+                            .AlignCenter()
+                            .AlignMiddle();
+                    }
+
+                    table.ColumnsDefinition(columns =>
+                    {
+                        columns.RelativeColumn();
+                        columns.RelativeColumn();
+                        columns.RelativeColumn();
+                        columns.RelativeColumn();
+                        columns.RelativeColumn();
+                    });
+
+                    table.Header(header =>
+                    {
+                        header.Cell().Border(0.1f).BorderColor(Colors.Black).BorderLeft(0).Element(CellStyle).Text("Фото").Style(textStyleWithFallback).Bold();
+
+                        header.Cell().Border(0.1f).BorderColor(Colors.Black).Element(CellStyle).Text("Название").Style(textStyleWithFallback).Bold();
+                        header.Cell().Border(0.1f).BorderColor(Colors.Black).Element(CellStyle).Text("Количество").Style(textStyleWithFallback).Bold();
+                        header.Cell().Border(0.1f).BorderColor(Colors.Black).Element(CellStyle).Text("Категория").Style(textStyleWithFallback).Bold();
+                        header.Cell().Border(0.1f).BorderColor(Colors.Black).BorderRight(0).Element(CellStyle).Text("Стоимость").Style(textStyleWithFallback).Bold();
+                        //header.Cell().Border(0.1f).BorderColor(Colors.Black).BorderRight(0).Element(CellStyle).Text("Описание").Style(textStyleWithFallback).Bold();
+
+                    });
+
+                    double totalValue = 0;
+                    foreach (var orderElement in orderElements)
+                    {
+                        if(orderElement.Product.FileImage is not null)
+                        {
+                            table.Cell().Border(0.1f).BorderColor(Colors.Black).BorderLeft(0).AlignLeft().Image(Convert.FromBase64String(orderElement.Product.FileImage.Data));
+                        }
+                        else
+                        {
+                            table.Cell().Border(0.1f).BorderColor(Colors.Black).BorderLeft(0).AlignLeft().Text("Фото отсутствует");
+                        }
+                        table.Cell().Border(0.1f).BorderColor(Colors.Black).Element(CellStyle).Text(orderElement.Product.ProductName);
+                        table.Cell().Border(0.1f).BorderColor(Colors.Black).Element(CellStyle).Text(orderElement.ElementsCount);
+                        table.Cell().Border(0.1f).BorderColor(Colors.Black).Element(CellStyle).Text(orderElement.Product.Category.CategoryName);
+                        table.Cell().Border(0.1f).BorderColor(Colors.Black).BorderRight(0).Element(CellStyle).Text($"{Math.Round(orderElement.Product.ProductPrice * orderElement.ElementsCount, 2)} ₽");
+                        //table.Cell().Border(0.1f).BorderColor(Colors.Black).Border(0.1f).BorderColor(Colors.Black).BorderRight(0).Element(CellStyle).Text(orderElement.Product.Description);
+
+                        totalValue += orderElement.Product.ProductPrice * orderElement.ElementsCount;
+                    }
+
+                    //table.Cell().ColumnSpan(4).Border(0.1f).BorderColor(Colors.Black).BorderLeft(0).AlignLeft().Element(CellStyle).Text("Kosten van werken");
+                    //table.Cell().Border(0.1f).BorderColor(Colors.Black).BorderRight(0).Element(CellStyle).Text(totalOrderValue);
+                    table.Cell().ColumnSpan(4).Border(0.1f).BorderColor(Colors.Black).BorderLeft(0).BorderBottom(0).AlignLeft().Element(CellStyle).Text("Итого").Style(textStyleWithFallback).Bold().FontSize(13);
+                    table.Cell().Border(0.1f).BorderColor(Colors.Black).BorderRight(0).BorderBottom(0).Element(CellStyle).Text($"{Math.Round(totalValue, 2)} ₽").Style(textStyleWithFallback).Bold().FontSize(13);
+                    IContainer CellStyle(IContainer container) => DefaultCellStyle(container, Colors.White);
+
+                });
+
+
+            });
+
+        }).GeneratePdf();
+        var file = new FileIMG() { Data = Convert.ToBase64String(generatedPdf), FileName = $"Заказ #{order.OrderNumber}", Id = Guid.NewGuid() };
+        return Task.FromResult(file);
+
+
     }
 
     public async Task<List<OrderElement>> GetElementsInMemory() {
@@ -180,7 +330,7 @@ public class OrderService
     }
     public async Task<Order> GetOrderById(Guid id)
     {
-        Order order = await dataContext.Orders.Include(el => el.OrderElements).ThenInclude(p => p.Product).ThenInclude(f => f.FileImage).Where(i => i.IdOrder == id).FirstOrDefaultAsync();
+        Order order = await dataContext.Orders.Include(el => el.OrderElements).ThenInclude(p => p.Product).ThenInclude(c => c.Category).Where(i => i.IdOrder == id).FirstOrDefaultAsync();
 
         return await Task.FromResult(order);
     }

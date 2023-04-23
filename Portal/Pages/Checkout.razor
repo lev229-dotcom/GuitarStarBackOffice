@@ -1,7 +1,7 @@
 ﻿@page "/checkout"
 @using Portal.Shared.Common
 
-@if (cartProducts == null)
+@if (IsActive == false)
 {
     <LoadingScreen />
 }

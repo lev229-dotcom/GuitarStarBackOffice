@@ -38,6 +38,12 @@
                             <ValidationMessage For="@(() => newProduct.WareHouseId)" />
                         </div>
 
+                        <div style="margin-bottom: 1rem" class="flex-column">
+                            <RadzenLabel Text="Описание" style="width: 100%" />
+                            <RadzenTextBox MaxLength="350" style="display: block; width: 100%" @bind-Value="@newProduct.Description" />
+                            <ValidationMessage For="@(() => newProduct.Description)" />
+                        </div>
+
                         <MudFileUpload id="FileIMGUpload" Accept=".png, jpg"
                                        T="IBrowserFile" FilesChanged="ImportFileImage">
                             <ButtonTemplate Context="FileIMGUpload">

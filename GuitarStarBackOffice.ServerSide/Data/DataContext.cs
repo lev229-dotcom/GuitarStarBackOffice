@@ -76,6 +76,13 @@ public class DataContext : DbContext
             .IsRequired(false)
             .OnDelete(DeleteBehavior.Cascade);
 
+        modelBuilder.Entity<FileIMG>()
+            .HasMany(i => i.Orders)
+            .WithOne(i => i.FileOrder)
+            .HasForeignKey(i => i.FileOrderId)
+            .IsRequired(false)
+            .OnDelete(DeleteBehavior.NoAction);
+
         #endregion
 
         #region Product
@@ -107,7 +114,7 @@ public class DataContext : DbContext
             .WithMany(i => i.Products)
             .HasForeignKey(i => i.FileImageId)
             .IsRequired(false)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.NoAction);
 
 
         #endregion
@@ -214,11 +221,19 @@ public class DataContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Order>()
-   .HasOne(i => i.Client)
-   .WithMany(i => i.Orders)
-   .HasForeignKey(i => i.ClientId)
-   .IsRequired()
-   .OnDelete(DeleteBehavior.Cascade);
+               .HasOne(i => i.Client)
+               .WithMany(i => i.Orders)
+               .HasForeignKey(i => i.ClientId)
+               .IsRequired()
+               .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Order>()
+            .HasOne(i => i.FileOrder)
+            .WithMany(i => i.Orders)
+            .HasForeignKey(i => i.FileOrderId)
+            .IsRequired(false)
+            .OnDelete(DeleteBehavior.NoAction);
+
 
         #endregion
 
@@ -340,7 +355,8 @@ public class DataContext : DbContext
                 ProductPrice = 45999.99,
                 CategoryId = Guid.Parse("11A0D7CE-007C-44AC-9DA6-FE333BA042BE"),
                 WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
-                FileImageId = null
+                FileImageId = null,
+                Description = "Новая игровая консоль"
             },
             new Product
             {
@@ -349,7 +365,9 @@ public class DataContext : DbContext
                 ProductPrice = 50999.99,
                 CategoryId = Guid.Parse("11A0D7CE-007C-44AC-9DA6-FE333BA042BE"),
                 WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
-                FileImageId = null
+                FileImageId = null,
+                Description = "Новая игровая консоль"
+
             },
             new Product
             {
@@ -358,7 +376,9 @@ public class DataContext : DbContext
                 ProductPrice = 16999.99,
                 CategoryId = Guid.Parse("4B94A8DB-AC66-4A7F-9045-59672FF62E64"),
                 WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
-                FileImageId = null
+                FileImageId = null,
+                Description = "Описание товара"
+
             },
             new Product
             {
@@ -367,7 +387,8 @@ public class DataContext : DbContext
                 ProductPrice = 20999.99,
                 CategoryId = Guid.Parse("4B94A8DB-AC66-4A7F-9045-59672FF62E64"),
                 WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
-                FileImageId = null
+                FileImageId = null,
+                Description = "Описание товара"
             },
             new Product
             {
@@ -376,7 +397,8 @@ public class DataContext : DbContext
                 ProductPrice = 25999.99,
                 CategoryId = Guid.Parse("DA7D35D3-735C-40F7-B16C-CB65C1AC0D3F"),
                 WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
-                FileImageId = null
+                FileImageId = null,
+                Description = "Описание товара"
             },
             new Product
             {
@@ -385,7 +407,8 @@ public class DataContext : DbContext
                 ProductPrice = 2999.99,
                 CategoryId = Guid.Parse("DA7D35D3-735C-40F7-B16C-CB65C1AC0D3F"),
                 WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
-                FileImageId = null
+                FileImageId = null,
+                Description = "Описание товара"
             },
             new Product
             {
@@ -394,7 +417,8 @@ public class DataContext : DbContext
                 ProductPrice = 69999.99,
                 CategoryId = Guid.Parse("497D6809-488D-4252-9CCA-D04956BAA87B"),
                 WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
-                FileImageId = null
+                FileImageId = null,
+                Description = "Описание товара"
             },
             new Product
             {
@@ -403,7 +427,8 @@ public class DataContext : DbContext
                 ProductPrice = 59999.99,
                 CategoryId = Guid.Parse("497D6809-488D-4252-9CCA-D04956BAA87B"),
                 WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
-                FileImageId = null
+                FileImageId = null,
+                Description = "Описание товара"
             },
             new Product
             {
@@ -412,7 +437,8 @@ public class DataContext : DbContext
                 ProductPrice = 169999.99,
                 CategoryId = Guid.Parse("E571E876-CCE6-4CDE-ADE1-D36732F3761D"),
                 WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
-                FileImageId = null
+                FileImageId = null,
+                Description = "Описание товара"
             },
             new Product
             {
@@ -421,7 +447,8 @@ public class DataContext : DbContext
                 ProductPrice = 109999.99,
                 CategoryId = Guid.Parse("E571E876-CCE6-4CDE-ADE1-D36732F3761D"),
                 WareHouseId = Guid.Parse("0C43BA79-F67A-46FA-A7AD-BEF8DD1CFF30"),
-                FileImageId = null
+                FileImageId = null,
+                Description = "Описание товара"
             }) ;
 
         modelBuilder.Entity<Order>()

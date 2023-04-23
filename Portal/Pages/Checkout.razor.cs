@@ -18,6 +18,8 @@ public partial class Checkout
 
     [Inject] protected ILocalStorageService LocalStorageService { get; set; }
 
+    public bool IsActive { get; set; } = true;
+
     private readonly AddressesRequestModel address = new ();
     //private readonly OrdersRequestModel order = new OrdersRequestModel();
 
@@ -35,10 +37,13 @@ public partial class Checkout
 
     private async Task SubmitAsync()
     {
+        StateHasChanged();
+        IsActive = false;
+        StateHasChanged();
         var id = await LocalStorageService.GetItemAsync<string>("admin.fullname");
         var fullAddress = $"Страна: {address.Country}, Область: {address.State}, Город: {address.City}, Код: {address.PostalCode}, Подробное описание: {address.Description}";
         var orderId = await OrderService.CreateOrderTest(fullAddress, address.CustomerName, address.PhoneNumber, email, totalPrice, Guid.Parse(id));
-
+        IsActive = true;
 
         NavigationManager.NavigateTo($"/order/confirmed/{orderId}", forceLoad: true);
     }

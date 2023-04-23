@@ -31,6 +31,13 @@
 
                         </div>
 
+                        <div style="margin-bottom: 1rem" class="flex-column">
+                            <RadzenLabel Text="Описание" style="width: 100%" />
+                            <RadzenTextBox MaxLength="350" style="display: block; width: 100%" @bind-Value="@editedProduct.Description" />
+                            <ValidationMessage For="@(() => editedProduct.Description)" />
+                        </div>
+
+
                         <MudFileUpload id="FileIMGUpload" Accept=".png, jpg"
                                        T="IBrowserFile" FilesChanged="ImportFileImage">
                             <ButtonTemplate Context="FileIMGUpload">
@@ -45,9 +52,15 @@
                         </MudFileUpload>
                         @if (ImageData != null || editedProduct.FileImage != null)
                         {
-                            if (editedProduct.FileImage != null && ImageData != null){
+                            if ( ImageData != null){
                                 <img style='width:80px; height:auto;' src="data:image/jpeg;base64, @ImageData" />
                             }
+
+                            else if (editedProduct.FileImage != null)
+                            {
+                                <img style='width:80px; height:auto;' src="data:image/jpeg;base64, @editedProduct.FileImage.Data" />
+                            }
+
                         }
 
                         <div style="margin-bottom: 1rem" class="flex-column">

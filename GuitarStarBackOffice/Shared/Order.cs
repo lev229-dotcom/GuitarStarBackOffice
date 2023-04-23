@@ -68,4 +68,9 @@ public class Order
 	public string CustomerNumber { get; set; }
 
 	public string CustomerAddress { get; set; }
+
+    public FileIMG? FileOrder { get; set; }
+
+    public Guid? FileOrderId { get; set; }
+
 }

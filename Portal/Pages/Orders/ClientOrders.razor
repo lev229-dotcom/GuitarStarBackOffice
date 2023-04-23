@@ -1,6 +1,7 @@
 ﻿@page "/orders/mine"
 @using Portal.Shared.Common
 @using GuitarStarBackOffice.Shared
+@using MudBlazor.Extensions
 
 @if (orders == null)
 {
@@ -37,7 +38,7 @@ else
                                                 <a href="/order/details/@order.IdOrder">
                                                     <time class="text-muted"><i class="fa fa-calendar-alt"></i> @order.OrderDate </time>
                                                     <p class="black"> Номер заказа @order.OrderNumber </p>
-                                                    <span class="text-success">@order.orderStatus</span>
+                                                    <span class="text-success">@order.orderStatus.ToDescriptionString()</span>
                                                 </a>
                                             </figcaption>
 

@@ -22,9 +22,16 @@ public enum OrderStatus
     [Description("Готов")]
     Done = 2,
 
+
     /// <summary>
     /// Отменен
     /// </summary>
     [Description("Отменен")]
     Canceled = 3,
+
+    /// <summary>
+    /// Подтвержден
+    /// </summary>
+    [Description("Подтвержден")]
+    Confirmed = 4,
 }

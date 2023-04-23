@@ -1,5 +1,6 @@
 ﻿@page "/order/details/{Id:guid}"
 @using Portal.Shared.Common
+@using MudBlazor.Extensions
 
 @if (order == null)
 {
@@ -50,6 +51,13 @@ else
                     <dl class="row">
                         <dt class="col-sm-10">Created on: </dt>
                         <dd class="col-sm-2 text-right"><strong>@order.OrderDate</strong></dd>
+
+                        <dt class="col-sm-10">Статус оплаты: </dt>
+                        <dd class="col-sm-2 text-right"><strong>@order.payementStatus.ToDescriptionString()</strong></dd>
+
+
+                        <dt class="col-sm-10">Статус заказа: </dt>
+                        <dd class="col-sm-2 text-right"><strong>@order.orderStatus.ToDescriptionString()</strong></dd>
 
                         <dt class="col-sm-10">Subtotal: <span class="float-right text-muted">@order.OrderElements.Count() items</span></dt>
                         <dd class="col-sm-2 text-right"><strong>@totalPrice ₽</strong></dd>

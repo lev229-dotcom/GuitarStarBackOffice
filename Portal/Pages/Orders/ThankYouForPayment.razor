@@ -1,5 +1,6 @@
-﻿@page "/order/PayemntConfirmed/{Id:int}"
-
+﻿@page "/api/order/PayOrder/{Id:guid}"
+@using DataBaseService.Services
+@inject OrderService orderService
 
 <section class="section-pagetop bg">
     <div class="container text-center">
@@ -10,7 +11,7 @@
             Спасибо за ваш заказ!
         </h1>
         <h5 class="text-muted">
-            Ваш заказ #@Id, оплачен!
+            Ваш заказ #@OrderNumber, оплачен!
         </h5>
 
         <br />
@@ -22,5 +23,16 @@
 
 @code {
     [Parameter]
-    public int Id { get; set; }
+    public Guid Id { get; set; }
+
+    public int OrderNumber { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var order = await orderService.GetOrderById(Id);
+        OrderNumber = order.OrderNumber;
+
+        order.payementStatus = GuitarStarBackOffice.Shared.PayementStatus.Payed;
+        await orderService.UpdateOrder(order);
+    }
 }

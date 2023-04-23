@@ -76,4 +76,6 @@ public class Product
     public FileIMG? FileImage { get; set; }
 
     public Guid? FileImageId { get; set; }
+
+    public string Description { get; set; }
 }

@@ -34,6 +34,7 @@ public class ClientService
     {
         var client = await dataContext.Clients
             .Include(d => d.Orders)
+            .Include(w => w.WishlistElements)
             .Where(i => i.IdClient == id)
             .FirstOrDefaultAsync();
 
