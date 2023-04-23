@@ -50,5 +50,11 @@ public class Bot : BackgroundService
         };
 
         bot.StartReceiving(HandleUpdateAsync, HandleErrorAsync, receiverOptions, cancellationToken);
+
+        //while (!stoppingToken.IsCancellationRequested)
+        //{
+
+        //    await Task.Delay(1000, stoppingToken);
+        //}
     }
 }

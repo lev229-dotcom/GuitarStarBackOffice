@@ -33,6 +33,7 @@
         OrderNumber = order.OrderNumber;
 
         order.payementStatus = GuitarStarBackOffice.Shared.PayementStatus.Payed;
-        await orderService.UpdateOrder(order);
+        await orderService.UpdateOrderWithTg(order);
+
     }
 }

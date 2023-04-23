@@ -54,4 +54,24 @@ public class SendNewOrderMessageCommand
         }
 
     }
+    public async Task SendPaidOrdersAsync()
+    {
+        var messageBuilder = new StringBuilder();
+        messageBuilder
+            .AppendLine($"💸 <b>Заказ оплачен!</b>")
+            .AppendLine($"<b>Номер заказа</b> #{order.OrderNumber}")
+            .AppendLine($"<u>Контактные данные клиента</u>")
+            .AppendLine($"<b>Имя клиента:</b> {order.CustomerName}");
+
+        if (order.OrderNumber is not 0 && order.CustomerNumber.Length > 0)
+            messageBuilder.AppendLine($"<b>Номер телефона:</b> {order.CustomerNumber}");
+
+        messageBuilder
+            .AppendLine($"<b>Электронная почта</b> {order.CustomerEmail}")
+            .AppendLine($"<b>Адрес</b> {order.CustomerAddress}");
+
+        await bot.SendTextMessageAsync(-748847994, messageBuilder.ToString(), ParseMode.Html);
+       
+
+    }
 }

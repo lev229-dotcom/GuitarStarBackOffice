@@ -116,6 +116,15 @@ public class OrderService
         return order.OrderNumber;
     }
 
+    public async Task UpdateOrderWithTg(Order order)
+    {
+
+        dataContext.Orders.Attach(order);
+        await dataContext.SaveChangesAsync();
+        var orderInTg = new SendNewOrderMessageCommand(bot, order);
+        await orderInTg.SendPaidOrdersAsync();
+    }
+
     public Task<FileIMG> CreatePdfFile(Order order, List<OrderElement> orderElements)
     {
         var textStyleWithFallback = TextStyle.Default
